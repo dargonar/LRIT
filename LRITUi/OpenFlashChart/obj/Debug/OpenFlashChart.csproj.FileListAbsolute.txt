@@ -1,0 +1,5 @@
+C:\wdir\lrit\LRITUi\OpenFlashChart\bin\Debug\OpenFlashChart.dll
+C:\wdir\lrit\LRITUi\OpenFlashChart\bin\Debug\OpenFlashChart.pdb
+C:\wdir\lrit\LRITUi\OpenFlashChart\obj\Debug\ResolveAssemblyReference.cache
+C:\wdir\lrit\LRITUi\OpenFlashChart\obj\Debug\OpenFlashChart.dll
+C:\wdir\lrit\LRITUi\OpenFlashChart\obj\Debug\OpenFlashChart.pdb

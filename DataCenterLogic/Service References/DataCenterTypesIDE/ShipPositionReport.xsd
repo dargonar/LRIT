@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:lrit="http://gisis.imo.org/XML/LRIT/types/2008" xmlns="http://gisis.imo.org/XML/LRIT/positionReport/2008" elementFormDefault="qualified" targetNamespace="http://gisis.imo.org/XML/LRIT/positionReport/2008" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="Types.xsd" namespace="http://gisis.imo.org/XML/LRIT/types/2008" />
+  <xs:simpleType name="messageTypeType">
+    <xs:restriction base="xs:integer">
+      <xs:enumeration value="1" />
+      <xs:enumeration value="2" />
+      <xs:enumeration value="3" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ShipPositionReport" type="ShipPositionReportType" />
+  <xs:complexType name="ShipPositionReportType">
+    <xs:sequence>
+      <xs:element name="Latitude" type="lrit:latitudeType" />
+      <xs:element name="Longitude" type="lrit:longitudeType" />
+      <xs:element name="TimeStamp1" type="xs:dateTime" />
+      <xs:element name="ShipborneEquipmentId" type="xs:string" />
+      <xs:element name="ASPId" type="lrit:aspLRITIDType" />
+      <xs:element minOccurs="0" name="CSPId" type="lrit:cspLRITIDType" />
+      <xs:element name="MessageType" type="messageTypeType" />
+      <xs:element name="MessageId" type="lrit:msgIDType" />
+      <xs:element name="ReferenceId" type="lrit:refIDType" />
+      <xs:element name="IMONum" type="lrit:imoNumType" />
+      <xs:element minOccurs="0" name="MMSINum" type="lrit:mmsiNumType" />
+      <xs:element name="TimeStamp2" type="xs:dateTime" />
+      <xs:element name="TimeStamp3" type="xs:dateTime" />
+      <xs:element name="DCId" type="lrit:dataCentreLRITIDType" />
+      <xs:element name="TimeStamp4" type="xs:dateTime" />
+      <xs:element name="TimeStamp5" type="xs:dateTime" />
+      <xs:element name="ResponseType" type="lrit:responseTypeType" />
+      <xs:element name="DataUserRequestor" type="lrit:lritIDType" />
+      <xs:element minOccurs="0" name="ShipName" type="lrit:shipNameType" />
+      <xs:element name="DataUserProvider" type="lrit:lritIDType" />
+      <xs:element name="DDPVersionNum" type="lrit:ddpVersionNumType" />
+    </xs:sequence>
+    <xs:attribute default="0" name="test" type="lrit:testType" use="optional" />
+    <xs:attribute name="schemaVersion" type="xs:decimal" use="required" />
+  </xs:complexType>
+</xs:schema>

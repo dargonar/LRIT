@@ -1,0 +1,7 @@
+C:\wdir\lrit\JQGridHelper\obj\Debug\ResolveAssemblyReference.cache
+C:\wdir\lrit\JQGridHelper\bin\Debug\JQGridHelper.dll
+C:\wdir\lrit\JQGridHelper\bin\Debug\JQGridHelper.pdb
+C:\wdir\lrit\JQGridHelper\obj\Debug\JQGridHelper.dll
+C:\wdir\lrit\JQGridHelper\obj\Debug\JQGridHelper.pdb
+C:\wdir\lrit\JQGridHelper\bin\Debug\Dynamic.dll
+C:\wdir\lrit\JQGridHelper\bin\Debug\Dynamic.pdb

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://localhost/IDESIM/IDESimulator.asmx?wsdl" docRef="http://localhost/IDESIM/IDESimulator.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://localhost/IDESIM/IDESimulator.asmx" xmlns:q1="http://gisis.imo.org/XML/LRIT/2008" binding="q1:ideServiceBinding" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://localhost/IDESIM/IDESimulator.asmx" xmlns:q2="http://gisis.imo.org/XML/LRIT/2008" binding="q2:ideServiceBinding1" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

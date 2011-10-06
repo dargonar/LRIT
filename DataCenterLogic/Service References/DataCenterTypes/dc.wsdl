@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:surpic="http://gisis.imo.org/XML/LRIT/sarSurpicRequest/2008" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:receipt="http://gisis.imo.org/XML/LRIT/receipt/2008" xmlns:pricingNotification="http://gisis.imo.org/XML/LRIT/pricingNotification/2008" xmlns:pricingUpdate="http://gisis.imo.org/XML/LRIT/pricingUpdate/2008" xmlns:tns="http://gisis.imo.org/XML/LRIT/2008" xmlns:ddpNotification="http://gisis.imo.org/XML/LRIT/ddpNotification/2008" xmlns:ddpUpdate="http://gisis.imo.org/XML/LRIT/ddpUpdate/2008" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:systemStatus="http://gisis.imo.org/XML/LRIT/systemStatus/2008" xmlns:posreq="http://gisis.imo.org/XML/LRIT/positionRequest/2008" xmlns:posrep="http://gisis.imo.org/XML/LRIT/positionReport/2008" name="dc" targetNamespace="http://gisis.imo.org/XML/LRIT/2008" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://gisis.imo.org/XML/LRIT/2008">
+      <xs:import schemaLocation="ShipPositionReport.xsd" namespace="http://gisis.imo.org/XML/LRIT/positionReport/2008" />
+      <xs:import schemaLocation="ShipPositionRequest.xsd" namespace="http://gisis.imo.org/XML/LRIT/positionRequest/2008" />
+      <xs:import schemaLocation="SARSURPICRequest.xsd" namespace="http://gisis.imo.org/XML/LRIT/sarSurpicRequest/2008" />
+      <xs:import schemaLocation="Receipt.xsd" namespace="http://gisis.imo.org/XML/LRIT/receipt/2008" />
+      <xs:import schemaLocation="DDPNotification.xsd" namespace="http://gisis.imo.org/XML/LRIT/ddpNotification/2008" />
+      <xs:import schemaLocation="DDPRequest.xsd" namespace="http://gisis.imo.org/XML/LRIT/ddpRequest/2008" />
+      <xs:import schemaLocation="DDPUpdate.xsd" namespace="http://gisis.imo.org/XML/LRIT/ddpUpdate/2008" />
+      <xs:import schemaLocation="SystemStatus.xsd" namespace="http://gisis.imo.org/XML/LRIT/systemStatus/2008" />
+      <xs:import schemaLocation="PricingNotification.xsd" namespace="http://gisis.imo.org/XML/LRIT/pricingNotification/2008" />
+      <xs:import schemaLocation="PricingUpdate.xsd" namespace="http://gisis.imo.org/XML/LRIT/pricingUpdate/2008" />
+      <xs:simpleType name="responseType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Success" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="Response">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="response" type="tns:responseType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="ShipPositionReportRequest">
+    <wsdl:part name="params" element="posrep:ShipPositionReport" />
+  </wsdl:message>
+  <wsdl:message name="ShipPositionReportResponse">
+    <wsdl:part name="params" element="tns:Response" />
+  </wsdl:message>
+  <wsdl:message name="ShipPositionRequestRequest">
+    <wsdl:part name="params" element="posreq:ShipPositionRequest" />
+  </wsdl:message>
+  <wsdl:message name="ShipPositionRequestResponse">
+    <wsdl:part name="params" element="tns:Response" />
+  </wsdl:message>
+  <wsdl:message name="SARSURPICRequestRequest">
+    <wsdl:part name="params" element="surpic:SARSURPICRequest" />
+  </wsdl:message>
+  <wsdl:message name="SARSURPICRequestResponse">
+    <wsdl:part name="params" element="tns:Response" />
+  </wsdl:message>
+  <wsdl:message name="ReceiptRequest">
+    <wsdl:part name="params" element="receipt:Receipt" />
+  </wsdl:message>
+  <wsdl:message name="ReceiptResponse">
+    <wsdl:part name="params" element="tns:Response" />
+  </wsdl:message>
+  <wsdl:message name="DDPNotificationRequest">
+    <wsdl:part name="params" element="ddpNotification:DDPNotification" />
+  </wsdl:message>
+  <wsdl:message name="DDPNotificationResponse">
+    <wsdl:part name="params" element="tns:Response" />
+  </wsdl:message>
+  <wsdl:message name="DDPUpdateRequest">
+    <wsdl:part name="params" element="ddpUpdate:DDPUpdate" />
+  </wsdl:message>
+  <wsdl:message name="DDPUpdateResponse">
+    <wsdl:part name="params" element="tns:Response" />
+  </wsdl:message>
+  <wsdl:message name="SystemStatusRequest">
+    <wsdl:part name="params" element="systemStatus:SystemStatus" />
+  </wsdl:message>
+  <wsdl:message name="SystemStatusResponse">
+    <wsdl:part name="params" element="tns:Response" />
+  </wsdl:message>
+  <wsdl:message name="PricingNotificationRequest">
+    <wsdl:part name="params" element="pricingNotification:PricingNotification" />
+  </wsdl:message>
+  <wsdl:message name="PricingNotificationResponse">
+    <wsdl:part name="params" element="tns:Response" />
+  </wsdl:message>
+  <wsdl:message name="PricingUpdateRequest">
+    <wsdl:part name="params" element="pricingUpdate:PricingUpdate" />
+  </wsdl:message>
+  <wsdl:message name="PricingUpdateResponse">
+    <wsdl:part name="params" element="tns:Response" />
+  </wsdl:message>
+  <wsdl:portType name="dcPortType">
+    <wsdl:operation name="ShipPositionReport">
+      <wsdl:input message="tns:ShipPositionReportRequest" />
+      <wsdl:output message="tns:ShipPositionReportResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ShipPositionRequest">
+      <wsdl:input message="tns:ShipPositionRequestRequest" />
+      <wsdl:output message="tns:ShipPositionRequestResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="SARSURPICRequest">
+      <wsdl:input message="tns:SARSURPICRequestRequest" />
+      <wsdl:output message="tns:SARSURPICRequestResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="Receipt">
+      <wsdl:input message="tns:ReceiptRequest" />
+      <wsdl:output message="tns:ReceiptResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="DDPNotification">
+      <wsdl:input message="tns:DDPNotificationRequest" />
+      <wsdl:output message="tns:DDPNotificationResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="DDPUpdate">
+      <wsdl:input message="tns:DDPUpdateRequest" />
+      <wsdl:output message="tns:DDPUpdateResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="SystemStatus">
+      <wsdl:input message="tns:SystemStatusRequest" />
+      <wsdl:output message="tns:SystemStatusResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="PricingNotification">
+      <wsdl:input message="tns:PricingNotificationRequest" />
+      <wsdl:output message="tns:PricingNotificationResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="PricingUpdate">
+      <wsdl:input message="tns:PricingUpdateRequest" />
+      <wsdl:output message="tns:PricingUpdateResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="dcServiceBinding" type="tns:dcPortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ShipPositionReport">
+      <soap12:operation soapAction="" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ShipPositionRequest">
+      <soap12:operation soapAction="" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SARSURPICRequest">
+      <soap12:operation soapAction="" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Receipt">
+      <soap12:operation soapAction="" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DDPNotification">
+      <soap12:operation soapAction="" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DDPUpdate">
+      <soap12:operation soapAction="" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SystemStatus">
+      <soap12:operation soapAction="" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PricingNotification">
+      <soap12:operation soapAction="" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PricingUpdate">
+      <soap12:operation soapAction="" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="dcService">
+    <wsdl:port name="dcPort" binding="tns:dcServiceBinding">
+      <soap12:address location="http://localhost:8080/dc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

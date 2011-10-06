@@ -1,0 +1,14 @@
+C:\wdir\lrit\LRITTaskRun\bin\Debug\LRITTaskRun.exe.config
+C:\wdir\lrit\LRITTaskRun\bin\Debug\LRITTaskRun.exe
+C:\wdir\lrit\LRITTaskRun\bin\Debug\LRITTaskRun.pdb
+C:\wdir\lrit\LRITTaskRun\bin\Debug\DataCenterDataAccess.dll
+C:\wdir\lrit\LRITTaskRun\bin\Debug\DataCenterLogic.dll
+C:\wdir\lrit\LRITTaskRun\bin\Debug\log4net.dll
+C:\wdir\lrit\LRITTaskRun\bin\Debug\Common.dll
+C:\wdir\lrit\LRITTaskRun\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\wdir\lrit\LRITTaskRun\bin\Debug\DataCenterLogic.pdb
+C:\wdir\lrit\LRITTaskRun\bin\Debug\log4net.xml
+C:\wdir\lrit\LRITTaskRun\bin\Debug\DataCenterDataAccess.pdb
+C:\wdir\lrit\LRITTaskRun\obj\Debug\ResolveAssemblyReference.cache
+C:\wdir\lrit\LRITTaskRun\obj\Debug\LRITTaskRun.exe
+C:\wdir\lrit\LRITTaskRun\obj\Debug\LRITTaskRun.pdb

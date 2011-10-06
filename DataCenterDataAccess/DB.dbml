@@ -1,0 +1,588 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="LRIT" Class="DBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=LEONIDAS\ELSQL2008;Initial Catalog=LRIT;Persist Security Info=True;User ID=sa" SettingsObjectName="DataCenterDataAccess.Properties.Settings" SettingsPropertyName="LRITConnectionString4" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.ActiveShipPositionRequest" Member="ActiveShipPositionRequests">
+    <Type Name="ActiveShipPositionRequest">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RequestId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LastTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastMessage" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="ShipPositionRequest_ActiveShipPositionRequest" Member="ShipPositionRequest" ThisKey="RequestId" OtherKey="Id" Type="ShipPositionRequest" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[User]" Member="Users">
+    <Type Name="User">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ContractingGoverment" Member="ContractingGoverments">
+    <Type Name="ContractingGoverment">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="isoCode" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DataCenterId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LRITId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DDPVersionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="ContractingGoverment_Place" Member="Places" ThisKey="Id" OtherKey="ContractingGovermentId" Type="Place" />
+      <Association Name="ContractingGoverment_Exclusion" Member="Exclusions" ThisKey="Id" OtherKey="ContractingGoverment" Type="Exclusion" />
+      <Association Name="ContractingGoverment_SARService" Member="SARServices" ThisKey="Id" OtherKey="ContractingGovermentId" Type="SARService" />
+      <Association Name="DDPVersion_ContractingGoverment" Member="DDPVersion" ThisKey="DDPVersionId" OtherKey="Id" Type="DDPVersion" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DDPNotification" Member="DDPNotifications">
+    <Type Name="DDPNotification">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Message" Type="System.String" DbType="VarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="MessageId" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="MessageType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NewVersionNum" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="schemaVersion" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="test" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MsgInOutId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="MsgInOut_DDPNotification" Member="MsgInOut" ThisKey="MsgInOutId" OtherKey="Id" Type="MsgInOut" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DDPRequestSent" Member="DDPRequestSents">
+    <Type Name="DDPRequestSent">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ArchivedDDPTimeStamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ArchivedDDPTimeStampSpecified" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ArchivedDDPVersionNum" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="DDPVersionNum" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="MessageId" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MessageType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Originator" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="schemaVersion" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="test" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MsgInOutId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="MsgInOut_DDPRequestSent" Member="MsgInOut" ThisKey="MsgInOutId" OtherKey="Id" Type="MsgInOut" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DDPUpdate" Member="DDPUpdates">
+    <Type Name="DDPUpdate">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DDPFile" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="DDPFileVersionNum" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Message" Type="System.String" DbType="VarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="MessageId" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="MessageType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="schemaVersion" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="test" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MsgInOutId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="DDPUpdate_PendingDDPUpdate" Member="PendingDDPUpdates" ThisKey="Id" OtherKey="ddpUpdateId" Type="PendingDDPUpdate" />
+      <Association Name="MsgInOut_DDPUpdate" Member="MsgInOut" ThisKey="MsgInOutId" OtherKey="Id" Type="MsgInOut" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.JournalReportSent" Member="JournalReportSents">
+    <Type Name="JournalReportSent">
+      <Column Name="DDPVersionNum" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="JournalFile" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Message" Type="System.String" DbType="VarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="MessageId" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="MessageType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Originator" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="schemaVersion" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Test" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MsgInOutId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="MsgInOut_JournalReportSent" Member="MsgInOut" ThisKey="MsgInOutId" OtherKey="Id" Type="MsgInOut" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Log]" Member="Logs">
+    <Type Name="Log">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Thread" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="[Level]" Member="Level" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Logger" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Message" Type="System.String" DbType="VarChar(4000) NOT NULL" CanBeNull="false" />
+      <Column Name="Exception" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MessageId" Member="MessageIds">
+    <Type Name="MessageId">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nextId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PricingNotification" Member="PricingNotifications">
+    <Type Name="PricingNotification">
+      <Column Name="MessageType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MessageId" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="Message" Type="System.String" DbType="VarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="DDPVersion" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="schemaVersion" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Test" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MsgInOutId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="MsgInOut_PricingNotification" Member="MsgInOut" ThisKey="MsgInOutId" OtherKey="Id" Type="MsgInOut" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PricingRequestSent" Member="PricingRequestSents">
+    <Type Name="PricingRequestSent">
+      <Column Name="DDPVersionNum" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="MessageId" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MessageType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Originator" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="schemaVersion" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="test" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MsgInOutId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="MsgInOut_PricingRequestSent" Member="MsgInOut" ThisKey="MsgInOutId" OtherKey="Id" Type="MsgInOut" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PricingUpdate" Member="PricingUpdates">
+    <Type Name="PricingUpdate">
+      <Column Name="DDPVersionNum" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Message" Type="System.String" DbType="VarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="MessageId" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="MessageType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PricingFile" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="schemaVersion" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Test" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MsgInOutId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="MsgInOut_PricingUpdate" Member="MsgInOut" ThisKey="MsgInOutId" OtherKey="Id" Type="MsgInOut" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Receipt" Member="Receipts">
+    <Type Name="Receipt">
+      <Column Name="MessageType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MessageId" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ReferenceId" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ReceiptCode" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Destination" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Originator" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Message" Type="System.String" DbType="VarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DDPVersion" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Test" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MsgInOutId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="MsgInOut_Receipt" Member="MsgInOut" ThisKey="MsgInOutId" OtherKey="Id" Type="MsgInOut" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SARSURPICRequest" Member="SARSURPICRequests">
+    <Type Name="SARSURPICRequest">
+      <Column Name="DataUserRequestor" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DDPVersionNum" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Item" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemElementName" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="MessageId" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MessageType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NumberOfPositions" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="schemaVersion" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="test" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MsgInOutId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="MsgInOut_SARSURPICRequest" Member="MsgInOut" ThisKey="MsgInOutId" OtherKey="Id" Type="MsgInOut" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ShipPositionReport" Member="ShipPositionReports">
+    <Type Name="ShipPositionReport">
+      <Column Name="ASPId" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DataUserProvider" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="DataUserRequestor" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="DCId" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="DDPVersionNum" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="IMONum" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Latitude" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Longitude" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="MessageId" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MessageType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MMSINum" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="ReferenceId" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ResponseType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="schemaVersion" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="ShipborneEquipmentId" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="ShipName" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="test" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStamp1" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStamp2" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStamp3" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStamp4" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStamp5" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MsgInOutId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="MsgInOut_ShipPositionReport" Member="MsgInOut" ThisKey="MsgInOutId" OtherKey="Id" Type="MsgInOut" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ShipPositionRequest" Member="ShipPositionRequests">
+    <Type Name="ShipPositionRequest">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AccessType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DataUserProvider" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="DataUserRequestor" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="DDPVersionNum" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Distance" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IMONum" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Item" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="MessageId" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MessageType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StartTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="StartTimeSpecified" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StopTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="StopTimeSpecified" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RequestType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="schemaVersion" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="test" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="MsgInOutId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="ShipPositionRequest_ActiveShipPositionRequest" Member="ActiveShipPositionRequests" ThisKey="Id" OtherKey="RequestId" Type="ActiveShipPositionRequest" />
+      <Association Name="MsgInOut_ShipPositionRequest" Member="MsgInOut" ThisKey="MsgInOutId" OtherKey="Id" Type="MsgInOut" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.StandingOrder" Member="StandingOrders">
+    <Type Name="StandingOrder">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PlaceId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Place_StandingOrder" Member="Place" ThisKey="PlaceId" OtherKey="Id" Type="Place" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SystemStatus" Member="SystemStatus">
+    <Type Name="SystemStatus">
+      <Column Name="DDPVersionNum" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Message" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MessageId" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MessageType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Originator" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="schemaVersion" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="SystemStatus" Member="SystemStatus1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="test" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MsgInOutId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="MsgInOut_SystemStatus" Member="MsgInOut" ThisKey="MsgInOutId" OtherKey="Id" Type="MsgInOut" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LRIT_SIGO" Member="LRIT_SIGOs">
+    <Type Name="LRIT_SIGO">
+      <Column Name="ID_BARCO" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MMSI" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MATRICULA" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="NRO_OMI" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NOMBRE" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SISTEMA" Type="System.String" DbType="VarChar(4) NOT NULL" CanBeNull="false" />
+      <Column Name="ESLORA" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="MANGA" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CALADO" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="TIPO_NAVEGACION" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="TIPO_NAVEGACION_INGLES" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="TIPO_BUQUE" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="TIPO_BUQUE_INGLES" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="FECHA_REPORTE" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Position" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="RUMBO" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="VELOCIDAD" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="DESTINO" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LRIT_SIGO_SO" Member="LRIT_SIGO_SOs">
+    <Type Name="LRIT_SIGO_SO">
+      <Column Name="ID_BARCO" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MMSI" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="NRO_OMI" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="NOMBRE" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="SISTEMA" Type="System.String" DbType="VarChar(4) NOT NULL" CanBeNull="false" />
+      <Column Name="LATITUD" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="LONGITUD" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="FECHA_REPORTE" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="TIPO_RESPUESTA" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Column Name="GOBIERNO" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DayStats" Member="DayStats">
+    <Type Name="DayStat">
+      <Column Name="AvgShipAsp" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="MaxShipAsp" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="MinShipAsp" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="AvgAsp" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="MaxAsp" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="MinAsp" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="AvgAspDc" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="MaxAspDc" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="MinAspDc" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="AvgDc" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="MaxDc" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="MinDc" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="dia" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ano" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DDPData" Member="DDPDatas">
+    <Type Name="DDPData">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DataCenterId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LRITId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PlaceStringId" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="PlaceName" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="AreaType" Type="System.String" DbType="VarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="PlaceId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DDPVersion" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MonthStats" Member="MonthStats">
+    <Type Name="MonthStat">
+      <Column Name="AvgShipAsp" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="MaxShipAsp" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="MinShipAsp" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="AvgAsp" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="MaxAsp" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="MinAsp" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="AvgAspDc" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="MaxAspDc" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="MinAspDc" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="AvgDc" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="MaxDc" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="MinDc" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="mes" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ano" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.WeekStats" Member="WeekStats">
+    <Type Name="WeekStat">
+      <Column Name="AvgShipAsp" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="MaxShipAsp" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="MinShipAsp" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="AvgAsp" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="MaxAsp" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="MinAsp" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="AvgAspDc" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="MaxAspDc" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="MinAspDc" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="AvgDc" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="MaxDc" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="MinDc" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="semana" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ASP" Member="ASPs">
+    <Type Name="ASP">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ASPID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CSPID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="ASP_Ship" Member="Ships" ThisKey="Id" OtherKey="ASPId" Type="Ship" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ShipPosition" Member="ShipPositions">
+    <Type Name="ShipPosition">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ShipId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStampInASP" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStampOutASP" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStampInDC" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Position" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Rumbo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Velocidad" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Destino" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Region" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Ship_ShipPosition" Member="Ship" ThisKey="ShipId" OtherKey="Id" Type="Ship" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Place" Member="Places">
+    <Type Name="Place">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ContractingGovermentId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PlaceStringId" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="AreaType" Type="System.String" DbType="VarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="Area" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IsTerritory" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Place_StandingOrder" Member="StandingOrders" ThisKey="Id" OtherKey="PlaceId" Type="StandingOrder" />
+      <Association Name="ContractingGoverment_Place" Member="ContractingGoverment" ThisKey="ContractingGovermentId" OtherKey="Id" Type="ContractingGoverment" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Exclusion" Member="Exclusions">
+    <Type Name="Exclusion">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ContractingGoverment" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="exclusionID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ExcludedContractingGovernmentID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="FromDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ToDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="ContractingGoverment_Exclusion" Member="ContractingGoverment1" ThisKey="ContractingGoverment" OtherKey="Id" Type="ContractingGoverment" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Ship" Member="Ships">
+    <Type Name="Ship">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ASPId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EquipID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IMONum" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MMSINum" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ID_Barco" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Matricula" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Eslora" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Manga" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Calado" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="Tipo_Navegacion" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Tipo_Navegacion_Ingles" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Tipo_Buque" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Tipo_Buque_Ingles" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="DNID" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Member" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Mobile" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="EstadoAsp" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Periodo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ReprogPeriodo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EstadoAspFecha" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="issata" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Ship_ShipPosition" Member="ShipPositions" ThisKey="Id" OtherKey="ShipId" Type="ShipPosition" />
+      <Association Name="ASP_Ship" Member="ASP" ThisKey="ASPId" OtherKey="Id" Type="ASP" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SARService" Member="SARServices">
+    <Type Name="SARService">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ContractingGovermentId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LRITid" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(512)" CanBeNull="true" />
+      <Association Name="ContractingGoverment_SARService" Member="ContractingGoverment" ThisKey="ContractingGovermentId" OtherKey="Id" Type="ContractingGoverment" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DDPVersion" Member="DDPVersions">
+    <Type Name="DDPVersion">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="regularVer" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="inmediateVer" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="received_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="published_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DDPFile" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="DDPVersion_ContractingGoverment" Member="ContractingGoverments" ThisKey="Id" OtherKey="DDPVersionId" Type="ContractingGoverment" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PendingDDPUpdates" Member="PendingDDPUpdates">
+    <Type Name="PendingDDPUpdate">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ddpUpdateId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="baseVersion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="targetVersion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="implementationTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="DDPUpdate_PendingDDPUpdate" Member="DDPUpdate" ThisKey="ddpUpdateId" OtherKey="Id" Type="DDPUpdate" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Configuration" Member="Configurations">
+    <Type Name="Configuration">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DataCenterID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SchemaVersion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ASPId" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PriceUserProvider" Member="PriceUserProviders">
+    <Type Name="PriceUserProvider">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="priceId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dataProviderID" Type="System.String" DbType="VarChar(8) NOT NULL" CanBeNull="false" />
+      <Association Name="Price_PriceUserProvider" Member="Price" ThisKey="priceId" OtherKey="id" Type="Price" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Price" Member="Prices">
+    <Type Name="Price">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="effectiveDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="issueDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="dataCentreID" Type="System.String" DbType="VarChar(8) NOT NULL" CanBeNull="false" />
+      <Column Name="currency" Type="System.String" DbType="VarChar(8) NOT NULL" CanBeNull="false" />
+      <Column Name="PeriodicRateChange" Type="System.Decimal" DbType="Decimal(18,4) NOT NULL" CanBeNull="false" />
+      <Column Name="Poll" Type="System.Decimal" DbType="Decimal(18,4) NOT NULL" CanBeNull="false" />
+      <Column Name="PositionReport" Type="System.Decimal" DbType="Decimal(18,4) NOT NULL" CanBeNull="false" />
+      <Column Name="ArchivePositionReport" Type="System.Decimal" DbType="Decimal(18,4) NOT NULL" CanBeNull="false" />
+      <Association Name="Price_PriceUserProvider" Member="PriceUserProviders" ThisKey="id" OtherKey="priceId" Type="PriceUserProvider" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InvoiceCounter" Member="InvoiceCounters">
+    <Type Name="InvoiceCounter">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nextInvoice" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MsgInOut" Member="MsgInOuts">
+    <Type Name="MsgInOut">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MsgType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MsgId" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="RefId" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Source" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Destination" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="DDPVersion" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="InOut" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Price" Type="System.Decimal" DbType="Decimal(18,4)" CanBeNull="true" />
+      <Association Name="MsgInOut_DDPNotification" Member="DDPNotifications" ThisKey="Id" OtherKey="MsgInOutId" Type="DDPNotification" />
+      <Association Name="MsgInOut_DDPRequestSent" Member="DDPRequestSents" ThisKey="Id" OtherKey="MsgInOutId" Type="DDPRequestSent" />
+      <Association Name="MsgInOut_DDPUpdate" Member="DDPUpdates" ThisKey="Id" OtherKey="MsgInOutId" Type="DDPUpdate" />
+      <Association Name="MsgInOut_JournalReportSent" Member="JournalReportSents" ThisKey="Id" OtherKey="MsgInOutId" Type="JournalReportSent" />
+      <Association Name="MsgInOut_PricingNotification" Member="PricingNotifications" ThisKey="Id" OtherKey="MsgInOutId" Type="PricingNotification" />
+      <Association Name="MsgInOut_PricingRequestSent" Member="PricingRequestSents" ThisKey="Id" OtherKey="MsgInOutId" Type="PricingRequestSent" />
+      <Association Name="MsgInOut_PricingUpdate" Member="PricingUpdates" ThisKey="Id" OtherKey="MsgInOutId" Type="PricingUpdate" />
+      <Association Name="MsgInOut_Receipt" Member="Receipts" ThisKey="Id" OtherKey="MsgInOutId" Type="Receipt" />
+      <Association Name="MsgInOut_SARSURPICRequest" Member="SARSURPICRequests" ThisKey="Id" OtherKey="MsgInOutId" Type="SARSURPICRequest" />
+      <Association Name="MsgInOut_ShipPositionReport" Member="ShipPositionReports" ThisKey="Id" OtherKey="MsgInOutId" Type="ShipPositionReport" />
+      <Association Name="MsgInOut_ShipPositionRequest" Member="ShipPositionRequests" ThisKey="Id" OtherKey="MsgInOutId" Type="ShipPositionRequest" />
+      <Association Name="MsgInOut_SystemStatus" Member="SystemStatus" ThisKey="Id" OtherKey="MsgInOutId" Type="SystemStatus" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Contract" Member="Contracts">
+    <Type Name="Contract">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="lritid" Type="System.String" DbType="VarChar(8) NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="minimun" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="period" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="lastInvoice" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="credit_balance" Type="System.Decimal" DbType="Decimal(18,4) NOT NULL" CanBeNull="false" />
+      <Column Name="lastInvoiceRecv" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="debit_balance" Type="System.Decimal" DbType="Decimal(18,4) NOT NULL" CanBeNull="false" />
+      <Association Name="Contract_Invoice" Member="Invoices" ThisKey="id" OtherKey="contract_id" Type="Invoice" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Invoice" Member="Invoices">
+    <Type Name="Invoice">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="emitidarecibida" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="invoiceNumber" Type="System.String" DbType="VarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="contract_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateFrom" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="dateTo" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="amount" Type="System.Decimal" DbType="Decimal(18,4) NOT NULL" CanBeNull="false" />
+      <Column Name="currency" Type="System.String" DbType="VarChar(8) NOT NULL" CanBeNull="false" />
+      <Column Name="transfercost" Type="System.Decimal" DbType="Decimal(18,4) NOT NULL" CanBeNull="false" />
+      <Column Name="interests" Type="System.Decimal" DbType="Decimal(18,4) NOT NULL" CanBeNull="false" />
+      <Column Name="bankreference" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Column Name="notes" Type="System.String" DbType="VarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="isueDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="state" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="invoiceFile_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Contract_Invoice" Member="Contract" ThisKey="contract_id" OtherKey="id" Type="Contract" IsForeignKey="true" />
+      <Association Name="InvoiceFile_Invoice" Member="InvoiceFile" ThisKey="invoiceFile_id" OtherKey="id" Type="InvoiceFile" IsForeignKey="true" DeleteRule="SET NULL" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InvoiceFile" Member="InvoiceFiles">
+    <Type Name="InvoiceFile">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="fileName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="fileContent" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="fileType" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="InvoiceFile_Invoice" Member="Invoices" ThisKey="id" OtherKey="invoiceFile_id" Type="Invoice" />
+    </Type>
+  </Table>
+</Database>

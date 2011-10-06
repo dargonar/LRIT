@@ -1,0 +1,25 @@
+body{
+	background:#fff url(../img/bg000000.jpg) repeat-x;
+	}
+	
+th {
+	background:#a8b2c5 url(../img/highligh.gif) repeat-x scroll 0 0;
+}
+
+td.alt {
+	background: #eceff5 url(../img/highligh.gif) repeat-x scroll 0 0;
+	color: #797268;
+}
+
+th.specalt {
+	background: #eceff5 url(../img/bullet10.gif) no-repeat;
+	color: #797268;
+}
+
+.button{
+	background:#a8b2c5 url(../img/highligh.gif) repeat-x top left;
+}
+
+.button:hover{
+	background:#a8b2c5;
+}

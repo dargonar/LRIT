@@ -1,0 +1,121 @@
+<!-- 
+	File: 		IDE-DDP.wsdl
+	Version:	1.0
+	Date:		22 August 2008
+-->
+<wsdl:definitions name="ide" targetNamespace="http://gisis.imo.org/XML/LRIT/2008" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://gisis.imo.org/XML/LRIT/2008" xmlns:receipt="http://gisis.imo.org/XML/LRIT/receipt/2008" xmlns:ddpNotification="http://gisis.imo.org/XML/LRIT/ddpNotification/2008" xmlns:ddpUpdate="http://gisis.imo.org/XML/LRIT/ddpUpdate/2008" xmlns:systemStatus="http://gisis.imo.org/XML/LRIT/systemStatus/2008" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/">
+	<wsdl:types>
+		<xs:schema elementFormDefault="qualified" targetNamespace="http://gisis.imo.org/XML/LRIT/2008">
+			<xs:import namespace="http://gisis.imo.org/XML/LRIT/ddpNotification/2008" schemaLocation="DDPNotification.xsd"/>
+			<xs:import namespace="http://gisis.imo.org/XML/LRIT/ddpUpdate/2008" schemaLocation="DDPUpdate.xsd"/>
+			<xs:import namespace="http://gisis.imo.org/XML/LRIT/systemStatus/2008" schemaLocation="SystemStatus.xsd"/>
+			<xs:import namespace="http://gisis.imo.org/XML/LRIT/receipt/2008" schemaLocation="Receipt.xsd"/>
+
+			<xs:simpleType name="responseType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Success"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:element name="Response">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="response" type="tns:responseType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+	</wsdl:types>
+
+	<wsdl:message name="ReceiptRequest">
+		<wsdl:part name="params" element="receipt:Receipt"/>
+	</wsdl:message>
+	<wsdl:message name="ReceiptResponse">
+		<wsdl:part name="params" element="tns:Response"/>
+	</wsdl:message>
+
+	<wsdl:message name="DDPNotificationRequest">
+		<wsdl:part name="params" element="ddpNotification:DDPNotification"/>
+	</wsdl:message>
+	<wsdl:message name="DDPNotificationResponse">
+		<wsdl:part name="params" element="tns:Response"/>
+	</wsdl:message>
+
+	<wsdl:message name="DDPUpdateRequest">
+		<wsdl:part name="params" element="ddpUpdate:DDPUpdate"/>
+	</wsdl:message>
+	<wsdl:message name="DDPUpdateResponse">
+		<wsdl:part name="params" element="tns:Response"/>
+	</wsdl:message>
+
+	<wsdl:message name="SystemStatusRequest">
+		<wsdl:part name="params" element="systemStatus:SystemStatus"/>
+	</wsdl:message>
+	<wsdl:message name="SystemStatusResponse">
+		<wsdl:part name="params" element="tns:Response"/>
+	</wsdl:message>
+
+	<wsdl:portType name="ideDDPPortType">
+		<wsdl:operation name="Receipt">
+			<wsdl:input message="tns:ReceiptRequest"/>
+			<wsdl:output message="tns:ReceiptResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="DDPNotification">
+			<wsdl:input message="tns:DDPNotificationRequest"/>
+			<wsdl:output message="tns:DDPNotificationResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="DDPUpdate">
+			<wsdl:input message="tns:DDPUpdateRequest"/>
+			<wsdl:output message="tns:DDPUpdateResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="SystemStatus">
+			<wsdl:input message="tns:SystemStatusRequest"/>
+			<wsdl:output message="tns:SystemStatusResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="ideDDPServiceBinding" type="tns:ideDDPPortType">
+		<soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="Receipt">
+			<soap12:operation soapAction=""/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="DDPNotification">
+			<soap12:operation soapAction=""/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="DDPUpdate">
+			<soap12:operation soapAction=""/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="SystemStatus">
+			<soap12:operation soapAction=""/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="ideDDPService">
+
+		<wsdl:port name="ideDDPPort" binding="tns:ideDDPServiceBinding">
+			<soap12:address location="http://localhost:8080/ideDDP"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

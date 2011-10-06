@@ -1,0 +1,29 @@
+<!-- 
+	File: 		PricingRequest.xsd
+	Version:	1.1
+	Date:		24 October 2008
+-->
+<xs:schema version="1.0" targetNamespace="http://gisis.imo.org/XML/LRIT/pricingRequest/2008" xmlns="http://gisis.imo.org/XML/LRIT/pricingRequest/2008" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:lrit="http://gisis.imo.org/XML/LRIT/types/2008" elementFormDefault="qualified">
+
+	<xs:import namespace="http://gisis.imo.org/XML/LRIT/types/2008" schemaLocation="Types.xsd"/>
+
+	<xs:simpleType name="messageTypeType">
+		<xs:restriction base="xs:integer">
+			<xs:enumeration value="14"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="PricingRequest" type="PricingRequestType"/>
+	<xs:complexType name="PricingRequestType">
+		<xs:sequence>
+			<xs:element name="MessageType" type="messageTypeType"/>
+			<xs:element name="MessageId" type="lrit:msgIDType"/>
+			<xs:element name="ReferenceId" type="lrit:refIDType"/>			
+			<xs:element name="Originator" type="lrit:dataCentreLRITIDType"/>
+			<xs:element name="TimeStamp" type="xs:dateTime"/>
+			<xs:element name="DDPVersionNum" type="lrit:ddpVersionNumType"/>
+		</xs:sequence>
+		<xs:attribute name="test" type="lrit:testType" use="optional" default="0"/>
+		<xs:attribute name="schemaVersion" type="xs:decimal" use="required"/>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,8 @@
+C:\wdir\lrit\DataCenterDataAccess\bin\Debug\DataCenterDataAccess.dll.config
+C:\wdir\lrit\DataCenterDataAccess\bin\Debug\DataCenterDataAccess.dll
+C:\wdir\lrit\DataCenterDataAccess\bin\Debug\DataCenterDataAccess.pdb
+C:\wdir\lrit\DataCenterDataAccess\bin\Debug\log4net.dll
+C:\wdir\lrit\DataCenterDataAccess\bin\Debug\log4net.xml
+C:\wdir\lrit\DataCenterDataAccess\obj\Debug\ResolveAssemblyReference.cache
+C:\wdir\lrit\DataCenterDataAccess\obj\Debug\DataCenterDataAccess.dll
+C:\wdir\lrit\DataCenterDataAccess\obj\Debug\DataCenterDataAccess.pdb

@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="https://www.ws.prefecturanaval.gov.ar/LRITSIGO/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="https://www.ws.prefecturanaval.gov.ar/LRITSIGO/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="https://www.ws.prefecturanaval.gov.ar/LRITSIGO/">
+      <s:element name="DatasetLrit">
+        <s:complexType />
+      </s:element>
+      <s:element name="DatasetLritResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DatasetLritResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DatasetLritHistorico">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="fromDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="toDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="shipIds" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DatasetLritHistoricoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DatasetLritHistoricoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DatasetLrit_ContractingGoverment">
+        <s:complexType />
+      </s:element>
+      <s:element name="DatasetLrit_ContractingGovermentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DatasetLrit_ContractingGovermentResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DatasetLritFlitro">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mmsi" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="matricula" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nro_omi" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nombre" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DatasetLritFlitroResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DatasetLritFlitroResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DatasetLritSt">
+        <s:complexType />
+      </s:element>
+      <s:element name="DatasetLritStResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DatasetLritStResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DatasetLritStFiltro">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ShipName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IMONum" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MMSINum" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DatasetLritStFiltroResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DatasetLritStFiltroResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DatasetLritPort_id">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LRITid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DatasetLritPort_idResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DatasetLritPort_idResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DatasetLritPort_name">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Name_Place" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DatasetLritPort_nameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DatasetLritPort_nameResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DatasetLritPort_facility_id">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LRITid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DatasetLritPort_facility_idResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DatasetLritPort_facility_idResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DatasetLritDDP1000mn_id">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LRITid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DatasetLritDDP1000mn_idResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DatasetLritDDP1000mn_idResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DatasetLRIT_SIGO_TERRITORIAL_SEA_id">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LRITid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DatasetLRIT_SIGO_TERRITORIAL_SEA_idResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DatasetLRIT_SIGO_TERRITORIAL_SEA_idResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DatasetLritDDP_LRIT_SIGO_INTERNAL_WATER_ID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LRITid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DatasetLritDDP_LRIT_SIGO_INTERNAL_WATER_IDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DatasetLritDDP_LRIT_SIGO_INTERNAL_WATER_IDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DatasetLritDDP_CUSTOM_COASTAL_AREAS_ID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LRITid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DatasetLritDDP_CUSTOM_COASTAL_AREAS_IDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DatasetLritDDP_CUSTOM_COASTAL_AREAS_IDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="DatasetLritSoapIn">
+    <wsdl:part name="parameters" element="tns:DatasetLrit" />
+  </wsdl:message>
+  <wsdl:message name="DatasetLritSoapOut">
+    <wsdl:part name="parameters" element="tns:DatasetLritResponse" />
+  </wsdl:message>
+  <wsdl:message name="DatasetLritHistoricoSoapIn">
+    <wsdl:part name="parameters" element="tns:DatasetLritHistorico" />
+  </wsdl:message>
+  <wsdl:message name="DatasetLritHistoricoSoapOut">
+    <wsdl:part name="parameters" element="tns:DatasetLritHistoricoResponse" />
+  </wsdl:message>
+  <wsdl:message name="DatasetLrit_ContractingGovermentSoapIn">
+    <wsdl:part name="parameters" element="tns:DatasetLrit_ContractingGoverment" />
+  </wsdl:message>
+  <wsdl:message name="DatasetLrit_ContractingGovermentSoapOut">
+    <wsdl:part name="parameters" element="tns:DatasetLrit_ContractingGovermentResponse" />
+  </wsdl:message>
+  <wsdl:message name="DatasetLritFlitroSoapIn">
+    <wsdl:part name="parameters" element="tns:DatasetLritFlitro" />
+  </wsdl:message>
+  <wsdl:message name="DatasetLritFlitroSoapOut">
+    <wsdl:part name="parameters" element="tns:DatasetLritFlitroResponse" />
+  </wsdl:message>
+  <wsdl:message name="DatasetLritStSoapIn">
+    <wsdl:part name="parameters" element="tns:DatasetLritSt" />
+  </wsdl:message>
+  <wsdl:message name="DatasetLritStSoapOut">
+    <wsdl:part name="parameters" element="tns:DatasetLritStResponse" />
+  </wsdl:message>
+  <wsdl:message name="DatasetLritStFiltroSoapIn">
+    <wsdl:part name="parameters" element="tns:DatasetLritStFiltro" />
+  </wsdl:message>
+  <wsdl:message name="DatasetLritStFiltroSoapOut">
+    <wsdl:part name="parameters" element="tns:DatasetLritStFiltroResponse" />
+  </wsdl:message>
+  <wsdl:message name="DatasetLritPort_idSoapIn">
+    <wsdl:part name="parameters" element="tns:DatasetLritPort_id" />
+  </wsdl:message>
+  <wsdl:message name="DatasetLritPort_idSoapOut">
+    <wsdl:part name="parameters" element="tns:DatasetLritPort_idResponse" />
+  </wsdl:message>
+  <wsdl:message name="DatasetLritPort_nameSoapIn">
+    <wsdl:part name="parameters" element="tns:DatasetLritPort_name" />
+  </wsdl:message>
+  <wsdl:message name="DatasetLritPort_nameSoapOut">
+    <wsdl:part name="parameters" element="tns:DatasetLritPort_nameResponse" />
+  </wsdl:message>
+  <wsdl:message name="DatasetLritPort_facility_idSoapIn">
+    <wsdl:part name="parameters" element="tns:DatasetLritPort_facility_id" />
+  </wsdl:message>
+  <wsdl:message name="DatasetLritPort_facility_idSoapOut">
+    <wsdl:part name="parameters" element="tns:DatasetLritPort_facility_idResponse" />
+  </wsdl:message>
+  <wsdl:message name="DatasetLritDDP1000mn_idSoapIn">
+    <wsdl:part name="parameters" element="tns:DatasetLritDDP1000mn_id" />
+  </wsdl:message>
+  <wsdl:message name="DatasetLritDDP1000mn_idSoapOut">
+    <wsdl:part name="parameters" element="tns:DatasetLritDDP1000mn_idResponse" />
+  </wsdl:message>
+  <wsdl:message name="DatasetLRIT_SIGO_TERRITORIAL_SEA_idSoapIn">
+    <wsdl:part name="parameters" element="tns:DatasetLRIT_SIGO_TERRITORIAL_SEA_id" />
+  </wsdl:message>
+  <wsdl:message name="DatasetLRIT_SIGO_TERRITORIAL_SEA_idSoapOut">
+    <wsdl:part name="parameters" element="tns:DatasetLRIT_SIGO_TERRITORIAL_SEA_idResponse" />
+  </wsdl:message>
+  <wsdl:message name="DatasetLritDDP_LRIT_SIGO_INTERNAL_WATER_IDSoapIn">
+    <wsdl:part name="parameters" element="tns:DatasetLritDDP_LRIT_SIGO_INTERNAL_WATER_ID" />
+  </wsdl:message>
+  <wsdl:message name="DatasetLritDDP_LRIT_SIGO_INTERNAL_WATER_IDSoapOut">
+    <wsdl:part name="parameters" element="tns:DatasetLritDDP_LRIT_SIGO_INTERNAL_WATER_IDResponse" />
+  </wsdl:message>
+  <wsdl:message name="DatasetLritDDP_CUSTOM_COASTAL_AREAS_IDSoapIn">
+    <wsdl:part name="parameters" element="tns:DatasetLritDDP_CUSTOM_COASTAL_AREAS_ID" />
+  </wsdl:message>
+  <wsdl:message name="DatasetLritDDP_CUSTOM_COASTAL_AREAS_IDSoapOut">
+    <wsdl:part name="parameters" element="tns:DatasetLritDDP_CUSTOM_COASTAL_AREAS_IDResponse" />
+  </wsdl:message>
+  <wsdl:portType name="LRITSIGOSoap">
+    <wsdl:operation name="DatasetLrit">
+      <wsdl:input message="tns:DatasetLritSoapIn" />
+      <wsdl:output message="tns:DatasetLritSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritHistorico">
+      <wsdl:input message="tns:DatasetLritHistoricoSoapIn" />
+      <wsdl:output message="tns:DatasetLritHistoricoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLrit_ContractingGoverment">
+      <wsdl:input message="tns:DatasetLrit_ContractingGovermentSoapIn" />
+      <wsdl:output message="tns:DatasetLrit_ContractingGovermentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritFlitro">
+      <wsdl:input message="tns:DatasetLritFlitroSoapIn" />
+      <wsdl:output message="tns:DatasetLritFlitroSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritSt">
+      <wsdl:input message="tns:DatasetLritStSoapIn" />
+      <wsdl:output message="tns:DatasetLritStSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritStFiltro">
+      <wsdl:input message="tns:DatasetLritStFiltroSoapIn" />
+      <wsdl:output message="tns:DatasetLritStFiltroSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritPort_id">
+      <wsdl:input message="tns:DatasetLritPort_idSoapIn" />
+      <wsdl:output message="tns:DatasetLritPort_idSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritPort_name">
+      <wsdl:input message="tns:DatasetLritPort_nameSoapIn" />
+      <wsdl:output message="tns:DatasetLritPort_nameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritPort_facility_id">
+      <wsdl:input message="tns:DatasetLritPort_facility_idSoapIn" />
+      <wsdl:output message="tns:DatasetLritPort_facility_idSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritDDP1000mn_id">
+      <wsdl:input message="tns:DatasetLritDDP1000mn_idSoapIn" />
+      <wsdl:output message="tns:DatasetLritDDP1000mn_idSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLRIT_SIGO_TERRITORIAL_SEA_id">
+      <wsdl:input message="tns:DatasetLRIT_SIGO_TERRITORIAL_SEA_idSoapIn" />
+      <wsdl:output message="tns:DatasetLRIT_SIGO_TERRITORIAL_SEA_idSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritDDP_LRIT_SIGO_INTERNAL_WATER_ID">
+      <wsdl:input message="tns:DatasetLritDDP_LRIT_SIGO_INTERNAL_WATER_IDSoapIn" />
+      <wsdl:output message="tns:DatasetLritDDP_LRIT_SIGO_INTERNAL_WATER_IDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritDDP_CUSTOM_COASTAL_AREAS_ID">
+      <wsdl:input message="tns:DatasetLritDDP_CUSTOM_COASTAL_AREAS_IDSoapIn" />
+      <wsdl:output message="tns:DatasetLritDDP_CUSTOM_COASTAL_AREAS_IDSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="LRITSIGOSoap" type="tns:LRITSIGOSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DatasetLrit">
+      <soap:operation soapAction="https://www.ws.prefecturanaval.gov.ar/LRITSIGO/DatasetLrit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritHistorico">
+      <soap:operation soapAction="https://www.ws.prefecturanaval.gov.ar/LRITSIGO/DatasetLritHistorico" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLrit_ContractingGoverment">
+      <soap:operation soapAction="https://www.ws.prefecturanaval.gov.ar/LRITSIGO/DatasetLrit_ContractingGoverment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritFlitro">
+      <soap:operation soapAction="https://www.ws.prefecturanaval.gov.ar/LRITSIGO/DatasetLritFlitro" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritSt">
+      <soap:operation soapAction="https://www.ws.prefecturanaval.gov.ar/LRITSIGO/DatasetLritSt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritStFiltro">
+      <soap:operation soapAction="https://www.ws.prefecturanaval.gov.ar/LRITSIGO/DatasetLritStFiltro" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritPort_id">
+      <soap:operation soapAction="https://www.ws.prefecturanaval.gov.ar/LRITSIGO/DatasetLritPort_id" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritPort_name">
+      <soap:operation soapAction="https://www.ws.prefecturanaval.gov.ar/LRITSIGO/DatasetLritPort_name" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritPort_facility_id">
+      <soap:operation soapAction="https://www.ws.prefecturanaval.gov.ar/LRITSIGO/DatasetLritPort_facility_id" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritDDP1000mn_id">
+      <soap:operation soapAction="https://www.ws.prefecturanaval.gov.ar/LRITSIGO/DatasetLritDDP1000mn_id" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLRIT_SIGO_TERRITORIAL_SEA_id">
+      <soap:operation soapAction="https://www.ws.prefecturanaval.gov.ar/LRITSIGO/DatasetLRIT_SIGO_TERRITORIAL_SEA_id" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritDDP_LRIT_SIGO_INTERNAL_WATER_ID">
+      <soap:operation soapAction="https://www.ws.prefecturanaval.gov.ar/LRITSIGO/DatasetLritDDP_LRIT_SIGO_INTERNAL_WATER_ID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritDDP_CUSTOM_COASTAL_AREAS_ID">
+      <soap:operation soapAction="https://www.ws.prefecturanaval.gov.ar/LRITSIGO/DatasetLritDDP_CUSTOM_COASTAL_AREAS_ID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LRITSIGOSoap12" type="tns:LRITSIGOSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DatasetLrit">
+      <soap12:operation soapAction="https://www.ws.prefecturanaval.gov.ar/LRITSIGO/DatasetLrit" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritHistorico">
+      <soap12:operation soapAction="https://www.ws.prefecturanaval.gov.ar/LRITSIGO/DatasetLritHistorico" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLrit_ContractingGoverment">
+      <soap12:operation soapAction="https://www.ws.prefecturanaval.gov.ar/LRITSIGO/DatasetLrit_ContractingGoverment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritFlitro">
+      <soap12:operation soapAction="https://www.ws.prefecturanaval.gov.ar/LRITSIGO/DatasetLritFlitro" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritSt">
+      <soap12:operation soapAction="https://www.ws.prefecturanaval.gov.ar/LRITSIGO/DatasetLritSt" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritStFiltro">
+      <soap12:operation soapAction="https://www.ws.prefecturanaval.gov.ar/LRITSIGO/DatasetLritStFiltro" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritPort_id">
+      <soap12:operation soapAction="https://www.ws.prefecturanaval.gov.ar/LRITSIGO/DatasetLritPort_id" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritPort_name">
+      <soap12:operation soapAction="https://www.ws.prefecturanaval.gov.ar/LRITSIGO/DatasetLritPort_name" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritPort_facility_id">
+      <soap12:operation soapAction="https://www.ws.prefecturanaval.gov.ar/LRITSIGO/DatasetLritPort_facility_id" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritDDP1000mn_id">
+      <soap12:operation soapAction="https://www.ws.prefecturanaval.gov.ar/LRITSIGO/DatasetLritDDP1000mn_id" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLRIT_SIGO_TERRITORIAL_SEA_id">
+      <soap12:operation soapAction="https://www.ws.prefecturanaval.gov.ar/LRITSIGO/DatasetLRIT_SIGO_TERRITORIAL_SEA_id" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritDDP_LRIT_SIGO_INTERNAL_WATER_ID">
+      <soap12:operation soapAction="https://www.ws.prefecturanaval.gov.ar/LRITSIGO/DatasetLritDDP_LRIT_SIGO_INTERNAL_WATER_ID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DatasetLritDDP_CUSTOM_COASTAL_AREAS_ID">
+      <soap12:operation soapAction="https://www.ws.prefecturanaval.gov.ar/LRITSIGO/DatasetLritDDP_CUSTOM_COASTAL_AREAS_ID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="LRITSIGO">
+    <wsdl:port name="LRITSIGOSoap" binding="tns:LRITSIGOSoap">
+      <soap:address location="http://localhost:1523/LRITSIGO.asmx" />
+    </wsdl:port>
+    <wsdl:port name="LRITSIGOSoap12" binding="tns:LRITSIGOSoap12">
+      <soap12:address location="http://localhost:1523/LRITSIGO.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

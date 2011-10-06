@@ -1,0 +1,32 @@
+<publishData>
+  <publishTarget publishUrl="c:\Inetpub\wwwroot\LRIT\DC\">
+    <file relUrl="bin/DataCenterDataAccess.dll" publishTime="04/05/2009 23:12:20" />
+    <file relUrl="bin/DataCenterLogic.pdb" publishTime="04/06/2009 10:57:26" />
+    <file relUrl="bin/log4net.xml" publishTime="12/17/2008 18:33:25" />
+    <file relUrl="bin/ICSharpCode.SharpZipLib.dll" publishTime="08/07/2008 22:31:12" />
+    <file relUrl="LRITDataCenter.asmx.cs" publishTime="12/22/2008 11:54:47" />
+    <file relUrl="LRITDataCenter.asmx" publishTime="12/17/2008 18:33:22" />
+    <file relUrl="DataCenterRX.csproj" publishTime="04/05/2009 16:40:30" />
+    <file relUrl="Web.config" publishTime="04/06/2009 10:59:15" />
+    <file relUrl="bin/LRITDataCenter.dll" publishTime="04/06/2009 10:57:28" />
+    <file relUrl="bin/DataCenterLogic.dll" publishTime="04/06/2009 10:57:26" />
+    <file relUrl="DataCenterRX.csproj.user" publishTime="04/05/2009 16:40:30" />
+    <file relUrl="bin/DataCenterDataAccess.pdb" publishTime="04/05/2009 23:12:20" />
+    <file relUrl="dcServiceInterfaces.cs" publishTime="12/17/2008 18:33:22" />
+    <file relUrl="bin/LRITDataCenter.pdb" publishTime="04/06/2009 10:57:28" />
+    <file relUrl="bin/log4net.dll" publishTime="12/17/2008 18:33:24" />
+    <file relUrl="Properties/AssemblyInfo.cs" publishTime="12/17/2008 18:33:22" />
+  </publishTarget>
+  <publishTarget publishUrl="C:\wdir\LRIT\web\">
+    <file relUrl="bin/DataCenterDataAccess.dll" publishTime="11/07/2008 10:23:39" />
+    <file relUrl="bin/DataCenterLogic.pdb" publishTime="11/07/2008 10:23:40" />
+    <file relUrl="bin/log4net.xml" publishTime="10/06/2008 19:58:01" />
+    <file relUrl="bin/DataCenterDataAccess.pdb" publishTime="11/07/2008 10:23:39" />
+    <file relUrl="LRITDataCenter.asmx" publishTime="10/06/2008 19:57:59" />
+    <file relUrl="Web.config" publishTime="10/06/2008 19:57:59" />
+    <file relUrl="bin/log4net.dll" publishTime="10/06/2008 19:58:01" />
+    <file relUrl="bin/DataCenterLogic.dll" publishTime="11/07/2008 10:23:40" />
+    <file relUrl="bin/LRITDataCenter.pdb" publishTime="11/07/2008 10:23:46" />
+    <file relUrl="bin/LRITDataCenter.dll" publishTime="11/07/2008 10:23:46" />
+  </publishTarget>
+</publishData>

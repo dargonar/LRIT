@@ -1,0 +1,12 @@
+C:\wdir\lrit\PriceUpdater\bin\Debug\PriceUpdater.exe.config
+C:\wdir\lrit\PriceUpdater\bin\Debug\PriceUpdater.exe
+C:\wdir\lrit\PriceUpdater\bin\Debug\PriceUpdater.pdb
+C:\wdir\lrit\PriceUpdater\bin\Debug\DataCenterDataAccess.dll
+C:\wdir\lrit\PriceUpdater\bin\Debug\log4net.dll
+C:\wdir\lrit\PriceUpdater\bin\Debug\PriceUpdaterLib.dll
+C:\wdir\lrit\PriceUpdater\bin\Debug\log4net.xml
+C:\wdir\lrit\PriceUpdater\bin\Debug\PriceUpdaterLib.pdb
+C:\wdir\lrit\PriceUpdater\bin\Debug\DataCenterDataAccess.pdb
+C:\wdir\lrit\PriceUpdater\obj\Debug\ResolveAssemblyReference.cache
+C:\wdir\lrit\PriceUpdater\obj\Debug\PriceUpdater.exe
+C:\wdir\lrit\PriceUpdater\obj\Debug\PriceUpdater.pdb

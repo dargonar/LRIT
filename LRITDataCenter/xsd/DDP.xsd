@@ -1,0 +1,431 @@
+<!-- 
+	File: 		DDP.xsd
+	Version: 	1.2
+	Date: 		24 October 2008
+-->
+<xs:schema version="1.0" targetNamespace="http://gisis.imo.org/XML/LRIT/ddp/2008" xmlns="http://gisis.imo.org/XML/LRIT/ddp/2008" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:lrit="http://gisis.imo.org/XML/LRIT/types/2008" elementFormDefault="qualified">
+
+	<xs:import namespace="http://gisis.imo.org/XML/LRIT/types/2008" schemaLocation="Types.xsd"/>
+
+	<!-- Simple datatypes -->
+	<xs:simpleType name="iso3166-1Alpha3CodeType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[A-Z]{3}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="mmsiType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{9}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="contactIDType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="CPN1[0-9]{3}_[0-9]+"/>
+			<xs:pattern value="CPDCINF1[0-9]{3}_[0-9]+"/>
+			<xs:pattern value="CPASPINF1[0-9]{3}_[0-9]+"/>
+			<xs:pattern value="CPSAR2[0-9]{3}_[0-9]+"/>
+			<xs:pattern value="CPDC3[0-9]{3}_[0-9]+"/>
+			<xs:pattern value="CPASP4[0-9]{3}_[0-9]+"/>
+			<xs:pattern value="CPDDP0001_[0-9]+"/>
+			<xs:pattern value="CPIDE0002_[0-9]+"/>
+			<xs:pattern value="CPLC0003_[0-9]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="dcInfoIDType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="DCINF1[0-9]{3}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="aspInfoIDType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="ASPINF1[0-9]{3}_[0-9]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="exclusionIDType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="EXCL1[0-9]{3}_[0-9]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="coastalStateStandingOrderAreasIDType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="GA(IW|TS|OT|CA)1[0-9]{3}_[0-9]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="coastalStateStandingOrderAreasIDListType">
+		<xs:list itemType="coastalStateStandingOrderAreasIDType"/>
+	</xs:simpleType>
+	<xs:simpleType name="sarFacilityTypeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="RB"/>
+			<xs:enumeration value="RV"/>
+			<xs:enumeration value="SRG"/>
+			<xs:enumeration value="MRG"/>
+			<xs:enumeration value="LRG"/>
+			<xs:enumeration value="VLR"/>
+			<xs:enumeration value="ELR"/>
+			<xs:enumeration value="HEL-L"/>
+			<xs:enumeration value="HEL-M"/>
+			<xs:enumeration value="HEL-H"/>
+			<xs:enumeration value="GSU"/>
+			<xs:enumeration value="MAU"/>
+			<xs:enumeration value="UIU"/>
+			<xs:enumeration value="DUIU"/>
+			<xs:enumeration value="FFU"/>
+			<xs:enumeration value="IRU"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="sarFacilityTypeListType">
+		<xs:list itemType="sarFacilityTypeType"/>
+	</xs:simpleType>
+	<!-- Complex datatypes -->
+	<xs:complexType name="contactPointType">
+		<xs:sequence>
+			<xs:element name="Type">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Primary"/>
+						<xs:enumeration value="Alternate"/>
+						<xs:enumeration value="Operational"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Title" type="xs:string" minOccurs="0"/>
+			<xs:element name="FirstName" type="xs:string" minOccurs="0"/>
+			<xs:element name="LastName" type="xs:string" minOccurs="0"/>
+			<xs:element name="Department" type="xs:string" minOccurs="0"/>
+			<xs:element name="Position" type="xs:string" minOccurs="0"/>
+			<xs:element name="AddressLine1" type="xs:string" minOccurs="0"/>
+			<xs:element name="AddressLine2" type="xs:string" minOccurs="0"/>
+			<xs:element name="AddressLine3" type="xs:string" minOccurs="0"/>
+			<xs:element name="AddressCity" type="xs:string" minOccurs="0"/>
+			<xs:element name="AddressPostcode" type="xs:string" minOccurs="0"/>
+			<xs:element name="AddressState" type="xs:string" minOccurs="0"/>
+			<xs:element name="AddressCountry" type="xs:string" minOccurs="0"/>
+			<xs:element name="Telephone" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Fax" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Email" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Website" type="xs:anyURI" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="contactID" type="contactIDType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="dataCentreType">
+		<xs:sequence>
+			<xs:element name="Type">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="International"/>
+						<xs:enumeration value="National"/>
+						<xs:enumeration value="Regional"/>
+						<xs:enumeration value="Cooperative"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Name" type="xs:string"/>
+			<xs:element name="IDEInterfaceWebServiceLocation" type="xs:anyURI"/>
+			<xs:element name="DDPInterfaceWebServiceLocation" type="xs:anyURI"/>
+			<xs:element name="ContactPoint" type="contactPointType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="AdditionalInformation" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="lritID" type="lrit:dataCentreLRITIDType"/>
+	</xs:complexType>
+	<xs:complexType name="aspType">
+		<xs:sequence>
+			<xs:element name="Name" type="xs:string"/>
+		</xs:sequence>
+		<xs:attribute name="lritID" type="lrit:aspLRITIDType"/>
+	</xs:complexType>
+	<xs:complexType name="dataCentreInfoType">
+		<xs:sequence>
+			<xs:element name="DataCentreID" type="lrit:dataCentreLRITIDType"/>
+			<xs:element name="ContactPoint" type="contactPointType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="dcInfoID" type="dcInfoIDType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="sarServiceType">
+		<xs:sequence>
+			<xs:element name="Name" type="xs:string"/>
+			<xs:element name="MMSI" type="mmsiType" minOccurs="0"/>
+			<xs:element name="CallSign" type="xs:string" minOccurs="0"/>
+			<xs:element name="VHFVoiceCallSign" type="xs:string" minOccurs="0"/>
+			<xs:element name="Telephone" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Fax" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Email" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Telex" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="OtherLandlineComms" type="xs:string" minOccurs="0"/>
+			<xs:element name="AvailableFacilities" type="sarFacilityTypeListType" minOccurs="0"/>
+			<xs:element name="ContactPoint" type="contactPointType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="lritID" type="lrit:sarServiceLRITIDType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="aspInfoType">
+		<xs:sequence>
+			<xs:element name="ASPID" type="lrit:aspLRITIDType"/>
+			<xs:element name="Conditions" type="xs:string" minOccurs="0"/>
+			<xs:element name="ContactPoint" type="contactPointType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="aspInfoID" type="aspInfoIDType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="placeType">
+		<xs:sequence>
+			<xs:element name="Name" type="xs:string"/>
+			<xs:element name="Position" type="lrit:posType"/>
+		</xs:sequence>
+		<xs:attribute name="placeCode" type="lrit:placeCodeType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="portFacilityType">
+		<xs:sequence>
+			<xs:element name="Name" type="xs:string"/>
+			<xs:element name="Position" type="lrit:posType"/>
+		</xs:sequence>
+		<xs:attribute name="imoPortFacilityNumber" type="lrit:imoPortFacilityNumberType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="portType">
+		<xs:sequence>
+			<xs:element name="Name" type="xs:string"/>
+			<xs:element name="Position" type="lrit:posType"/>
+		</xs:sequence>
+		<xs:attribute name="locode" type="lrit:locodeType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="exclusionType">
+		<xs:sequence>
+			<xs:element name="ExcludedContractingGovernmentID" type="lrit:contractingGovernmentLRITIDType"/>
+			<xs:element name="From" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="Until" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="Reason" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="contractingGovernmentID" type="lrit:contractingGovernmentLRITIDType" use="required"/>
+		<xs:attribute name="exclusionID" type="exclusionIDType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="coastalStateStandingOrderType">
+		<xs:simpleContent>
+			<xs:extension base="coastalStateStandingOrderAreasIDListType">
+				<xs:attribute name="contractingGovernmentID" type="lrit:contractingGovernmentLRITIDType" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="ddpServerType">
+		<xs:sequence>
+			<xs:element name="Name" type="xs:string"/>
+			<xs:element name="WebServiceLocation" type="xs:anyURI"/>
+			<xs:element name="ContactPoint" type="contactPointType" maxOccurs="unbounded"/>
+			<xs:element name="AdditionalInformation" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="lritID" type="lrit:ddpServerLRITIDType"/>
+	</xs:complexType>
+	<xs:complexType name="ideType">
+		<xs:sequence>
+			<xs:element name="Name" type="xs:string"/>
+			<xs:element name="DCInterfaceWebServiceLocation" type="xs:anyURI"/>
+			<xs:element name="DDPInterfaceWebServiceLocation" type="xs:anyURI"/>
+			<xs:element name="ContactPoint" type="contactPointType" maxOccurs="unbounded"/>
+			<xs:element name="AdditionalInformation" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="lritID" type="lrit:ideLRITIDType"/>
+	</xs:complexType>
+	<xs:complexType name="lritCoordinatorType">
+		<xs:sequence>
+			<xs:element name="Name" type="xs:string"/>
+			<xs:element name="ContactPoint" type="contactPointType" maxOccurs="unbounded"/>
+			<xs:element name="AdditionalInformation" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="lritID" type="lrit:lritCoordinatorLRITIDType"/>
+	</xs:complexType>
+	<!-- Incremental datatypes -->
+	<xs:complexType name="regularIncrementableType">
+		<xs:choice>
+			<xs:element name="ContractingGovernment" type="contractingGovernmentType"/>
+			<xs:element name="Territory" type="territoryType"/>
+			<xs:element name="ContactPoint" type="contactPointType"/>
+			<xs:element name="ASPInfo" type="aspInfoType"/>
+			<xs:element name="SARService" type="sarServiceType"/>
+			<xs:element name="Port" type="portType"/>
+			<xs:element name="PortFacility" type="portFacilityType"/>
+			<xs:element name="Place" type="placeType"/>
+			<xs:element name="Polygon" type="lrit:polygonType"/>
+			<xs:element name="DataCentreInfo" type="dataCentreInfoType"/>
+			<xs:element name="ASP" type="aspType"/>
+			<xs:element name="LRITCoordinator" type="lritCoordinatorType"/>
+		</xs:choice>
+		<xs:attribute name="xPath" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="immediateIncrementableType">
+		<xs:choice>
+			<xs:element name="StandingOrder" type="coastalStateStandingOrderType"/>
+			<xs:element name="Exclusion" type="exclusionType"/>
+			<xs:element name="DataCentre" type="dataCentreType"/>
+			<xs:element name="DDPServer" type="ddpServerType"/>
+			<xs:element name="IDE" type="ideType"/>
+		</xs:choice>
+		<xs:attribute name="xPath" type="xs:string" use="required"/>
+	</xs:complexType>
+	<!-- Root-element datatypes -->
+	<xs:complexType name="contractingGovernmentType">
+		<xs:sequence>
+			<xs:element name="Name">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="isoCode" type="iso3166-1Alpha3CodeType"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NationalPointsOfContact">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ContactPoint" type="contactPointType" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="DataCentreInfo" type="dataCentreInfoType"/>
+			<xs:element name="ASPInfo" type="aspInfoType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="SARServices">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="SARService" type="sarServiceType" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Ports">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Port" type="portType" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PortFacilities">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="PortFacility" type="portFacilityType" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Places">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Place" type="placeType" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="InternalWaters">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Polygon" type="lrit:polygonType" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="TerritorialSea">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Polygon" type="lrit:polygonType" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SeawardAreaOf1000NM">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Polygon" type="lrit:polygonType" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="CustomCoastalAreas">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Polygon" type="lrit:polygonType" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="lritID" type="lrit:contractingGovernmentLRITIDType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="territoryType">
+		<xs:complexContent>
+			<xs:extension base="contractingGovernmentType">
+				<xs:attribute name="contractingGovernmentID" type="lrit:contractingGovernmentLRITIDType" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Root elements -->
+	<xs:element name="DataDistributionPlan">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ContractingGovernment" type="contractingGovernmentType" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="Territory" type="territoryType" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="CoastalStateStandingOrders">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="StandingOrder" type="coastalStateStandingOrderType" minOccurs="0" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Exclusions">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Exclusion" type="exclusionType" minOccurs="0" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="DataCentres">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="DataCentre" type="dataCentreType" minOccurs="0" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="ASPs">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ASP" type="aspType" minOccurs="0" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="DDPServer" type="ddpServerType"/>
+				<xs:element name="IDE" type="ideType"/>
+				<xs:element name="LRITCoordinator" type="lritCoordinatorType"/>
+			</xs:sequence>
+			<xs:attribute name="versionNum" type="lrit:ddpVersionNumType" use="required"/>
+			<xs:attribute name="regularVersionPublishedAt" type="xs:dateTime" use="required"/>
+			<xs:attribute name="regularVersionImplementationAt" type="xs:dateTime" use="required"/>
+			<xs:attribute name="immediateVersionPublishedAt" type="xs:dateTime" use="required"/>
+			<xs:attribute name="immediateVersionImplementationAt" type="xs:dateTime" use="required"/>
+			<xs:attribute name="schemaVersion" type="xs:decimal" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DataDistributionPlan-IncrementalUpdate">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Regular" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:choice minOccurs="0" maxOccurs="unbounded">
+							<xs:element name="Delete" type="regularIncrementableType"/>
+							<xs:element name="Insert" type="regularIncrementableType"/>
+							<xs:element name="Update" type="regularIncrementableType"/>
+						</xs:choice>
+						<xs:attribute name="baseRegularVersionNum" type="xs:int" use="required"/>
+						<xs:attribute name="targetRegularVersionNum" type="xs:int" use="required"/>
+						<xs:attribute name="targetPublishedAt" type="xs:dateTime" use="required"/>
+						<xs:attribute name="targetImplementationAt" type="xs:dateTime" use="required"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Immediate" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:choice minOccurs="0" maxOccurs="unbounded">
+							<xs:element name="Delete" type="immediateIncrementableType"/>
+							<xs:element name="Insert" type="immediateIncrementableType"/>
+							<xs:element name="Update" type="immediateIncrementableType"/>
+						</xs:choice>
+						<xs:attribute name="baseImmediateVersionNum" type="xs:int" use="required"/>
+						<xs:attribute name="targetImmediateVersionNum" type="xs:int" use="required"/>
+						<xs:attribute name="targetPublishedAt" type="xs:dateTime" use="required"/>
+						<xs:attribute name="targetImplementationAt" type="xs:dateTime" use="required"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="baseRegularVersionNum" type="lrit:ddpIncrementalVersionNumType"/>
+			<xs:attribute name="targetRegularVersionNum" type="lrit:ddpIncrementalVersionNumType"/>
+			<xs:attribute name="baseImmediateVersionNum" type="lrit:ddpIncrementalVersionNumType"/>
+			<xs:attribute name="targetImmediateVersionNum" type="lrit:ddpIncrementalVersionNumType"/>
+			<xs:attribute name="schemaVersion" type="xs:decimal" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:lrit="http://gisis.imo.org/XML/LRIT/types/2008" xmlns="http://gisis.imo.org/XML/LRIT/systemStatus/2008" elementFormDefault="qualified" targetNamespace="http://gisis.imo.org/XML/LRIT/systemStatus/2008" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="Types.xsd" namespace="http://gisis.imo.org/XML/LRIT/types/2008" />
+  <xs:simpleType name="messageTypeType">
+    <xs:restriction base="xs:integer">
+      <xs:enumeration value="11" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="systemStatusIndicatorType">
+    <xs:restriction base="xs:integer">
+      <xs:enumeration value="0" />
+      <xs:enumeration value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="SystemStatus" type="SystemStatusType" />
+  <xs:complexType name="SystemStatusType">
+    <xs:sequence>
+      <xs:element name="MessageType" type="messageTypeType" />
+      <xs:element name="MessageId" type="lrit:msgIDType" />
+      <xs:element name="TimeStamp" type="xs:dateTime" />
+      <xs:element name="DDPVersionNum" type="lrit:ddpVersionNumType" />
+      <xs:element name="SystemStatus" type="systemStatusIndicatorType" />
+      <xs:element name="Message" type="lrit:messageType" />
+      <xs:element name="Originator" type="lrit:lritIDType" />
+    </xs:sequence>
+    <xs:attribute default="0" name="test" type="lrit:testType" use="optional" />
+    <xs:attribute name="schemaVersion" type="xs:decimal" use="required" />
+  </xs:complexType>
+</xs:schema>

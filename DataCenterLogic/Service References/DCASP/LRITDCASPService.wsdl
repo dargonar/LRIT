@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://ws.prefecturanaval.gov.ar/lritdcaspws" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://ws.prefecturanaval.gov.ar/lritdcaspws" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Bleh</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://ws.prefecturanaval.gov.ar/lritdcaspws">
+      <s:element name="PollShip">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="msg" type="tns:PollMessage" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PollMessage">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="OceanRegion" type="tns:EOceanRegion" />
+          <s:element minOccurs="0" maxOccurs="1" name="DNID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PollType" type="tns:EPollType" />
+          <s:element minOccurs="1" maxOccurs="1" name="ResponseType" type="tns:EResponseType" />
+          <s:element minOccurs="1" maxOccurs="1" name="SubAddress" type="tns:ESubAddress" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CommandType" type="tns:ECommandType" />
+          <s:element minOccurs="1" maxOccurs="1" name="MemberNumber" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartFrame" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumberOfReports" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Acknowledgement" type="tns:EAcknowledgement" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="EOceanRegion">
+        <s:restriction base="s:string">
+          <s:enumeration value="AORW" />
+          <s:enumeration value="AORE" />
+          <s:enumeration value="POT" />
+          <s:enumeration value="IOR" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="EPollType">
+        <s:restriction base="s:string">
+          <s:enumeration value="GroupPoll" />
+          <s:enumeration value="IndividualPoll" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="EResponseType">
+        <s:restriction base="s:string">
+          <s:enumeration value="DataReport" />
+          <s:enumeration value="MessageChannel" />
+          <s:enumeration value="NoResponse" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="ESubAddress">
+        <s:restriction base="s:string">
+          <s:enumeration value="Trimble" />
+          <s:enumeration value="Others" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="ECommandType">
+        <s:restriction base="s:string">
+          <s:enumeration value="DataReport" />
+          <s:enumeration value="ProgramDataReporting" />
+          <s:enumeration value="StartDataReporting" />
+          <s:enumeration value="StopDataReserving" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="EAcknowledgement">
+        <s:restriction base="s:string">
+          <s:enumeration value="NoAck" />
+          <s:enumeration value="Ack" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="PollShipResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="PollShipSata">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="msg" type="tns:PollMessageSata" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PollMessageSata">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="reprog" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="equipmentId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="minutes" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="PollShipSataResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="PollShipSoapIn">
+    <wsdl:part name="parameters" element="tns:PollShip" />
+  </wsdl:message>
+  <wsdl:message name="PollShipSoapOut">
+    <wsdl:part name="parameters" element="tns:PollShipResponse" />
+  </wsdl:message>
+  <wsdl:message name="PollShipSataSoapIn">
+    <wsdl:part name="parameters" element="tns:PollShipSata" />
+  </wsdl:message>
+  <wsdl:message name="PollShipSataSoapOut">
+    <wsdl:part name="parameters" element="tns:PollShipSataResponse" />
+  </wsdl:message>
+  <wsdl:portType name="LRITDCASPServiceSoap">
+    <wsdl:operation name="PollShip">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Poll ship for Inmarsat</wsdl:documentation>
+      <wsdl:input message="tns:PollShipSoapIn" />
+      <wsdl:output message="tns:PollShipSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PollShipSata">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Poll ship for Satamatics</wsdl:documentation>
+      <wsdl:input message="tns:PollShipSataSoapIn" />
+      <wsdl:output message="tns:PollShipSataSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="LRITDCASPServiceSoap" type="tns:LRITDCASPServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="PollShip">
+      <soap:operation soapAction="http://ws.prefecturanaval.gov.ar/lritdcaspws/PollShip" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PollShipSata">
+      <soap:operation soapAction="http://ws.prefecturanaval.gov.ar/lritdcaspws/PollShipSata" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LRITDCASPServiceSoap12" type="tns:LRITDCASPServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="PollShip">
+      <soap12:operation soapAction="http://ws.prefecturanaval.gov.ar/lritdcaspws/PollShip" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PollShipSata">
+      <soap12:operation soapAction="http://ws.prefecturanaval.gov.ar/lritdcaspws/PollShipSata" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="LRITDCASPService">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Bleh</wsdl:documentation>
+    <wsdl:port name="LRITDCASPServiceSoap" binding="tns:LRITDCASPServiceSoap">
+      <soap:address location="http://localhost:1596/LRITDCASPService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="LRITDCASPServiceSoap12" binding="tns:LRITDCASPServiceSoap12">
+      <soap12:address location="http://localhost:1596/LRITDCASPService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

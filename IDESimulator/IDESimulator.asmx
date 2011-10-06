@@ -1,0 +1,1 @@
+﻿<%@ WebService Language="C#" CodeBehind="IDESimulator.asmx.cs" Class="IDESimulator.IDESimulator" %>

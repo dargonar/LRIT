@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="ca47f6ed-ca71-43b1-b8e0-1d47ffedda3a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="d:\wdir\LRIT\lastDoc\5-ta\LRIT 5(Schema)\LRIT 5(Schema)\DDP.wsdl" Protocol="file" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ddp1.wsdl" MetadataType="Wsdl" ID="10f09a19-a1cd-4ee8-b867-55c3f169408c" SourceId="1" SourceUrl="file:///d:/wdir/LRIT/lastDoc/5-ta/LRIT 5(Schema)/LRIT 5(Schema)/DDP.wsdl" />
+    <MetadataFile FileName="Types1.xsd" MetadataType="Schema" ID="b4ae467d-3d81-43d6-b362-6eb9ba9c58fa" SourceId="1" SourceUrl="file:///d:/wdir/LRIT/lastDoc/5-ta/LRIT 5(Schema)/LRIT 5(Schema)/Types.xsd" />
+    <MetadataFile FileName="DDPRequest1.xsd" MetadataType="Schema" ID="2db1ab57-81fc-4924-875f-54cc396cfc17" SourceId="1" SourceUrl="file:///d:/wdir/LRIT/lastDoc/5-ta/LRIT 5(Schema)/LRIT 5(Schema)/DDPRequest.xsd" />
+    <MetadataFile FileName="Receipt1.xsd" MetadataType="Schema" ID="52b6a541-891b-4d9f-8c78-1d87be4a98e1" SourceId="1" SourceUrl="file:///d:/wdir/LRIT/lastDoc/5-ta/LRIT 5(Schema)/LRIT 5(Schema)/Receipt.xsd" />
+    <MetadataFile FileName="SystemStatus1.xsd" MetadataType="Schema" ID="21c60826-bd26-4e9a-b9a0-f43a8ace1c22" SourceId="1" SourceUrl="file:///d:/wdir/LRIT/lastDoc/5-ta/LRIT 5(Schema)/LRIT 5(Schema)/SystemStatus.xsd" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

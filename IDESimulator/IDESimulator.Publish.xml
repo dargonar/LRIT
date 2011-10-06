@@ -1,0 +1,28 @@
+<publishData>
+  <publishTarget publishUrl="C:\Inetpub\wwwroot\LRIT\IDESIM\">
+    <file relUrl="IDESimulator.asmx.cs" publishTime="12/17/2008 20:33:48" />
+    <file relUrl="bin/log4net.dll" publishTime="12/17/2008 18:33:24" />
+    <file relUrl="bin/log4net.xml" publishTime="12/17/2008 18:33:25" />
+    <file relUrl="IDESimulator.asmx" publishTime="12/17/2008 18:33:21" />
+    <file relUrl="IDESimulator.csproj.user" publishTime="12/17/2008 18:33:21" />
+    <file relUrl="Web.config" publishTime="12/17/2008 20:33:33" />
+    <file relUrl="IDESimulator.csproj" publishTime="12/17/2008 18:33:21" />
+    <file relUrl="bin/IDESimulator.dll" publishTime="12/17/2008 20:35:07" />
+    <file relUrl="ideServiceInterfaces.cs" publishTime="12/17/2008 18:33:21" />
+    <file relUrl="bin/IDESimulator.pdb" publishTime="12/17/2008 20:35:07" />
+    <file relUrl="Properties/AssemblyInfo.cs" publishTime="12/17/2008 18:33:21" />
+  </publishTarget>
+  <publishTarget publishUrl="C:\wdir\LRIT\web\idesim\">
+    <file relUrl="IDESimulator.asmx.cs" publishTime="10/06/2008 19:57:58" />
+    <file relUrl="bin/log4net.xml" publishTime="10/06/2008 19:58:01" />
+    <file relUrl="IDESimulator.asmx" publishTime="10/06/2008 19:57:58" />
+    <file relUrl="IDESimulator.csproj.user" publishTime="10/06/2008 19:57:58" />
+    <file relUrl="Web.config" publishTime="10/06/2008 19:57:58" />
+    <file relUrl="IDESimulator.csproj" publishTime="10/06/2008 19:57:58" />
+    <file relUrl="bin/IDESimulator.dll" publishTime="10/14/2008 02:45:34" />
+    <file relUrl="ideServiceInterfaces.cs" publishTime="10/06/2008 19:57:58" />
+    <file relUrl="bin/IDESimulator.pdb" publishTime="10/14/2008 02:45:34" />
+    <file relUrl="bin/log4net.dll" publishTime="10/06/2008 19:58:01" />
+    <file relUrl="Properties/AssemblyInfo.cs" publishTime="10/06/2008 19:57:58" />
+  </publishTarget>
+</publishData>

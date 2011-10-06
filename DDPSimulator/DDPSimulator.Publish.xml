@@ -1,0 +1,28 @@
+<publishData>
+  <publishTarget publishUrl="C:\Inetpub\wwwroot\LRIT\DDPSIM\">
+    <file relUrl="bin/log4net.xml" publishTime="12/17/2008 18:33:25" />
+    <file relUrl="ddpServiceInterfaces.cs" publishTime="12/17/2008 18:33:23" />
+    <file relUrl="DDPSimulator.csproj" publishTime="12/17/2008 18:33:23" />
+    <file relUrl="DDPSimulator.asmx.cs" publishTime="12/17/2008 20:34:50" />
+    <file relUrl="Web.config" publishTime="12/17/2008 20:34:12" />
+    <file relUrl="DDPSimulator.asmx" publishTime="12/17/2008 18:33:23" />
+    <file relUrl="bin/log4net.dll" publishTime="12/17/2008 18:33:24" />
+    <file relUrl="bin/DDPSimulator.pdb" publishTime="12/17/2008 20:35:09" />
+    <file relUrl="DDPSimulator.csproj.user" publishTime="12/17/2008 18:33:23" />
+    <file relUrl="bin/DDPSimulator.dll" publishTime="12/17/2008 20:35:09" />
+    <file relUrl="Properties/AssemblyInfo.cs" publishTime="12/17/2008 18:33:23" />
+  </publishTarget>
+  <publishTarget publishUrl="C:\wdir\LRIT\web\ddpsim\">
+    <file relUrl="bin/log4net.xml" publishTime="10/06/2008 20:58:01" />
+    <file relUrl="DDPSimulator.csproj" publishTime="11/05/2008 17:48:18" />
+    <file relUrl="DDPSimulator.asmx.cs" publishTime="11/05/2008 18:15:50" />
+    <file relUrl="Web.config" publishTime="11/04/2008 21:01:34" />
+    <file relUrl="ddpServiceInterfaces.cs" publishTime="11/05/2008 15:53:05" />
+    <file relUrl="bin/DDPSimulator.dll" publishTime="11/05/2008 18:19:31" />
+    <file relUrl="bin/DDPSimulator.pdb" publishTime="11/05/2008 18:19:31" />
+    <file relUrl="DDPSimulator.asmx" publishTime="11/05/2008 15:14:06" />
+    <file relUrl="DDPSimulator.csproj.user" publishTime="11/05/2008 17:48:18" />
+    <file relUrl="bin/log4net.dll" publishTime="10/06/2008 20:58:01" />
+    <file relUrl="Properties/AssemblyInfo.cs" publishTime="11/04/2008 21:01:36" />
+  </publishTarget>
+</publishData>

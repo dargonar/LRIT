@@ -1,0 +1,48 @@
+<!-- 
+	File: 		Receipt.xsd
+	Version:	1.0
+	Date:		22 August 2008
+-->
+<xs:schema version="1.0" targetNamespace="http://gisis.imo.org/XML/LRIT/receipt/2008" xmlns="http://gisis.imo.org/XML/LRIT/receipt/2008" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:lrit="http://gisis.imo.org/XML/LRIT/types/2008" elementFormDefault="qualified">
+
+	<xs:import namespace="http://gisis.imo.org/XML/LRIT/types/2008" schemaLocation="Types.xsd"/>
+
+	<xs:simpleType name="messageTypeType">
+		<xs:restriction base="xs:integer">
+			<xs:enumeration value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="receiptCodeType">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="256"/>
+			<xs:enumeration value="0"/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
+			<xs:enumeration value="8"/>
+			<xs:enumeration value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="Receipt" type="ReceiptType"/>
+	<xs:complexType name="ReceiptType">
+		<xs:sequence>
+			<xs:element name="MessageType" type="messageTypeType"/>
+			<xs:element name="MessageId" type="lrit:msgIDType"/>
+			<xs:element name="ReferenceId" type="lrit:refIDType"/>
+			<xs:element name="ReceiptCode" type="receiptCodeType"/>
+			<xs:element name="Destination" type="lrit:lritIDType"/>
+			<xs:element name="Originator" type="lrit:lritIDType"/>
+			<xs:element name="Message" type="lrit:messageType"/>
+			<xs:element name="TimeStamp" type="xs:dateTime"/>
+			<xs:element name="DDPVersionNum" type="lrit:ddpVersionNumType"/>
+		</xs:sequence>
+		<xs:attribute name="test" type="lrit:testType" use="optional" default="0"/>
+		<xs:attribute name="schemaVersion" type="xs:decimal" use="required"/>
+	</xs:complexType>
+</xs:schema>

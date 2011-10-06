@@ -1,0 +1,377 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7A79B863-3AA5-4134-B5A4-6AFD581221D9}</ProjectGuid>
+    <ProjectTypeGuids>{603c0e0b-db56-11dc-be95-000d561079b0};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LRITUi</RootNamespace>
+    <AssemblyName>LRITUi</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Mobile" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AuditController.cs" />
+    <Compile Include="Controllers\ContractController.cs" />
+    <Compile Include="Controllers\DDPController.cs" />
+    <Compile Include="Controllers\DDPNotificationController.cs" />
+    <Compile Include="Controllers\DDPRequestController.cs" />
+    <Compile Include="Controllers\ExternalInvoiceController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InvoiceController.cs" />
+    <Compile Include="Controllers\JournalController.cs" />
+    <Compile Include="Controllers\LogController.cs" />
+    <Compile Include="Controllers\MyController.cs" />
+    <Compile Include="Controllers\PricingRequestSentController.cs" />
+    <Compile Include="Controllers\PricingUpdateController.cs" />
+    <Compile Include="Controllers\PricingController.cs" />
+    <Compile Include="Controllers\ReceiptsController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
+    <Compile Include="Controllers\RequestsController.cs" />
+    <Compile Include="Controllers\ShipController.cs" />
+    <Compile Include="Controllers\SystemStatusController.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers.cs" />
+    <Compile Include="Models\IPagedList.cs" />
+    <Compile Include="Models\JqGridData.cs" />
+    <Compile Include="Models\JqGridExtensions.cs" />
+    <Compile Include="Models\PagedList.cs" />
+    <Compile Include="Models\PagingLinqExtensions.cs" />
+    <Compile Include="Models\Repository.cs" />
+    <Compile Include="Models\SomeEntity.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\EntityHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="asdf.txt" />
+    <Content Include="css\images\application.png" />
+    <Content Include="css\images\code.png" />
+    <Content Include="css\images\css.png" />
+    <Content Include="css\images\db.png" />
+    <Content Include="css\images\directory.png" />
+    <Content Include="css\images\doc.png" />
+    <Content Include="css\images\file.png" />
+    <Content Include="css\images\film.png" />
+    <Content Include="css\images\flash.png" />
+    <Content Include="css\images\folder_open.png" />
+    <Content Include="css\images\html.png" />
+    <Content Include="css\images\java.png" />
+    <Content Include="css\images\linux.png" />
+    <Content Include="css\images\music.png" />
+    <Content Include="css\images\pdf.png" />
+    <Content Include="css\images\php.png" />
+    <Content Include="css\images\picture.png" />
+    <Content Include="css\images\ppt.png" />
+    <Content Include="css\images\psd.png" />
+    <Content Include="css\images\ruby.png" />
+    <Content Include="css\images\script.png" />
+    <Content Include="css\images\spinner.gif" />
+    <Content Include="css\images\txt.png" />
+    <Content Include="css\images\xls.png" />
+    <Content Include="css\images\zip.png" />
+    <Content Include="css\jquery-u.css" />
+    <Content Include="css\jquery-ui-1.7.1.custom.css" />
+    <Content Include="css\jquery00.css" />
+    <Content Include="css\jqueryFileTree.css" />
+    <Content Include="css\style100.css" />
+    <Content Include="css\style_al.css" />
+    <Content Include="css\ui.daterangepicker.css" />
+    <Content Include="css\ui.datetimepicker.css" />
+    <Content Include="css\ui.jqgrid.css" />
+    <Content Include="Default.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="img\24_alert.png" />
+    <Content Include="img\24_infor.png" />
+    <Content Include="img\24_tick0.png" />
+    <Content Include="img\24_x_fal.png" />
+    <Content Include="img\advanced.png" />
+    <Content Include="img\ajax-loader.gif" />
+    <Content Include="img\applicat.png" />
+    <Content Include="img\archive0.png" />
+    <Content Include="img\bg000000.jpg" />
+    <Content Include="img\bg_head0.png" />
+    <Content Include="img\bg_main0.jpg" />
+    <Content Include="img\bg_tab00.png" />
+    <Content Include="img\bullet10.gif" />
+    <Content Include="img\bullet20.gif" />
+    <Content Include="img\Computer.png" />
+    <Content Include="img\copy0000.png" />
+    <Content Include="img\dotted_l.gif" />
+    <Content Include="img\edit0000.png" />
+    <Content Include="img\help0000.png" />
+    <Content Include="img\highligh.gif" />
+    <Content Include="img\icons\book_open.png" />
+    <Content Include="img\icons\currency_dollar.png" />
+    <Content Include="img\icons\earth_preferences.png" />
+    <Content Include="img\icons\earth_view.png" />
+    <Content Include="img\icons\flag_blue.png" />
+    <Content Include="img\icons\id_cards.png" />
+    <Content Include="img\icons\inbox_into.png" />
+    <Content Include="img\icons\outbox_out.png" />
+    <Content Include="img\icons\user1_monitor.png" />
+    <Content Include="img\icons\wrench.png" />
+    <Content Include="img\logo0000.png" />
+    <Content Include="img\picture0.png" />
+    <Content Include="img\search00.png" />
+    <Content Include="img\send0000.png" />
+    <Content Include="img\trash000.png" />
+    <Content Include="img\ui-bg_fl.png" />
+    <Content Include="img\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="img\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="img\ui-bg_gl.png" />
+    <Content Include="img\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="img\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="img\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="img\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="img\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="img\ui-bg_gm.png" />
+    <Content Include="img\ui-bg_gn.png" />
+    <Content Include="img\ui-bg_hi.png" />
+    <Content Include="img\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="img\ui-icons.png" />
+    <Content Include="img\ui-icons_222222_256x240.png" />
+    <Content Include="img\ui-icons_2e83ff_256x240.png" />
+    <Content Include="img\ui-icons_454545_256x240.png" />
+    <Content Include="img\ui-icons_888888_256x240.png" />
+    <Content Include="img\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="img\ui-icont.png" />
+    <Content Include="img\unreadma.png" />
+    <Content Include="img\users000.png" />
+    <Content Include="img\window00.png" />
+    <Content Include="js\contract.js" />
+    <Content Include="js\invoice.js" />
+    <Content Include="js\ddpnotification.js" />
+    <Content Include="js\ddprequest.js" />
+    <Content Include="js\jquery.maskedinput-1.3.js" />
+    <Content Include="js\jqueryFileTree.js" />
+    <Content Include="js\pricingrequest.js" />
+    <Content Include="js\pricingupdate.js" />
+    <Content Include="js\systemstatus.js" />
+    <Content Include="js\pricing.js" />
+    <Content Include="js\custom00.js" />
+    <Content Include="js\daterangepicker.jQuery.js" />
+    <Content Include="js\ddp.js" />
+    <Content Include="js\i18n\grid.locale-bg.js" />
+    <Content Include="js\i18n\grid.locale-bg1251.js" />
+    <Content Include="js\i18n\grid.locale-cat.js" />
+    <Content Include="js\i18n\grid.locale-cs.js" />
+    <Content Include="js\i18n\grid.locale-de.js" />
+    <Content Include="js\i18n\grid.locale-dk.js" />
+    <Content Include="js\i18n\grid.locale-el.js" />
+    <Content Include="js\i18n\grid.locale-en.js" />
+    <Content Include="js\i18n\grid.locale-fa.js" />
+    <Content Include="js\i18n\grid.locale-fi.js" />
+    <Content Include="js\i18n\grid.locale-fr.js" />
+    <Content Include="js\i18n\grid.locale-is.js" />
+    <Content Include="js\i18n\grid.locale-it.js" />
+    <Content Include="js\i18n\grid.locale-jp.js" />
+    <Content Include="js\i18n\grid.locale-no.js" />
+    <Content Include="js\i18n\grid.locale-pl.js" />
+    <Content Include="js\i18n\grid.locale-pt-br.js" />
+    <Content Include="js\i18n\grid.locale-pt.js" />
+    <Content Include="js\i18n\grid.locale-ru.js" />
+    <Content Include="js\i18n\grid.locale-sp.js" />
+    <Content Include="js\i18n\grid.locale-sv.js" />
+    <Content Include="js\i18n\grid.locale-tr.js" />
+    <Content Include="js\i18n\grid.locale-ua.js" />
+    <Content Include="js\jqDnR.js" />
+    <Content Include="js\jqModal.js" />
+    <Content Include="js\jquery-1.3.2-vsdoc.js" />
+    <Content Include="js\jquery-1.3.2.js" />
+    <Content Include="js\jquery-1.3.2.min-vsdoc.js" />
+    <Content Include="js\jquery-1.3.2.min.js" />
+    <Content Include="js\jquery-u.js" />
+    <Content Include="css\jquery-ui-1.7.2.custom.css" />
+    <Content Include="js\jquery-ui-1.7.2.custom.min.js" />
+    <Content Include="js\jquery.jqGrid.min.js" />
+    <Content Include="js\jquery00.js" />
+    <Content Include="js\jquery01.js" />
+    <Content Include="js\json2.js" />
+    <Content Include="js\log.js" />
+    <Content Include="js\MicrosoftAjax.debug.js" />
+    <Content Include="js\MicrosoftAjax.js" />
+    <Content Include="js\MicrosoftMvcAjax.debug.js" />
+    <Content Include="js\MicrosoftMvcAjax.js" />
+    <Content Include="js\ofc.js" />
+    <Content Include="js\receipts.js" />
+    <Content Include="js\reports.js" />
+    <Content Include="js\requests.js" />
+    <Content Include="js\sarsurpicrequests.js" />
+    <Content Include="js\swfobject.js" />
+    <Content Include="js\ui.datetimepicker.js" />
+    <Content Include="open-flash-chart.swf" />
+    <Content Include="OpenFlashChart.dll" />
+    <Content Include="Views\Account\List.aspx" />
+    <Content Include="Views\Audit\Audit.aspx" />
+    <Content Include="Views\Contract\List.aspx" />
+    <Content Include="Views\Contract\New.aspx" />
+    <Content Include="Views\DDPNotification\List.aspx" />
+    <Content Include="Views\DDPRequest\List.aspx" />
+    <Content Include="Views\DDP\List.aspx" />
+    <Content Include="Views\DDP\MenuControl.ascx" />
+    <Content Include="Views\ExternalInvoice\List.aspx" />
+    <Content Include="Views\ExternalInvoice\Password.aspx" />
+    <Content Include="Views\Home\MenuControl.ascx" />
+    <Content Include="Views\Invoice\List.aspx" />
+    <Content Include="Views\Invoice\ListMessages.aspx" />
+    <Content Include="Views\Invoice\New.aspx" />
+    <Content Include="Views\Invoice\Print.aspx" />
+    <Content Include="Views\Invoice\SelectCountry.aspx" />
+    <Content Include="Views\Journal\List.aspx" />
+    <Content Include="Views\Log\list.aspx" />
+    <Content Include="Views\PricingRequestSent\List.aspx" />
+    <Content Include="Views\PricingUpdate\List.aspx" />
+    <Content Include="Views\Pricing\Change.aspx" />
+    <Content Include="Views\Pricing\List.aspx" />
+    <Content Include="Views\Pricing\Prices.aspx" />
+    <Content Include="Views\Pricing\PriceTable.ascx" />
+    <Content Include="Views\Receipts\List.aspx" />
+    <Content Include="Views\Receipts\MenuControl.ascx" />
+    <Content Include="Views\Reports\List.aspx" />
+    <Content Include="Views\Reports\MenuControl.ascx" />
+    <Content Include="Views\Requests\NewDDPRequest.aspx" />
+    <Content Include="Views\Requests\List.aspx" />
+    <Content Include="Views\Requests\ListSarsurpic.aspx" />
+    <Content Include="Views\Requests\MenuControl.ascx" />
+    <Content Include="Views\Requests\New.aspx" />
+    <Content Include="Views\Requests\NewSarsurpic.aspx" />
+    <Content Include="Views\Requests\Sent.aspx" />
+    <Content Include="Views\Ship\List.aspx" />
+    <Content Include="Views\Ship\New.aspx" />
+    <Content Include="Views\SystemStatus\List.aspx" />
+    <Content Include="Views\SystemStatus\MenuControl.ascx" />
+    <Content Include="Web.config" />
+    <Content Include="Views\Account\ChangePassword.aspx" />
+    <Content Include="Views\Account\ChangePasswordSuccess.aspx" />
+    <Content Include="Views\Account\LogOn.aspx" />
+    <Content Include="Views\Account\Register.aspx" />
+    <Content Include="Views\Home\About.aspx" />
+    <Content Include="Views\Home\Index.aspx" />
+    <Content Include="Views\Shared\Error.aspx" />
+    <Content Include="Views\Shared\LogOnUserControl.ascx" />
+    <None Include="Views\Shared\Site.Master">
+      <SubType>ASPXCodeBehind</SubType>
+    </None>
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataCenterDataAccess\DataCenterDataAccess.csproj">
+      <Project>{0AEB4CCE-9F82-48B4-91C3-7190C48F2CDB}</Project>
+      <Name>DataCenterDataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataCenterLogic\DataCenterLogic.csproj">
+      <Project>{FE0ABC58-0534-400C-9E9A-866E6987AA32}</Project>
+      <Name>DataCenterLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JQGridHelper\JQGridHelper-vs2008.csproj">
+      <Project>{DD93E7C9-2898-4F16-8595-238A14D03779}</Project>
+      <Name>JQGridHelper-vs2008</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PriceUpdaterLib\PriceUpdaterLib.csproj">
+      <Project>{027A509B-10BB-4B38-8D8B-EA31359650B6}</Project>
+      <Name>PriceUpdaterLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="DynamicQuery\DynamicQuery-vs2008.csproj">
+      <Project>{F285CEB0-4108-440C-AD94-1C1A7C159D7C}</Project>
+      <Name>DynamicQuery-vs2008</Name>
+    </ProjectReference>
+    <ProjectReference Include="OpenFlashChart\OpenFlashChart.csproj">
+      <Project>{213ABC3E-F51E-4A09-A053-BC17E4797BA8}</Project>
+      <Name>OpenFlashChart</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)\..\$(ProjectName)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>2281</DevelopmentServerPort>
+          <DevelopmentServerVPath>/LRITADMIN</DevelopmentServerVPath>
+          <IISUrl>http://localhost/LRITUi</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

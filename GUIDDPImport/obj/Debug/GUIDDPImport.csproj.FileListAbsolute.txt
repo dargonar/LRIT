@@ -1,0 +1,17 @@
+C:\wdir\lrit\GUIDDPImport\bin\Debug\GUIDDPImport.exe.config
+C:\wdir\lrit\GUIDDPImport\bin\Debug\GUIDDPImport.exe
+C:\wdir\lrit\GUIDDPImport\bin\Debug\GUIDDPImport.pdb
+C:\wdir\lrit\GUIDDPImport\bin\Debug\DataCenterDataAccess.dll
+C:\wdir\lrit\GUIDDPImport\bin\Debug\DataCenterLogic.dll
+C:\wdir\lrit\GUIDDPImport\bin\Debug\Common.dll
+C:\wdir\lrit\GUIDDPImport\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\wdir\lrit\GUIDDPImport\bin\Debug\log4net.dll
+C:\wdir\lrit\GUIDDPImport\bin\Debug\DataCenterLogic.pdb
+C:\wdir\lrit\GUIDDPImport\bin\Debug\log4net.xml
+C:\wdir\lrit\GUIDDPImport\bin\Debug\DataCenterDataAccess.pdb
+C:\wdir\lrit\GUIDDPImport\obj\Debug\ResolveAssemblyReference.cache
+C:\wdir\lrit\GUIDDPImport\obj\Debug\GUIDDPImport.frmMain.resources
+C:\wdir\lrit\GUIDDPImport\obj\Debug\GUIDDPImport.Properties.Resources.resources
+C:\wdir\lrit\GUIDDPImport\obj\Debug\GUIDDPImport.csproj.GenerateResource.Cache
+C:\wdir\lrit\GUIDDPImport\obj\Debug\GUIDDPImport.exe
+C:\wdir\lrit\GUIDDPImport\obj\Debug\GUIDDPImport.pdb

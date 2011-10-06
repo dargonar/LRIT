@@ -1,0 +1,109 @@
+<!-- 
+	File: 		DDP.wsdl
+	Version:	1.0
+	Date:		22 August 2008
+-->
+<wsdl:definitions name="ddp" targetNamespace="http://gisis.imo.org/XML/LRIT/2008" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://gisis.imo.org/XML/LRIT/2008" xmlns:ddpRequest="http://gisis.imo.org/XML/LRIT/ddpRequest/2008" xmlns:receipt="http://gisis.imo.org/XML/LRIT/receipt/2008" xmlns:systemStatus="http://gisis.imo.org/XML/LRIT/systemStatus/2008" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/">
+	<wsdl:types>
+		<xs:schema elementFormDefault="qualified" targetNamespace="http://gisis.imo.org/XML/LRIT/2008">
+			<xs:import namespace="http://gisis.imo.org/XML/LRIT/ddpRequest/2008" schemaLocation="DDPRequest.xsd"/>
+			<xs:import namespace="http://gisis.imo.org/XML/LRIT/receipt/2008" schemaLocation="Receipt.xsd"/>
+			<xs:import namespace="http://gisis.imo.org/XML/LRIT/systemStatus/2008" schemaLocation="SystemStatus.xsd"/>
+
+			<xs:simpleType name="responseType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Success"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:element name="Response">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="response" type="tns:responseType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+	</wsdl:types>
+
+	<wsdl:message name="DDPRequestRequest">
+		<wsdl:part name="params" element="ddpRequest:DDPRequest"/>
+	</wsdl:message>
+	<wsdl:message name="DDPRequestResponse">
+		<wsdl:part name="params" element="tns:Response"/>
+	</wsdl:message>
+
+	<wsdl:message name="ReceiptRequest">
+		<wsdl:part name="params" element="receipt:Receipt"/>
+	</wsdl:message>
+	<wsdl:message name="ReceiptResponse">
+		<wsdl:part name="params" element="tns:Response"/>
+	</wsdl:message>
+
+	<wsdl:message name="SystemStatusRequest">
+		<wsdl:part name="params" element="systemStatus:SystemStatus"/>
+	</wsdl:message>
+	<wsdl:message name="SystemStatusResponse">
+		<wsdl:part name="params" element="tns:Response"/>
+	</wsdl:message>
+
+	<wsdl:portType name="ddpPortType">
+
+		<wsdl:operation name="DDPRequest">
+			<wsdl:input message="tns:DDPRequestRequest"/>
+			<wsdl:output message="tns:DDPRequestResponse"/>
+		</wsdl:operation>
+
+		<wsdl:operation name="Receipt">
+			<wsdl:input message="tns:ReceiptRequest"/>
+			<wsdl:output message="tns:ReceiptResponse"/>
+		</wsdl:operation>
+
+		<wsdl:operation name="SystemStatus">
+			<wsdl:input message="tns:SystemStatusRequest"/>
+			<wsdl:output message="tns:SystemStatusResponse"/>
+		</wsdl:operation>
+
+	</wsdl:portType>
+
+	<wsdl:binding name="ddpServiceBinding" type="tns:ddpPortType">
+		<soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+		<wsdl:operation name="DDPRequest">
+			<soap12:operation soapAction=""/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="Receipt">
+			<soap12:operation soapAction=""/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="SystemStatus">
+			<soap12:operation soapAction=""/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+
+	</wsdl:binding>
+
+	<wsdl:service name="ddpService">
+
+		<wsdl:port name="ddpPort" binding="tns:ddpServiceBinding">
+			<soap12:address location="http://localhost:8080/ddp"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

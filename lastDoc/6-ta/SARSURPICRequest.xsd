@@ -1,0 +1,49 @@
+<!-- 
+	File: 		SARSURPICRequest.xsd
+	Version:	1.1
+	Date:		24 October 2008
+-->
+<xs:schema version="1.0" targetNamespace="http://gisis.imo.org/XML/LRIT/sarSurpicRequest/2008" xmlns="http://gisis.imo.org/XML/LRIT/sarSurpicRequest/2008" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:lrit="http://gisis.imo.org/XML/LRIT/types/2008" elementFormDefault="qualified">
+
+	<xs:import namespace="http://gisis.imo.org/XML/LRIT/types/2008" schemaLocation="Types.xsd"/>
+
+	<xs:simpleType name="messageTypeType">
+		<xs:restriction base="xs:integer">
+			<xs:enumeration value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="sarCircularAreaType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="()|((([0-8][0-9]\.[0-5][0-9]\.[nNsS])|(90\.00\.[nNsS])):(([0-1][0-7][0-9]\.[0-5][0-9]\.[eEwW])|([0][8-9][0-9]\.[0-5][0-9]\.[eEwW])|(180\.00\.[eEwW])):([0-9]{3}))"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="sarRectangularAreaType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="()|(([0-8][0-9]\.[0-5][0-9]\.[nNsS])|(90\.00\.[nNsS])):(([0-1][0-7][0-9]\.[0-5][0-9]\.[eEwW])|([0][8-9][0-9]\.[0-5][0-9]\.[eEwW])|(180\.00\.[eEwW])):(([0-8][0-9]\.[0-5][0-9]\.[nN])|(90\.00\.[nN])):(([0-1][0-7][0-9]\.[0-5][0-9]\.[eE])|([0][8-9][0-9]\.[0-5][0-9]\.[eE])|(180\.00\.[eE]))"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="numberOfPositionsType">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="SARSURPICRequest" type="SARSURPICType"/>
+	<xs:complexType name="SARSURPICType">
+		<xs:sequence>
+			<xs:element name="MessageType" type="messageTypeType"/>
+			<xs:element name="MessageId" type="lrit:msgIDType"/>
+			<xs:choice>
+				<xs:element name="SARCircularArea" type="sarCircularAreaType"/>
+				<xs:element name="SARRectangularArea" type="sarRectangularAreaType"/>
+			</xs:choice>
+			<xs:element name="NumberOfPositions" type="numberOfPositionsType"/>
+			<xs:element name="DataUserRequestor" type="lrit:lritIDType"/>
+			<xs:element name="TimeStamp" type="xs:dateTime"/>
+			<xs:element name="DDPVersionNum" type="lrit:ddpVersionNumType"/>
+		</xs:sequence>
+		<xs:attribute name="test" type="lrit:testType" use="optional" default="0"/>
+		<xs:attribute name="schemaVersion" type="xs:decimal" use="required"/>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,16 @@
+C:\wdir\lrit\DataCenterCore\bin\Debug\DataCenterCore.exe.config
+C:\wdir\lrit\DataCenterCore\bin\Debug\DataCenterCore.exe
+C:\wdir\lrit\DataCenterCore\bin\Debug\DataCenterCore.pdb
+C:\wdir\lrit\DataCenterCore\bin\Debug\DataCenterDataAccess.dll
+C:\wdir\lrit\DataCenterCore\bin\Debug\DataCenterLogic.dll
+C:\wdir\lrit\DataCenterCore\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\wdir\lrit\DataCenterCore\bin\Debug\log4net.dll
+C:\wdir\lrit\DataCenterCore\bin\Debug\Common.dll
+C:\wdir\lrit\DataCenterCore\bin\Debug\DataCenterLogic.pdb
+C:\wdir\lrit\DataCenterCore\bin\Debug\log4net.xml
+C:\wdir\lrit\DataCenterCore\bin\Debug\DataCenterDataAccess.pdb
+C:\wdir\lrit\DataCenterCore\obj\Debug\ResolveAssemblyReference.cache
+C:\wdir\lrit\DataCenterCore\obj\Debug\DataCenterCore.ProjectInstaller.resources
+C:\wdir\lrit\DataCenterCore\obj\Debug\DataCenterCore.csproj.GenerateResource.Cache
+C:\wdir\lrit\DataCenterCore\obj\Debug\DataCenterCore.exe
+C:\wdir\lrit\DataCenterCore\obj\Debug\DataCenterCore.pdb

@@ -1,0 +1,7 @@
+C:\wdir\lrit\DDPSimulator\bin\DDPSimulator.dll
+C:\wdir\lrit\DDPSimulator\bin\DDPSimulator.pdb
+C:\wdir\lrit\DDPSimulator\bin\log4net.dll
+C:\wdir\lrit\DDPSimulator\bin\log4net.xml
+C:\wdir\lrit\DDPSimulator\obj\Debug\ResolveAssemblyReference.cache
+C:\wdir\lrit\DDPSimulator\obj\Debug\DDPSimulator.dll
+C:\wdir\lrit\DDPSimulator\obj\Debug\DDPSimulator.pdb

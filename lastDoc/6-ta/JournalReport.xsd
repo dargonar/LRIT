@@ -1,0 +1,30 @@
+<!-- 
+	File: 		JournalReport.xsd
+	Version: 	1.0
+	Date: 		22 August 2008
+-->
+<xs:schema version="1.0" targetNamespace="http://gisis.imo.org/XML/LRIT/journalReport/2008" xmlns="http://gisis.imo.org/XML/LRIT/journalReport/2008" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:lrit="http://gisis.imo.org/XML/LRIT/types/2008" xmlns:xmime="http://www.w3.org/2005/05/xmlmime" elementFormDefault="qualified">
+
+	<xs:import namespace="http://gisis.imo.org/XML/LRIT/types/2008" schemaLocation="Types.xsd"/>
+
+	<xs:simpleType name="messageTypeType">
+		<xs:restriction base="xs:integer">
+			<xs:enumeration value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="JournalReport" type="JournalReportType"/>
+	<xs:complexType name="JournalReportType">
+		<xs:sequence>
+			<xs:element name="MessageType" type="messageTypeType"/>
+			<xs:element name="MessageId" type="lrit:msgIDType"/>
+			<xs:element name="Message" type="lrit:messageType"/>
+			<xs:element name="TimeStamp" type="xs:dateTime"/>
+			<xs:element name="Originator" type="lrit:lritIDType"/>
+			<xs:element name="JournalFile" type="xs:base64Binary" xmime:expectedContentTypes="application/zip"/>
+			<xs:element name="DDPVersionNum" type="lrit:ddpVersionNumType"/>
+		</xs:sequence>
+		<xs:attribute name="test" type="lrit:testType" use="optional" default="0"/>
+		<xs:attribute name="schemaVersion" type="xs:decimal" use="required"/>
+	</xs:complexType>
+</xs:schema>

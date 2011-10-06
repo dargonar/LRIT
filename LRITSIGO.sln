@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LRITSIGO", "LRITSIGO\LRITSIGO.csproj", "{BFC3F1FD-D06F-4161-AF8E-4F8ABC88F032}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LRITSIGOTestClient", "LRITSIGO\TestClient\LRITSIGOTestClient\LRITSIGOTestClient.csproj", "{E1F52C4F-C9B6-4C5A-AB15-7E3F252C212C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BFC3F1FD-D06F-4161-AF8E-4F8ABC88F032} = {BFC3F1FD-D06F-4161-AF8E-4F8ABC88F032}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BFC3F1FD-D06F-4161-AF8E-4F8ABC88F032}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFC3F1FD-D06F-4161-AF8E-4F8ABC88F032}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFC3F1FD-D06F-4161-AF8E-4F8ABC88F032}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFC3F1FD-D06F-4161-AF8E-4F8ABC88F032}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1F52C4F-C9B6-4C5A-AB15-7E3F252C212C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1F52C4F-C9B6-4C5A-AB15-7E3F252C212C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1F52C4F-C9B6-4C5A-AB15-7E3F252C212C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1F52C4F-C9B6-4C5A-AB15-7E3F252C212C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

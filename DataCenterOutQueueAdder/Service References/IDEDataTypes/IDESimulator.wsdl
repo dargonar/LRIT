@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s7="http://gisis.imo.org/XML/LRIT/journalReport/2008" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s5="http://gisis.imo.org/XML/LRIT/receipt/2008" xmlns:s8="http://gisis.imo.org/XML/LRIT/pricingRequest/2008" xmlns:s0="http://gisis.imo.org/XML/LRIT/positionReport/2008" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s3="http://gisis.imo.org/XML/LRIT/positionRequest/2008" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://gisis.imo.org/XML/LRIT/2008" xmlns:s6="http://gisis.imo.org/XML/LRIT/systemStatus/2008" xmlns:s9="http://gisis.imo.org/XML/LRIT/pricingUpdate/2008" xmlns:s1="http://gisis.imo.org/XML/LRIT/types/2008" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s4="http://gisis.imo.org/XML/LRIT/sarSurpicRequest/2008" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://gisis.imo.org/XML/LRIT/2008" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://gisis.imo.org/XML/LRIT/positionReport/2008">
+      <s:import namespace="http://gisis.imo.org/XML/LRIT/types/2008" />
+      <s:element name="ShipPositionReport" type="s0:ShipPositionReportType" />
+      <s:complexType name="ShipPositionReportType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Latitude" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Longitude" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TimeStamp1" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShipborneEquipmentId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ASPId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MessageType" type="s0:messageTypeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="MessageId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReferenceId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IMONum" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MMSINum" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TimeStamp2" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="TimeStamp3" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="DCId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TimeStamp4" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="TimeStamp5" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ResponseType" type="s1:responseTypeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="DataUserRequestor" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShipName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DataUserProvider" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDPVersionNum" type="s:string" />
+        </s:sequence>
+        <s:attribute default="0" name="test" type="s1:testType" />
+        <s:attribute name="schemaVersion" type="s:decimal" use="required" />
+      </s:complexType>
+      <s:simpleType name="messageTypeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="1" />
+          <s:enumeration value="2" />
+          <s:enumeration value="3" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://gisis.imo.org/XML/LRIT/types/2008">
+      <s:simpleType name="responseTypeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="1" />
+          <s:enumeration value="2" />
+          <s:enumeration value="3" />
+          <s:enumeration value="4" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="testType">
+        <s:restriction base="s:string">
+          <s:enumeration value="0" />
+          <s:enumeration value="1" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://gisis.imo.org/XML/LRIT/2008">
+      <s:element name="Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="response" type="tns:responseType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="responseType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Success" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://gisis.imo.org/XML/LRIT/positionRequest/2008">
+      <s:import namespace="http://gisis.imo.org/XML/LRIT/types/2008" />
+      <s:element name="ShipPositionRequest" type="s3:ShipPositionRequestType" />
+      <s:complexType name="ShipPositionRequestType">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="MessageType" type="s3:messageTypeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="MessageId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IMONum" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DataUserProvider" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AccessType" type="s3:accessTypeType" />
+          <s:choice minOccurs="1" maxOccurs="1">
+            <s:element minOccurs="0" maxOccurs="1" name="Port" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PortFacility" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Place" type="s:string" />
+          </s:choice>
+          <s:element minOccurs="0" maxOccurs="1" name="Distance" type="s:integer" />
+          <s:element minOccurs="1" maxOccurs="1" name="RequestType" type="s3:requestTypeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="RequestDuration" type="s3:requestDurationType" />
+          <s:element minOccurs="0" maxOccurs="1" name="DataUserRequestor" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TimeStamp" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDPVersionNum" type="s:string" />
+        </s:sequence>
+        <s:attribute default="0" name="test" type="s1:testType" />
+        <s:attribute name="schemaVersion" type="s:decimal" use="required" />
+      </s:complexType>
+      <s:simpleType name="messageTypeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="4" />
+          <s:enumeration value="5" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="accessTypeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="0" />
+          <s:enumeration value="1" />
+          <s:enumeration value="2" />
+          <s:enumeration value="3" />
+          <s:enumeration value="5" />
+          <s:enumeration value="6" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="requestTypeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="0" />
+          <s:enumeration value="1" />
+          <s:enumeration value="2" />
+          <s:enumeration value="3" />
+          <s:enumeration value="4" />
+          <s:enumeration value="5" />
+          <s:enumeration value="6" />
+          <s:enumeration value="7" />
+          <s:enumeration value="8" />
+          <s:enumeration value="9" />
+          <s:enumeration value="10" />
+          <s:enumeration value="11" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="requestDurationType">
+        <s:attribute name="startTime" type="s:dateTime" />
+        <s:attribute name="stopTime" type="s:dateTime" />
+      </s:complexType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://gisis.imo.org/XML/LRIT/sarSurpicRequest/2008">
+      <s:import namespace="http://gisis.imo.org/XML/LRIT/types/2008" />
+      <s:element name="SARSURPICRequest" type="s4:SARSURPICType" />
+      <s:complexType name="SARSURPICType">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="MessageType" type="s4:messageTypeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="MessageId" type="s:string" />
+          <s:choice minOccurs="1" maxOccurs="1">
+            <s:element minOccurs="0" maxOccurs="1" name="SARRectangularArea" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SARCircularArea" type="s:string" />
+          </s:choice>
+          <s:element minOccurs="0" maxOccurs="1" name="NumberOfPositions" type="s:integer" />
+          <s:element minOccurs="0" maxOccurs="1" name="DataUserRequestor" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TimeStamp" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDPVersionNum" type="s:string" />
+        </s:sequence>
+        <s:attribute default="0" name="test" type="s1:testType" />
+        <s:attribute name="schemaVersion" type="s:decimal" use="required" />
+      </s:complexType>
+      <s:simpleType name="messageTypeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="6" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://gisis.imo.org/XML/LRIT/receipt/2008">
+      <s:import namespace="http://gisis.imo.org/XML/LRIT/types/2008" />
+      <s:element name="Receipt" type="s5:ReceiptType" />
+      <s:complexType name="ReceiptType">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="MessageType" type="s5:messageTypeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="MessageId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReferenceId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReceiptCode" type="s5:receiptCodeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Destination" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Originator" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TimeStamp" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDPVersionNum" type="s:string" />
+        </s:sequence>
+        <s:attribute default="0" name="test" type="s1:testType" />
+        <s:attribute name="schemaVersion" type="s:decimal" use="required" />
+      </s:complexType>
+      <s:simpleType name="messageTypeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="7" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="receiptCodeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="0" />
+          <s:enumeration value="1" />
+          <s:enumeration value="2" />
+          <s:enumeration value="3" />
+          <s:enumeration value="4" />
+          <s:enumeration value="5" />
+          <s:enumeration value="6" />
+          <s:enumeration value="7" />
+          <s:enumeration value="8" />
+          <s:enumeration value="9" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://gisis.imo.org/XML/LRIT/systemStatus/2008">
+      <s:import namespace="http://gisis.imo.org/XML/LRIT/types/2008" />
+      <s:element name="SystemStatus" type="s6:SystemStatusType" />
+      <s:complexType name="SystemStatusType">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="MessageType" type="s6:messageTypeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="MessageId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TimeStamp" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDPVersionNum" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SystemStatus" type="s6:systemStatusIndicatorType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Originator" type="s:string" />
+        </s:sequence>
+        <s:attribute default="0" name="test" type="s1:testType" />
+        <s:attribute name="schemaVersion" type="s:decimal" use="required" />
+      </s:complexType>
+      <s:simpleType name="messageTypeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="11" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="systemStatusIndicatorType">
+        <s:restriction base="s:string">
+          <s:enumeration value="0" />
+          <s:enumeration value="1" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://gisis.imo.org/XML/LRIT/journalReport/2008">
+      <s:import namespace="http://gisis.imo.org/XML/LRIT/types/2008" />
+      <s:element name="JournalReport" type="s7:JournalReportType" />
+      <s:complexType name="JournalReportType">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="MessageType" type="s7:messageTypeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="MessageId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TimeStamp" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Originator" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JournalFile" type="s:base64Binary" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDPVersionNum" type="s:string" />
+        </s:sequence>
+        <s:attribute default="0" name="test" type="s1:testType" />
+        <s:attribute name="schemaVersion" type="s:decimal" use="required" />
+      </s:complexType>
+      <s:simpleType name="messageTypeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="12" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://gisis.imo.org/XML/LRIT/pricingRequest/2008">
+      <s:import namespace="http://gisis.imo.org/XML/LRIT/types/2008" />
+      <s:element name="PricingRequest" type="s8:PricingRequestType" />
+      <s:complexType name="PricingRequestType">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="MessageType" type="s8:messageTypeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="MessageId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Originator" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TimeStamp" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDPVersionNum" type="s:string" />
+        </s:sequence>
+        <s:attribute default="0" name="test" type="s1:testType" />
+        <s:attribute name="schemaVersion" type="s:decimal" use="required" />
+      </s:complexType>
+      <s:simpleType name="messageTypeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="14" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://gisis.imo.org/XML/LRIT/pricingUpdate/2008">
+      <s:import namespace="http://gisis.imo.org/XML/LRIT/types/2008" />
+      <s:element name="PricingUpdate" type="s9:PricingUpdateType" />
+      <s:complexType name="PricingUpdateType">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="MessageType" type="s9:messageTypeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="MessageId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TimeStamp" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="DDPVersionNum" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PricingFile" type="s:base64Binary" />
+        </s:sequence>
+        <s:attribute default="0" name="test" type="s1:testType" />
+        <s:attribute name="schemaVersion" type="s:decimal" use="required" />
+      </s:complexType>
+      <s:simpleType name="messageTypeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="15" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ShipPositionReportSoapIn">
+    <wsdl:part name="ShipPositionReport1" element="s0:ShipPositionReport" />
+  </wsdl:message>
+  <wsdl:message name="ShipPositionReportSoapOut">
+    <wsdl:part name="ShipPositionReportResult" element="tns:Response" />
+  </wsdl:message>
+  <wsdl:message name="ShipPositionRequestSoapIn">
+    <wsdl:part name="ShipPositionRequest1" element="s3:ShipPositionRequest" />
+  </wsdl:message>
+  <wsdl:message name="ShipPositionRequestSoapOut">
+    <wsdl:part name="ShipPositionRequestResult" element="tns:Response" />
+  </wsdl:message>
+  <wsdl:message name="SARSURPICRequestSoapIn">
+    <wsdl:part name="SARSURPICRequest1" element="s4:SARSURPICRequest" />
+  </wsdl:message>
+  <wsdl:message name="SARSURPICRequestSoapOut">
+    <wsdl:part name="SARSURPICRequestResult" element="tns:Response" />
+  </wsdl:message>
+  <wsdl:message name="ReceiptSoapIn">
+    <wsdl:part name="Receipt1" element="s5:Receipt" />
+  </wsdl:message>
+  <wsdl:message name="ReceiptSoapOut">
+    <wsdl:part name="ReceiptResult" element="tns:Response" />
+  </wsdl:message>
+  <wsdl:message name="SystemStatusSoapIn">
+    <wsdl:part name="SystemStatus1" element="s6:SystemStatus" />
+  </wsdl:message>
+  <wsdl:message name="SystemStatusSoapOut">
+    <wsdl:part name="SystemStatusResult" element="tns:Response" />
+  </wsdl:message>
+  <wsdl:message name="JournalReportSoapIn">
+    <wsdl:part name="JournalReport1" element="s7:JournalReport" />
+  </wsdl:message>
+  <wsdl:message name="JournalReportSoapOut">
+    <wsdl:part name="JournalReportResult" element="tns:Response" />
+  </wsdl:message>
+  <wsdl:message name="PricingRequestSoapIn">
+    <wsdl:part name="PricingRequest1" element="s8:PricingRequest" />
+  </wsdl:message>
+  <wsdl:message name="PricingRequestSoapOut">
+    <wsdl:part name="PricingRequestResult" element="tns:Response" />
+  </wsdl:message>
+  <wsdl:message name="PricingUpdateSoapIn">
+    <wsdl:part name="PricingUpdate1" element="s9:PricingUpdate" />
+  </wsdl:message>
+  <wsdl:message name="PricingUpdateSoapOut">
+    <wsdl:part name="PricingUpdateResult" element="tns:Response" />
+  </wsdl:message>
+  <wsdl:portType name="ideServiceBinding">
+    <wsdl:operation name="ShipPositionReport">
+      <wsdl:input message="tns:ShipPositionReportSoapIn" />
+      <wsdl:output message="tns:ShipPositionReportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ShipPositionRequest">
+      <wsdl:input message="tns:ShipPositionRequestSoapIn" />
+      <wsdl:output message="tns:ShipPositionRequestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SARSURPICRequest">
+      <wsdl:input message="tns:SARSURPICRequestSoapIn" />
+      <wsdl:output message="tns:SARSURPICRequestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Receipt">
+      <wsdl:input message="tns:ReceiptSoapIn" />
+      <wsdl:output message="tns:ReceiptSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SystemStatus">
+      <wsdl:input message="tns:SystemStatusSoapIn" />
+      <wsdl:output message="tns:SystemStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="JournalReport">
+      <wsdl:input message="tns:JournalReportSoapIn" />
+      <wsdl:output message="tns:JournalReportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PricingRequest">
+      <wsdl:input message="tns:PricingRequestSoapIn" />
+      <wsdl:output message="tns:PricingRequestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PricingUpdate">
+      <wsdl:input message="tns:PricingUpdateSoapIn" />
+      <wsdl:output message="tns:PricingUpdateSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ideServiceBinding" type="tns:ideServiceBinding">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="ShipPositionReport">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ShipPositionRequest">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SARSURPICRequest">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Receipt">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SystemStatus">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JournalReport">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PricingRequest">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PricingUpdate">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ideServiceBinding1" type="tns:ideServiceBinding">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="ShipPositionReport">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ShipPositionRequest">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SARSURPICRequest">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Receipt">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SystemStatus">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JournalReport">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PricingRequest">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PricingUpdate">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="IDESimulator">
+    <wsdl:port name="ideServiceBinding" binding="tns:ideServiceBinding">
+      <soap:address location="http://localhost/IDESIM/IDESimulator.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ideServiceBinding1" binding="tns:ideServiceBinding1">
+      <soap12:address location="http://localhost/IDESIM/IDESimulator.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

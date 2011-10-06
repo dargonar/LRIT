@@ -1,0 +1,42 @@
+<!-- 
+	File: 		PricingFile.xsd
+	Version:	1.0
+	Date:		22 August 2008
+-->
+<xs:schema version="1.0" targetNamespace="http://gisis.imo.org/XML/LRIT/pricingFile/2008" xmlns="http://gisis.imo.org/XML/LRIT/pricingFile/2008" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:lrit="http://gisis.imo.org/XML/LRIT/types/2008" elementFormDefault="qualified">
+
+	<xs:import namespace="http://gisis.imo.org/XML/LRIT/types/2008" schemaLocation="Types.xsd"/>
+
+	<xs:simpleType name="lritIDTypeList">
+		<xs:list itemType="lrit:lritIDType"/>
+	</xs:simpleType>
+
+	<xs:element name="PricingFile">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="PriceList" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="dataProviderID" type="lritIDTypeList"/>							
+							<xs:element name="BreakDown" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Poll" type="lrit:priceValueType"/>										
+										<xs:element name="PeriodicRateChange" type="lrit:priceValueType"/>
+										<xs:element name="PositionReport" type="lrit:priceValueType"/>										
+										<xs:element name="ArchivePositionReport" type="lrit:priceValueType"/>										
+									</xs:sequence>
+									<xs:attribute name="currency" type="lrit:currencyType"/>									
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="dataCentreID" type="lrit:lritIDType" use="required"/>
+						<xs:attribute name="issueDate" type="xs:date"/>
+						<xs:attribute name="effectiveDate" type="xs:date"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="schemaVersion" type="xs:decimal" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,6 @@
+C:\wdir\lrit\DataCenterTX\bin\Debug\DataCenterTX.exe.config
+C:\wdir\lrit\DataCenterTX\bin\Debug\DataCenterTX.exe
+C:\wdir\lrit\DataCenterTX\bin\Debug\DataCenterTX.pdb
+C:\wdir\lrit\DataCenterTX\obj\Debug\ResolveAssemblyReference.cache
+C:\wdir\lrit\DataCenterTX\obj\Debug\DataCenterTX.exe
+C:\wdir\lrit\DataCenterTX\obj\Debug\DataCenterTX.pdb

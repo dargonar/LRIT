@@ -1,0 +1,1 @@
+wsdl.exe /serverInterface DC.wsdl DDP.xsd DDPNotification.xsd DDPRequest.xsd DDPUpdate.xsd JournalReport.xsd PricingFile.xsd PricingNotification.xsd PricingRequest.xsd PricingUpdate.xsd Receipt.xsd SARSURPICRequest.xsd ShipPositionReport.xsd ShipPositionRequest.xsd SystemStatus.xsd Types.xsd

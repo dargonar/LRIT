@@ -1,0 +1,36 @@
+<!-- 
+	File: 		DDPNotification.xsd
+	Version: 	1.0
+	Date: 		22 August 2008
+-->
+<xs:schema version="1.0" targetNamespace="http://gisis.imo.org/XML/LRIT/ddpNotification/2008" xmlns="http://gisis.imo.org/XML/LRIT/ddpNotification/2008" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:lrit="http://gisis.imo.org/XML/LRIT/types/2008" elementFormDefault="qualified">
+
+	<xs:import namespace="http://gisis.imo.org/XML/LRIT/types/2008" schemaLocation="Types.xsd"/>
+
+	<xs:simpleType name="messageTypeType">
+		<xs:restriction base="xs:integer">
+			<xs:enumeration value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="DDPNotification" type="DDPNotificationType"/>
+	<xs:complexType name="DDPNotificationType">
+		<xs:sequence>
+			<xs:element name="MessageType" type="messageTypeType"/>
+			<xs:element name="MessageId" type="lrit:msgIDType"/>
+			<xs:element name="UpdateType">
+				<xs:simpleType>
+					<xs:restriction base="xs:integer">
+						<xs:enumeration value="0"/>
+						<xs:enumeration value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Message" type="lrit:messageType"/>
+			<xs:element name="TimeStamp" type="xs:dateTime"/>
+			<xs:element name="NewVersionNum" type="lrit:ddpIncrementalVersionNumType"/>
+		</xs:sequence>
+		<xs:attribute name="test" type="lrit:testType" use="optional" default="0"/>
+		<xs:attribute name="schemaVersion" type="xs:decimal" use="required"/>
+	</xs:complexType>
+</xs:schema>

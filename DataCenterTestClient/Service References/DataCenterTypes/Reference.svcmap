@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="ed6fcef8-aac8-492e-8750-27fe48eda569" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="d:\wdir\LRIT\lastDoc\5-ta\LRIT 5(Schema)\LRIT 5(Schema)\DC.WSDL" Protocol="file" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="dc1.wsdl" MetadataType="Wsdl" ID="5ea6a7e1-8d7e-41ff-b2ff-0622344a130f" SourceId="1" SourceUrl="file:///d:/wdir/LRIT/lastDoc/5-ta/LRIT 5(Schema)/LRIT 5(Schema)/DC.WSDL" />
+    <MetadataFile FileName="SARSURPICRequest1.xsd" MetadataType="Schema" ID="ff8ac79f-a616-4ce5-a4b5-68f331d553e1" SourceId="1" SourceUrl="file:///d:/wdir/LRIT/lastDoc/5-ta/LRIT 5(Schema)/LRIT 5(Schema)/SARSURPICRequest.xsd" />
+    <MetadataFile FileName="ShipPositionReport1.xsd" MetadataType="Schema" ID="ad018619-8760-40f1-95d2-34dcfd958a36" SourceId="1" SourceUrl="file:///d:/wdir/LRIT/lastDoc/5-ta/LRIT 5(Schema)/LRIT 5(Schema)/ShipPositionReport.xsd" />
+    <MetadataFile FileName="DDPNotification1.xsd" MetadataType="Schema" ID="25e58bb8-77fd-409a-aab2-7f33ec39a58c" SourceId="1" SourceUrl="file:///d:/wdir/LRIT/lastDoc/5-ta/LRIT 5(Schema)/LRIT 5(Schema)/DDPNotification.xsd" />
+    <MetadataFile FileName="Types1.xsd" MetadataType="Schema" ID="e034d1e1-5e21-4d9e-a0b7-846252cbc626" SourceId="1" SourceUrl="file:///d:/wdir/LRIT/lastDoc/5-ta/LRIT 5(Schema)/LRIT 5(Schema)/Types.xsd" />
+    <MetadataFile FileName="DDPUpdate1.xsd" MetadataType="Schema" ID="52472909-8a1f-4521-89db-172b1c15fa9e" SourceId="1" SourceUrl="file:///d:/wdir/LRIT/lastDoc/5-ta/LRIT 5(Schema)/LRIT 5(Schema)/DDPUpdate.xsd" />
+    <MetadataFile FileName="DDPRequest1.xsd" MetadataType="Schema" ID="5150313a-1134-48ae-ad4a-74d7036fec3a" SourceId="1" SourceUrl="file:///d:/wdir/LRIT/lastDoc/5-ta/LRIT 5(Schema)/LRIT 5(Schema)/DDPRequest.xsd" />
+    <MetadataFile FileName="PricingUpdate1.xsd" MetadataType="Schema" ID="a876b10f-0424-4083-9464-3ed3962d1422" SourceId="1" SourceUrl="file:///d:/wdir/LRIT/lastDoc/5-ta/LRIT 5(Schema)/LRIT 5(Schema)/PricingUpdate.xsd" />
+    <MetadataFile FileName="Receipt1.xsd" MetadataType="Schema" ID="8c7f6848-6cbb-4f64-a450-d56dab1a4bb8" SourceId="1" SourceUrl="file:///d:/wdir/LRIT/lastDoc/5-ta/LRIT 5(Schema)/LRIT 5(Schema)/Receipt.xsd" />
+    <MetadataFile FileName="ShipPositionRequest1.xsd" MetadataType="Schema" ID="f6e06905-bc58-41bc-83ff-55e2d0795cc1" SourceId="1" SourceUrl="file:///d:/wdir/LRIT/lastDoc/5-ta/LRIT 5(Schema)/LRIT 5(Schema)/ShipPositionRequest.xsd" />
+    <MetadataFile FileName="SystemStatus1.xsd" MetadataType="Schema" ID="10b7c52e-39d1-400a-89c0-16921f9531c1" SourceId="1" SourceUrl="file:///d:/wdir/LRIT/lastDoc/5-ta/LRIT 5(Schema)/LRIT 5(Schema)/SystemStatus.xsd" />
+    <MetadataFile FileName="PricingNotification1.xsd" MetadataType="Schema" ID="be4c444b-6432-46ac-9050-058a0e8b6e2b" SourceId="1" SourceUrl="file:///d:/wdir/LRIT/lastDoc/5-ta/LRIT 5(Schema)/LRIT 5(Schema)/PricingNotification.xsd" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
