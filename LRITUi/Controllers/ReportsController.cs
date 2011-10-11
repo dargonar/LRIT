@@ -15,11 +15,9 @@ using LRITUi.Controllers;
 
 namespace LRITUI.Controllers
 {
-    [Authorize]
+    [Authorize(Roles="Administrador, Operador")]
     public class ReportsController : MyController
     {
-      //
-      // GET: /Receipt/
       public ActionResult Sent(string refid)
       {
         DDPVersionManager v = new DDPVersionManager();

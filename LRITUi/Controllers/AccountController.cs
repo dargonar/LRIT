@@ -172,6 +172,7 @@ namespace LRITUi.Controllers
       return View();
     }
 
+    [Authorize(Roles = "Administrador")]
     public ActionResult List()
     {
       ViewData["users"] = Membership.GetAllUsers();

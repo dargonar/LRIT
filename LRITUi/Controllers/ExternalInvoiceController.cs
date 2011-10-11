@@ -7,6 +7,8 @@ using System.Web.Mvc.Ajax;
 
 namespace LRITUi.Controllers
 {
+
+  [Authorize(Roles = "ExternoVerificarFacturas")]
     public class ExternalInvoiceController : MyController
     {
         public IMembershipService MembershipService

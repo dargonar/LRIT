@@ -11,7 +11,7 @@ using LRITUi;
 
 namespace LRITUi.Controllers
 {
-  [Authorize]
+  [Authorize(Roles = "Administrador, Operador")]
     public class ShipController : MyController
     {
         //

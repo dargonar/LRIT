@@ -16,7 +16,7 @@ using LRITUi.Controllers;
 
 namespace LRITUI.Controllers
 {
-  [Authorize]
+  [Authorize(Roles = "Administrador, Operador")]
   public class DDPController : MyController
   {
     //

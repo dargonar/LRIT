@@ -15,7 +15,7 @@ using LRITUi.Controllers;
 
 namespace LRITUi.Controllers
 {
-  [Authorize]
+  [Authorize(Roles = "Administrador, Operador")]
   public class LogController : MyController
   {
     //

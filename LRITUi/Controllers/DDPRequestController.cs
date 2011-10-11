@@ -15,15 +15,14 @@ using LRITUi.Controllers;
 
 namespace LRITUi.Controllers
 {
+    [Authorize(Roles = "Administrador, Operador")]
     public class DDPRequestController : MyController
     {
-        //
-        // GET: /DDPRequest/
         public ActionResult List()
         {
             return View();
         }
-
+        
         public ActionResult GridData(int page, int rows, string[] _search, string sidx, string sord)
         {
             string[] ReqParams = { "ArchivedDDPTimeStamp", "ArchivedDDPTimeStampSpecified", "ArchivedDDPVersionNum", "DDPVersionNum", "MessageId", "MessageType", "Originator", "test", "TimeStamp", "UpdateType", "MsgInOutId" };

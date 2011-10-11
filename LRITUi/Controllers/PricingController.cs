@@ -15,8 +15,8 @@ using LRITUi.Controllers;
 using System.Messaging;
 
 namespace LRITUi.Controllers
-{   
-    [Authorize]
+{
+  [Authorize(Roles = "Administrador, Facturador")]
     public class PricingController : MyController
     {
       public ActionResult Prices()

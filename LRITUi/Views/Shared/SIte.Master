@@ -32,12 +32,10 @@
         </script>
         <![endif]--> 
               
-        <!--
         <script type='text/javascript' src="<%= Url.Content("~/js/jquery00.js") %>"></script>
         <script type='text/javascript' src="<%= Url.Content("~/js/jquery-u.js") %>"></script>
         <script type='text/javascript' src="<%= Url.Content("~/js/jquery01.js") %>"></script>
         <script type='text/javascript' src="<%= Url.Content("~/js/custom00.js") %>"></script>
-        -->
     
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
     
@@ -99,7 +97,7 @@
                     
               <div id="sidebar">
                             <ul class="nav">
-                                <% if (HttpContext.Current.User.IsInRole("Administrador") || HttpContext.Current.User.IsInRole("Operador") ) { %>
+                                <% if (ViewContext.hasRole(new[]{"Administrador","Operador"})) { %>
                                 <li><a class="headitem item1" href="">Reportes</a>
                                     <ul <%= ViewContext.Opened("Reports") %> >
 				                    <li><a href="<%= Url.Action("Sent", "Reports" )  %>">Ver Enviados</a></li>
@@ -107,6 +105,9 @@
 				                    <li><a href="<%= Url.Action("ReceivedFromSO", "Reports" )  %>">Ver Recibidos (SO)</a></li>
                                     </ul>                            
                                 </li>
+                                <%}%>
+
+                                <% if (ViewContext.hasRole(new[]{"Administrador","Operador","SARUser"})) { %>
                                 <li><a class="headitem item2" href="">Requerimientos</a>
                                     <ul <%= ViewContext.Opened("Requests") %> >
                                     <li><a href="<%= Url.Action("List", "Requests", new { msgInOut = 1 } )  %>">Ver Enviados</a></li>
@@ -116,19 +117,27 @@
                                     <li><a href="<%= Url.Action("ListSarsurpic", "Requests", new { msgInOut = 0 })  %>">Ver SarSurpic Recibidos</a></li>
                                     <li><a href="<%= Url.Action("NewRectangularSarsurpic", "Requests")  %>">Crear Nuevo SarSurpic</a></li>
                                     <li><a href="<%= Url.Action("List", "Requests", new { msgInOut = 2 } )  %>">Ver Activos</a></li>
+                                    <% if (ViewContext.hasRole(new[]{"Administrador","Operador"})) { %>
                                     <li><a href="<%= Url.Action("List", "DDPRequest")  %>">Ver DDP Request</a></li>
                                     <li><a href="<%= Url.Action("NewDDPRequest", "Requests")  %>">Crear Nuevo DDP Request</a></li>
+                                    <% } %>
                                     </ul>                            
                                 </li>
+                                <% } %>
+                                
+                                <% if (ViewContext.hasRole(new[]{"Administrador","Operador"})) { %>
                                 <li><a class="headitem item3" href="">Recibos</a>
                                     <ul <%= ViewContext.Opened("Receipts") %> >
 				                    <li><a href="<%= Url.Action("List", "Receipts", new { msgInOut = 1 } )  %>">Ver Enviados</a></li>
 				                    <li><a href="<%= Url.Action("List", "Receipts", new { msgInOut = 0 } )  %>">Ver Recibidos</a></li>
                                     </ul>                            
                                 </li>
+                                <% } %>
+                                
+                                <% if (ViewContext.hasRole(new[]{"Administrador","Operador"})) { %>
                                 <li><a class="headitem item4" href="">DDP</a>
                                     <ul <%= ViewContext.Opened("DDP") %> >
-                                <% 
+                                    <% 
                                     foreach (var DDPVersion in ddpversions)
                                     {
                                         string li_class = DDPVersion.Id == todaysddp.Id ? "actual" : "no";
@@ -140,10 +149,13 @@
                                         // Html.ActionLink(DDPVersion.DDPVersion1, "List", new { ddpid = DDPVersion.Id });
                                         Response.Write(Helpers.ListElement(Url.Action("List", "DDP", new { ddpid = DDPVersion.Id }), li_text, li_class));
                                     }
-                                %>
+                                    %>
                                         <li><a href="<%= Url.Action("List", "DDPNotification")  %>">Ver DDP Notificaciones</a></li>
                                     </ul >                            
                                 </li>
+                                <% } %>
+                                
+                                <% if (ViewContext.hasRole(new[]{"Administrador","Operador"})) { %>
                                 <li><a class="headitem item9" href="">Precios</a>
                                     <ul <%= ViewContext.Opened("Precios") %> >
 				                    <li><a href="<%= Url.Action("List", "Pricing", new { msgInOut = 1 } )  %>">Ver Notificaciones Enviadas</a></li>
@@ -152,26 +164,34 @@
 				                    <li><a href="<%= Url.Action("List", "PricingRequestSent")  %>">Ver Pedidos de actualizacion</a></li>
                                     </ul>                            
                                 </li>
+                                <% } %>
                                 
+                                <% if (ViewContext.hasRole(new[]{"Administrador","Operador"})) { %>
                                 <li><a class="headitem item5" href="">SystemStatus</a>
                                     <ul <%= ViewContext.Opened("SystemStatus") %>>
                                     <li><a href="<%= Url.Action("List", "SystemStatus") %>">Ver</a></li>
                                     </ul>                            
                                 </li>
+                                <% } %>
                                 
+                                <% if (ViewContext.hasRole(new[]{"Administrador","Operador"})) { %>
                                 <li><a class="headitem item5" href="">Logs</a>
                                     <ul <%= ViewContext.Opened("Log") %>>
                                     <li><a href="<%= Url.Action("List", "Log") %>">Ver</a></li>
                                     </ul>                            
                                 </li>
-                                 <li><a class="headitem item6" href="">Barcos</a>
+                                <% } %>
+                                
+                                <% if (ViewContext.hasRole(new[]{"Administrador","Operador"})) { %>
+                                <li><a class="headitem item6" href="">Barcos</a>
                                     <ul <%= ViewContext.Opened("Ship") %> >
                                     <li><a href="<%= Url.Action("List", "Ship")  %>">Ver Lista</a></li>
                                     <li><a href="<%= Url.Action("New", "Ship")  %>">Agregar Nuevo</a></li>
                                     </ul>                            
                                 </li>
+                                <% } %>
                                 
-                                <% if (HttpContext.Current.User.IsInRole("Administrador")) { %>
+                                <% if (ViewContext.hasRole("Administrador")) { %>
                                  <li><a class="headitem item7" href="">Usuarios</a>
                                     <ul <%= ViewContext.Opened("Account") %> >
                                     <li><a href="<%= Url.Action("List", "Account")  %>">Ver Lista</a></li>
@@ -179,8 +199,6 @@
                                     </ul>                            
                                 </li>                                
                                 <% } %>
-                                
-                                <% } //cierra admin/operador %>
                                 
                                 <% if (HttpContext.Current.User.IsInRole("Administrador")) { %>
                                  <li><a class="headitem item7" href="">Journal</a>

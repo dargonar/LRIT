@@ -10,6 +10,7 @@ using LRITUi.Utils;
 
 namespace LRITUi.Controllers
 {
+  [Authorize(Roles = "Administrador, Facturador")]
   public class ContractController : MyController
   {
     public ActionResult List()

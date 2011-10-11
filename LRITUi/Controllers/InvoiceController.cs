@@ -12,6 +12,7 @@ using System.Globalization;
 
 namespace LRITUi.Controllers
 {
+  [Authorize(Roles = "Administrador, Facturador")]
     public class InvoiceController : MyController
     {
       public ActionResult DownloadInvoiceFile(int fileid)

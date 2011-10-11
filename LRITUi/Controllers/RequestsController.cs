@@ -41,7 +41,8 @@ namespace LRITUi.Controllers
       set { mID = value; }
     } 
   }
-    [Authorize]
+    
+    [Authorize(Roles = "Administrador, Operador, SARUser")]
     public class RequestsController : MyController
     {
       public ActionResult List(int msgInOut, string refid)
@@ -98,11 +99,15 @@ namespace LRITUi.Controllers
         RequestTypeIndex.Clear();
         ItemElementIndex.Clear();
 
-        AccessTypeIndex.Add(new ItemDrop("0 - Reset entitlement", "0"));
-        AccessTypeIndex.Add(new ItemDrop("1 - Coastal State", "1"));
-        AccessTypeIndex.Add(new ItemDrop("2 - Flag State", "2"));
-        AccessTypeIndex.Add(new ItemDrop("3 - Port State with distance trigger", "3"));
-        AccessTypeIndex.Add(new ItemDrop("5 - Port with time trigger", "5"));
+        if (ControllerContext.HttpContext.User.IsInRole("Administrador") || ControllerContext.HttpContext.User.IsInRole("Operador"))
+        {
+          AccessTypeIndex.Add(new ItemDrop("0 - Reset entitlement", "0"));
+          AccessTypeIndex.Add(new ItemDrop("1 - Coastal State", "1"));
+          AccessTypeIndex.Add(new ItemDrop("2 - Flag State", "2"));
+          AccessTypeIndex.Add(new ItemDrop("3 - Port State with distance trigger", "3"));
+          AccessTypeIndex.Add(new ItemDrop("5 - Port with time trigger", "5"));
+        }
+
         AccessTypeIndex.Add(new ItemDrop("6 - SAR", "6"));
 
         ItemElementIndex.Add("Place");
@@ -142,12 +147,14 @@ namespace LRITUi.Controllers
 
         return View("New");
       }
-
+      
       public ActionResult New(int? requestType, int? accessType)
       {
+        if (this.ControllerContext.HttpContext.User.IsInRole("SARUser"))
+          accessType = 6;
+
         return ShowNewView(requestType, accessType);
       }
-
 
       public ActionResult CreateAndSend(DataCenterLogic.DataCenterTypesIDE.ShipPositionRequestType spr, int accessTypeIndex, int requestTypeIndex, string itemElementIndex, string strStartTime, string strStopTime)
       {
@@ -210,6 +217,9 @@ namespace LRITUi.Controllers
         else if (accessTypeIndex == 6)
           spr.AccessType = DataCenterLogic.DataCenterTypesIDE.accessTypeType.Item6;
 
+        //Prevet XSS
+        if( ControllerContext.HttpContext.User.IsInRole("SARUser") )
+          spr.AccessType = DataCenterLogic.DataCenterTypesIDE.accessTypeType.Item6;
 
         //spr.Item
         if (itemElementIndex != null)
@@ -286,7 +296,8 @@ namespace LRITUi.Controllers
       {
         return ShowNewSarsurpic(0);
       }
-
+      
+      [Authorize(Roles = "Administrador, Operador")]
       public ActionResult NewDDPRequest()
       {
         ViewData["archivedVersion"] = "";

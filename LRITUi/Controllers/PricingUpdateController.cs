@@ -15,6 +15,7 @@ using LRITUi.Controllers;
 
 namespace LRITUi.Controllers
 {
+    [Authorize(Roles = "Administrador, Operador")]
     public class PricingUpdateController : MyController
     {
         //

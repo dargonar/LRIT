@@ -7,21 +7,19 @@ using System.Web.Mvc.Ajax;
 
 namespace LRITUi.Controllers
 {
-    public class JournalController : Controller
-    {
-        [Authorize(Roles = "Administrador")]  
+  [Authorize(Roles = "Administrador")]
+  public class JournalController : Controller
+  {
         public ActionResult List()
         {
             return View();
         }
-
 
         public void GetContent(string file)
         {
           Response.Write(System.IO.File.ReadAllText((string)file));
         }
 
-        [Authorize(Roles = "Administrador")]
         public void Handler()
         {
           //

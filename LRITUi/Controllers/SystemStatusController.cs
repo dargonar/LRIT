@@ -14,8 +14,8 @@ using System.Globalization;
 using LRITUi.Controllers;
 
 namespace LRITUi.Controllers
-{   
-    [Authorize]
+{
+    [Authorize(Roles = "Administrador, Operador")]
     public class SystemStatusController : MyController
     {
         //

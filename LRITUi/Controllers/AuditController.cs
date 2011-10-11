@@ -12,7 +12,7 @@ using System.Globalization;
 
 namespace LRITUi.Controllers
 {
-  [Authorize]
+  [Authorize(Roles = "Administrador, Auditor")]
   public class AuditController : MyController
   {
     public ActionResult Day()

@@ -21,6 +21,24 @@ namespace LRITUi
     /// <param name="text">Texto del Link</param>
     /// <param name="cssclass">clase del list element</param>
     /// <returns></returns>
+
+    public static bool hasRole(this ViewContext viewcontext, string role)
+    {
+      return hasRole(viewcontext, new []{role});
+    }
+
+    public static bool hasRole(this ViewContext viewcontext, string[] roles)
+    {
+      bool hasAny = false;
+      foreach (var rol in roles)
+      {
+        hasAny = viewcontext.HttpContext.User.IsInRole(rol);
+        if (hasAny)
+          break;
+      }
+      return hasAny;
+    }
+    
     public static string ListElement(string link, string text, string cssclass)
     {
       return String.Format(@"<li class='{2}'><a href='{0}'>{1}</a></li>", link, text, cssclass);
