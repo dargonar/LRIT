@@ -1,7 +1,0 @@
-C:\wdir\lrit\IDESimulator\bin\IDESimulator.dll
-C:\wdir\lrit\IDESimulator\bin\IDESimulator.pdb
-C:\wdir\lrit\IDESimulator\bin\log4net.dll
-C:\wdir\lrit\IDESimulator\bin\log4net.xml
-C:\wdir\lrit\IDESimulator\obj\Debug\ResolveAssemblyReference.cache
-C:\wdir\lrit\IDESimulator\obj\Debug\IDESimulator.dll
-C:\wdir\lrit\IDESimulator\obj\Debug\IDESimulator.pdb
