@@ -125,7 +125,7 @@
                                 </li>
                                 <% } %>
                                 
-                                <% if (ViewContext.hasRole(new[]{"Administrador","Operador"})) { %>
+                                <% if (ViewContext.hasRole(new[]{"Administrador","Operador","SARUser"})) { %>
                                 <li><a class="headitem item3" href="">Recibos</a>
                                     <ul <%= ViewContext.Opened("Receipts") %> >
 				                    <li><a href="<%= Url.Action("List", "Receipts", new { msgInOut = 1 } )  %>">Ver Enviados</a></li>

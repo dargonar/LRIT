@@ -13,6 +13,7 @@ using System.Threading;
 using System.Globalization;
 using System.Messaging;
 using System.Text.RegularExpressions;
+using System.Configuration;
 
 namespace LRITUi.Controllers
 {
@@ -48,12 +49,13 @@ namespace LRITUi.Controllers
       public ActionResult List(int msgInOut, string refid)
       {
         DDPVersionManager v = new DDPVersionManager();
-
+        
         if (refid != null)
           ViewData["referenceId"] = refid;
 
         ViewData["msgInOut"] = msgInOut;
         ViewData["LritIDNamePairs"] = ContractingGovermentManager.LritIdNamePairs(v.GetCurrentDDPVersion().Id);
+        ViewData["is_sar"] = ControllerContext.HttpContext.User.IsInRole("SARUser") ? "true" : "false";
 
         return View("List");
       }
@@ -70,17 +72,14 @@ namespace LRITUi.Controllers
       public List<ItemDrop> BuildPlaceDropDown(int ddpVersion)
       {
         var DropDownList = new List<ItemDrop>();
-        using (DBDataContext context = new DBDataContext())
+        List<Place> ddp = context.Places.Where(p => p.ContractingGoverment.DDPVersionId==ddpVersion &&( p.AreaType == "port" || p.AreaType == "portfacility") ).OrderBy(p => p.ContractingGoverment.Name).OrderBy(p=>p.PlaceStringId).ToList();
+        foreach (var row in ddp)
         {
-          List<Place> ddp = context.Places.Where(p => p.ContractingGoverment.DDPVersionId==ddpVersion &&( p.AreaType == "port" || p.AreaType == "portfacility") ).OrderBy(p => p.ContractingGoverment.Name).OrderBy(p=>p.PlaceStringId).ToList();
-          foreach (var row in ddp)
-          {
-            var item = new ItemDrop();
-            item.ID = row.PlaceStringId;
-            var puntos = row.Name.Length > 50 ? "..." : "";
-            item.NAME = row.ContractingGoverment.Name + " - " + string.Format("{0,-62}", row.Name).Remove(50) + puntos + " (" + string.Format("{0,0}",row.PlaceStringId) + ")";
-            DropDownList.Add(item);
-          }
+          var item = new ItemDrop();
+          item.ID = row.PlaceStringId;
+          var puntos = row.Name.Length > 50 ? "..." : "";
+          item.NAME = row.ContractingGoverment.Name + " - " + string.Format("{0,-62}", row.Name).Remove(50) + puntos + " (" + string.Format("{0,0}",row.PlaceStringId) + ")";
+          DropDownList.Add(item);
         }
         return DropDownList;
       }
@@ -150,6 +149,10 @@ namespace LRITUi.Controllers
       
       public ActionResult New(int? requestType, int? accessType)
       {
+        //HACK: Por que tengo que hacerlo a mano aca?
+        //DataCenterDataAccess.Config.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
+        //log.Debug("RequestController::New => aca vale:" + System.Configuration.ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
+
         if (this.ControllerContext.HttpContext.User.IsInRole("SARUser"))
           accessType = 6;
 
@@ -158,7 +161,7 @@ namespace LRITUi.Controllers
 
       public ActionResult CreateAndSend(DataCenterLogic.DataCenterTypesIDE.ShipPositionRequestType spr, int accessTypeIndex, int requestTypeIndex, string itemElementIndex, string strStartTime, string strStopTime)
       {
-        var cfgman = new ConfigurationManager();
+        var cfgman = new DataCenterLogic.ConfigurationManager();
 
         DateTime dateStartTime = DateTime.UtcNow;
         DateTime dateStopTime = DateTime.UtcNow;
@@ -372,7 +375,7 @@ namespace LRITUi.Controllers
 
       public ActionResult CreateAndSendSarsurpic(DataCenterLogic.DataCenterTypesIDE.SARSURPICType SARSURPICMsg, int areaIndex, int NumberOfPositions, string Lat, string Long, string var1, string var2)
       {
-        var cfgman = new ConfigurationManager();
+        var cfgman = new DataCenterLogic.ConfigurationManager();
         var ddpVer = new DDPVersionDataAccess();
         var sprda = new SARSURPICRequestDataAccess(context);
         string strItem = string.Empty;
@@ -491,6 +494,13 @@ namespace LRITUi.Controllers
             columns.Add(ReqParams[i]);
             querys.Add(tempValue);
           }
+        }
+
+        //Solo traer 6 - Sar
+        if (ControllerContext.HttpContext.User.IsInRole("SARUser"))
+        {
+          columns.Add("RequestType");
+          querys.Add("6");
         }
 
 

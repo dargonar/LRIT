@@ -4,22 +4,26 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DataCenterDataAccess;
+using log4net;
 
 namespace LRITUi.Controllers
 {
   public class MyController : Controller
   {
     private DBDataContext _context = null;
+    protected static readonly ILog log = LogManager.GetLogger(typeof(MyController));
 
     public DBDataContext context
     {
       get
       {
+        //log.Debug("Piden contexto");
         if (_context == null)
         {
+          //log.Debug("Lo creo con: " + Config.ConnectionString);
           _context = new DBDataContext(Config.ConnectionString);
         }
-
+        //log.Debug("Lo retorno");
         return _context;
       }
     }

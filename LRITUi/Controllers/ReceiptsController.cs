@@ -27,7 +27,7 @@ namespace LRITUi.Controllers
     //}
 
 
-    [Authorize(Roles = "Administrador, Operador")]
+    [Authorize(Roles = "Administrador, Operador, SARUser")]
     public class ReceiptsController : MyController
     {
 
