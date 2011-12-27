@@ -79,7 +79,7 @@ namespace LRITUi.Controllers
                             MsgInOut = entity.MsgInOut.InOut,
                             TimeStamp = entity.TimeStamp.ToString()
                         };
-            return Json(model.ToJqGridData(page, rows, null, querys.ToArray(), columns.ToArray()));
+            return Json(model.ToJqGridData(page, rows, null, querys.ToArray(), columns.ToArray()), JsonRequestBehavior.AllowGet);
 
         }
     }

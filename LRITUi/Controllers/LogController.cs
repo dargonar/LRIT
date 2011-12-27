@@ -74,7 +74,7 @@ namespace LRITUi.Controllers
                     Logger = entity.Logger,
                     Message = entity.Message,
                   };
-      return Json(model.ToJqGridData(page, rows, null, querys.ToArray(), columns.ToArray()));
+      return Json(model.ToJqGridData(page, rows, null, querys.ToArray(), columns.ToArray()), JsonRequestBehavior.AllowGet);
     }
   }
 }

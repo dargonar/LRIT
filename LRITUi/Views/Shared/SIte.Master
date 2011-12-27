@@ -21,8 +21,8 @@
         <!-- to choose another color scheme uncomment one of the foloowing stylesheets and wrap styl1.css into a comment -->
         <link rel="stylesheet" href="~/css/style100.css" type="text/css" media="screen" />
         
-        <!--<link rel="stylesheet" href="~/css/jquery-u.css" type="text/css" media="screen" />
-        <link rel="stylesheet" href="~/css/jquery00.css" type="text/css" media="screen" />-->
+        <link rel="stylesheet" href="~/css/jquery-u.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="~/css/jquery00.css" type="text/css" media="screen" />
         
         <!--Internet Explorer Trancparency fix-->
         <!--[if IE 6]>
@@ -32,10 +32,12 @@
         </script>
         <![endif]--> 
               
+        
         <script type='text/javascript' src="<%= Url.Content("~/js/jquery00.js") %>"></script>
         <script type='text/javascript' src="<%= Url.Content("~/js/jquery-u.js") %>"></script>
         <script type='text/javascript' src="<%= Url.Content("~/js/jquery01.js") %>"></script>
         <script type='text/javascript' src="<%= Url.Content("~/js/custom00.js") %>"></script>
+        
     
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
     

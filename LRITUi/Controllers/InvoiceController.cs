@@ -65,7 +65,7 @@ namespace LRITUi.Controllers
                       context.MsgInOuts.Where(m => m.TimeStamp >= oinvoice.dateFrom && m.TimeStamp <= oinvoice.dateTo && m.Price != null ),
                       Request.Params,
                       columns,
-                      page, rows, sidx, sord));
+                      page, rows, sidx, sord), JsonRequestBehavior.AllowGet);
       }
 
       public ActionResult Calculate(int contract, DateTime from, DateTime to)
@@ -247,7 +247,7 @@ namespace LRITUi.Controllers
                       context.Invoices.Where(i => i.emitidarecibida==emireci),
                       Request.Params,
                       columns,
-                      page, rows, sidx, sord));
+                      page, rows, sidx, sord), JsonRequestBehavior.AllowGet);
       }
 
       private void MakeCombos()

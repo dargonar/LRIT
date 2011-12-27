@@ -88,7 +88,7 @@ namespace LRITUi.Controllers
                     context.Contracts, 
                     Request.Params,
                     columns,
-                    page, rows, sidx, sord));
+                    page, rows, sidx, sord), JsonRequestBehavior.AllowGet);
     }
 
   }

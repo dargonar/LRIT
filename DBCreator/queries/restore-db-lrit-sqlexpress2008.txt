@@ -1,0 +1,9 @@
+RESTORE DATABASE LRIT
+FROM DISK = N'c:\Borrar\lrit-backup\lrit-backup'
+WITH FILE = 1,  
+MOVE N'LRIT' TO N'c:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\LRIT.MDF',  
+MOVE N'LRIT_LOG' TO N'c:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\LRIT_LOG.LDF',  
+NOUNLOAD,  
+REPLACE,  
+STATS = 10
+GO

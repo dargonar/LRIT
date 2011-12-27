@@ -525,7 +525,7 @@ namespace LRITUi.Controllers
                       MessageId = entity.MessageId,
                       TimeStamp = entity.TimeStamp.ToString(),
                     };
-        return Json(model.ToJqGridData(page, rows, null, querys.ToArray(), columns.ToArray()));
+        return Json(model.ToJqGridData(page, rows, null, querys.ToArray(), columns.ToArray()), JsonRequestBehavior.AllowGet);
       }
 
       public ActionResult SurpicGridData(int page, int rows, string[] _search, string sidx, string sord, int msgInOut)
@@ -584,7 +584,7 @@ namespace LRITUi.Controllers
                       NumberOfPositions = entity.NumberOfPositions,
                       TimeStamp = entity.TimeStamp.ToString(),
                     };
-        return Json(model.ToJqGridData(page, rows, null, querys.ToArray(), columns.ToArray()));
+        return Json(model.ToJqGridData(page, rows, null, querys.ToArray(), columns.ToArray()), JsonRequestBehavior.AllowGet);
       }
 
 

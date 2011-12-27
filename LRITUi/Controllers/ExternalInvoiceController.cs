@@ -32,7 +32,7 @@ namespace LRITUi.Controllers
                         context.Invoices.Where(i => i.Contract.lritid == User.Identity.Name && new int[] {1,2,3}.Contains(i.state) ),
                         Request.Params,
                         columns,
-                        page, rows, sidx, sord));
+                        page, rows, sidx, sord), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Password()

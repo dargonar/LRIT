@@ -112,9 +112,9 @@ namespace LRITUI.Controllers
                         TimeStamp1 = entity.TimeStamp1.ToString(),
                       };
 
-          
 
-          return Json(model.ToJqGridData(page, rows, null, querys.ToArray(), columns.ToArray()));
+
+          return Json(model.ToJqGridData(page, rows, null, querys.ToArray(), columns.ToArray()), JsonRequestBehavior.AllowGet);
         }
 
     }

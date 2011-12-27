@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LRITUi", "LRITUi\LRITUi.csproj", "{7A79B863-3AA5-4134-B5A4-6AFD581221D9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataCenterDataAccess", "DataCenterDataAccess\DataCenterDataAccess.csproj", "{0AEB4CCE-9F82-48B4-91C3-7190C48F2CDB}"
