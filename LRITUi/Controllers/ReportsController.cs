@@ -15,7 +15,7 @@ using LRITUi.Controllers;
 
 namespace LRITUI.Controllers
 {
-    [Authorize(Roles="Administrador, Operador")]
+    [Authorize(Roles = "Administrador, Operador, SARUser")]  
     public class ReportsController : MyController
     {
       public ActionResult Sent(string refid)
@@ -28,6 +28,7 @@ namespace LRITUI.Controllers
         ViewData["LritIDNamePairs"] = ContractingGovermentManager.LritIdNamePairs(v.GetCurrentDDPVersion().Id);
         return View("List");
       }
+      
 
       public ActionResult Received(string refid)
       {
@@ -46,6 +47,7 @@ namespace LRITUI.Controllers
 
         if (refid != null)
           ViewData["referenceId"] = refid;
+
         ViewData["LritIDNamePairs"] = ContractingGovermentManager.LritIdNamePairs(v.GetCurrentDDPVersion().Id);
         ViewData["msgInOut"]    = 0;
         ViewData["referenceId"] = 0;

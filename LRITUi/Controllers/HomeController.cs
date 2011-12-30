@@ -23,6 +23,9 @@ namespace LRITUI.Controllers
       if (User.IsInRole("Facturador"))
         return RedirectToAction("List", "Contract");
 
+      if (User.IsInRole("SARUser"))
+        return RedirectToAction("ReceivedFromSO", "Reports");
+
       // Barcos
       var sda = new ShipDataAccess(context);
       var sman = new ShipManager();

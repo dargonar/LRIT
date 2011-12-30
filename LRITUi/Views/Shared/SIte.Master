@@ -99,7 +99,7 @@
                     
               <div id="sidebar">
                             <ul class="nav">
-                                <% if (ViewContext.hasRole(new[]{"Administrador","Operador"})) { %>
+                                <% if (ViewContext.hasRole(new[]{"Administrador","Operador", "SARUser"})) { %>
                                 <li><a class="headitem item1" href="">Reportes</a>
                                     <ul <%= ViewContext.Opened("Reports") %> >
 				                    <li><a href="<%= Url.Action("Sent", "Reports" )  %>">Ver Enviados</a></li>
