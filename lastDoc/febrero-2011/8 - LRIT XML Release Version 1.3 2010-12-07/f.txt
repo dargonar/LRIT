@@ -1,0 +1,10 @@
+
+C:\wdir\LRIT\lastDoc\febrero-2011\8 - LRIT XML Release Version 1.3 2010-12-07>REM  ShipPositionRequest.xsd SARSURPICRequest.xsd Receipt.xsd SystemStatus.xsd PricingNotification.xsd PricingRequest.xsd PricingUpdate.xsd DDPNotification.xsd DDPRequest.xsd DDPUpdate.xsd Types.xsd 
+
+C:\wdir\LRIT\lastDoc\febrero-2011\8 - LRIT XML Release Version 1.3 2010-12-07>xsd LRITMessageLog.xSD /n:jfb /c /e:LritMessageLog JournalReport.xsd ShipPositionReport.xsd ShipPositionRequest.xsd SARSURPICRequest.xsd Receipt.xsd SystemStatus.xsd PricingNotification.xsd PricingRequest.xsd PricingUpdate.xsd DDPNotification.xsd DDPRequest.xsd DDPUpdate.xsd Types.xsd 
+Microsoft (R) Xml Schemas/DataTypes support utility
+[Microsoft (R) .NET Framework, Version 4.0.30319.1]
+Copyright (C) Microsoft Corporation. All rights reserved.
+Writing file 'C:\wdir\LRIT\lastDoc\febrero-2011\8 - LRIT XML Release Version 1.3 2010-12-07\LRITMessageLog_JournalReport_ShipPositionReport_ShipPositionRequest_SARSURPICRequest_Receipt_SystemStatus_PricingNotification_PricingRequest_PricingUpdate_DDPNotification_DDPRequest_DDPUpdate_Types.cs'.
+
+If you would like more help, please type "xsd /?".

@@ -1,0 +1,71 @@
+<xs:schema version="1.0" targetNamespace="http://gisis.imo.org/XML/LRIT/2008"
+xmlns="http://gisis.imo.org/XML/LRIT/2008"   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:posrep="http://gisis.imo.org/XML/LRIT/positionReport/2008"
+    xmlns:posreq="http://gisis.imo.org/XML/LRIT/positionRequest/2008"
+    xmlns:surpic="http://gisis.imo.org/XML/LRIT/sarSurpicRequest/2008"
+    xmlns:receipt="http://gisis.imo.org/XML/LRIT/receipt/2008"
+    xmlns:systemStatus="http://gisis.imo.org/XML/LRIT/systemStatus/2008"
+    xmlns:journalReport="http://gisis.imo.org/XML/LRIT/journalReport/2008"
+    xmlns:pricingNotification="http://gisis.imo.org/XML/LRIT/pricingNotification/2008"
+    xmlns:pricingRequest="http://gisis.imo.org/XML/LRIT/pricingRequest/2008"
+    xmlns:pricingUpdate="http://gisis.imo.org/XML/LRIT/pricingUpdate/2008"
+    xmlns:ddpNotification="http://gisis.imo.org/XML/LRIT/ddpNotification/2008"
+    xmlns:ddpRequest="http://gisis.imo.org/XML/LRIT/ddpRequest/2008"
+    xmlns:ddpUpdate="http://gisis.imo.org/XML/LRIT/ddpUpdate/2008"
+    xmlns:xmime="http://www.w3.org/2005/05/xmlmime" elementFormDefault="qualified">
+    <xs:import namespace="http://gisis.imo.org/XML/LRIT/journalReport/2008"
+        schemaLocation="JournalReport.xsd"/>
+    <xs:import namespace="http://gisis.imo.org/XML/LRIT/positionReport/2008"
+        schemaLocation="ShipPositionReport.xsd"/>
+    <xs:import namespace="http://gisis.imo.org/XML/LRIT/positionRequest/2008"
+        schemaLocation="ShipPositionRequest.xsd"/>
+    <xs:import namespace="http://gisis.imo.org/XML/LRIT/sarSurpicRequest/2008"
+        schemaLocation="SARSURPICRequest.xsd"/>
+    <xs:import namespace="http://gisis.imo.org/XML/LRIT/receipt/2008" schemaLocation="Receipt.xsd"/>
+    <xs:import namespace="http://gisis.imo.org/XML/LRIT/systemStatus/2008"
+        schemaLocation="SystemStatus.xsd"/>
+    <xs:import namespace="http://gisis.imo.org/XML/LRIT/pricingNotification/2008"
+        schemaLocation="PricingNotification.xsd"/>
+    <xs:import namespace="http://gisis.imo.org/XML/LRIT/pricingRequest/2008"
+        schemaLocation="PricingRequest.xsd"/>
+    <xs:import namespace="http://gisis.imo.org/XML/LRIT/pricingUpdate/2008"
+        schemaLocation="PricingUpdate.xsd"/>
+    <xs:import namespace="http://gisis.imo.org/XML/LRIT/ddpNotification/2008"
+        schemaLocation="DDPNotification.xsd"/>
+    <xs:import namespace="http://gisis.imo.org/XML/LRIT/ddpRequest/2008"
+        schemaLocation="DDPRequest.xsd"/>
+    <xs:import namespace="http://gisis.imo.org/XML/LRIT/ddpUpdate/2008"
+        schemaLocation="DDPUpdate.xsd"/>
+ <xs:complexType name="PositionReportLogType">
+        <xs:sequence>
+            <xs:element ref="posrep:ShipPositionReport"/>
+        </xs:sequence>
+        <xs:attribute name="positionSent" type="xs:boolean" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="LritMessageType">
+        <xs:sequence>
+            <xs:element name="ReceivedTimestamp" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="SentTimestamp" type="xs:dateTime" minOccurs="0"/>
+            <xs:choice minOccurs="1" maxOccurs="1">
+                <xs:element name="PositionReport" type="PositionReportLogType"/>
+                <xs:element ref="posreq:ShipPositionRequest"/>
+                <xs:element ref="surpic:SARSURPICRequest"/>
+                <xs:element ref="receipt:Receipt"/>
+                <xs:element ref="systemStatus:SystemStatus"/>
+                <xs:element ref="journalReport:JournalReport"/>
+                <xs:element ref="pricingNotification:PricingNotification"/>
+                <xs:element ref="pricingRequest:PricingRequest"/>
+                <xs:element ref="pricingUpdate:PricingUpdate"/>
+                <xs:element ref="ddpUpdate:DDPUpdate"/>
+                <xs:element ref="ddpRequest:DDPRequest"/>
+                <xs:element ref="ddpNotification:DDPNotification"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="MessageLogType">
+        <xs:sequence>
+            <xs:element name="LritMessage" type="LritMessageType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="LritMessageLog" type="MessageLogType"/>
+</xs:schema>

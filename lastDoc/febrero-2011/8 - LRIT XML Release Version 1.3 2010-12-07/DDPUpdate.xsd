@@ -1,0 +1,41 @@
+<!-- 
+	File: 		DDPUpdate.xsd
+	Version: 	1.1
+	Date: 		17 September 2008
+-->
+<xs:schema version="1.0" targetNamespace="http://gisis.imo.org/XML/LRIT/ddpUpdate/2008" xmlns="http://gisis.imo.org/XML/LRIT/ddpUpdate/2008" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:lrit="http://gisis.imo.org/XML/LRIT/types/2008" xmlns:xmime="http://www.w3.org/2005/05/xmlmime" elementFormDefault="qualified">
+
+	<xs:import namespace="http://gisis.imo.org/XML/LRIT/types/2008" schemaLocation="Types.xsd"/>
+
+	<xs:simpleType name="messageTypeType">
+		<xs:restriction base="xs:integer">
+			<xs:enumeration value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="DDPUpdate" type="DDPUpdateType"/>
+	<xs:complexType name="DDPUpdateType">
+		<xs:sequence>
+			<xs:element name="MessageType" type="messageTypeType"/>
+			<xs:element name="MessageId" type="lrit:msgIDType"/>
+			<xs:element name="ReferenceId" type="lrit:msgIDType"/>
+			<xs:element name="UpdateType">
+				<xs:simpleType>
+					<xs:restriction base="xs:integer">
+						<xs:enumeration value="0"/>
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="3"/>
+						<xs:enumeration value="4"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Message" type="lrit:messageType"/>
+			<xs:element name="TimeStamp" type="xs:dateTime"/>
+			<xs:element name="DDPFileVersionNum" type="lrit:ddpVersionNumOrIncrementalVersionType"/>
+			<xs:element name="DDPFile" type="xs:base64Binary" xmime:expectedContentTypes="application/zip"/>
+		</xs:sequence>
+		<xs:attribute name="test" type="lrit:testType" use="optional" default="0"/>
+		<xs:attribute name="schemaVersion" type="xs:decimal" use="required"/>
+	</xs:complexType>
+</xs:schema>

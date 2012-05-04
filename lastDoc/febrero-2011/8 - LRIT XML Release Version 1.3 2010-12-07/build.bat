@@ -1,0 +1,2 @@
+REM  ShipPositionRequest.xsd SARSURPICRequest.xsd Receipt.xsd SystemStatus.xsd PricingNotification.xsd PricingRequest.xsd PricingUpdate.xsd DDPNotification.xsd DDPRequest.xsd DDPUpdate.xsd Types.xsd
+xsd.exe /p:conf.xml /classes

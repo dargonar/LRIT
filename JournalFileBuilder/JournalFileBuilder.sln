@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JournalFileBuilder", "JournalFileBuilder\JournalFileBuilder.csproj", "{AFC0C19F-E590-482D-B8FE-1037F6551237}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testRegex", "testRegex\testRegex.csproj", "{65E7D70F-3F90-46D9-82E5-E4203192DDEA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AFC0C19F-E590-482D-B8FE-1037F6551237}.Debug|x86.ActiveCfg = Debug|x86
+		{AFC0C19F-E590-482D-B8FE-1037F6551237}.Debug|x86.Build.0 = Debug|x86
+		{AFC0C19F-E590-482D-B8FE-1037F6551237}.Release|x86.ActiveCfg = Release|x86
+		{AFC0C19F-E590-482D-B8FE-1037F6551237}.Release|x86.Build.0 = Release|x86
+		{65E7D70F-3F90-46D9-82E5-E4203192DDEA}.Debug|x86.ActiveCfg = Debug|x86
+		{65E7D70F-3F90-46D9-82E5-E4203192DDEA}.Debug|x86.Build.0 = Debug|x86
+		{65E7D70F-3F90-46D9-82E5-E4203192DDEA}.Release|x86.ActiveCfg = Release|x86
+		{65E7D70F-3F90-46D9-82E5-E4203192DDEA}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

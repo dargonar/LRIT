@@ -1,0 +1,37 @@
+﻿      
+      var journal = new XmlDocument();
+
+      var xmlnode = journal.CreateXmlDeclaration("1.0", "utf-8", null);
+      journal.AppendChild(xmlnode);
+
+      //let's add the root element
+      var xmlelem=journal.CreateElement("","LritMessageLog","");
+
+      NameTable nt = new NameTable();
+      XmlNamespaceManager nsmgr = new XmlNamespaceManager(nt);
+      XmlNamespaceManager nsmanager = new XmlNamespaceManager(nt);
+
+      var dictns = new Dictionary<string,string>() { 
+        {"ns1","http://gisis.imo.org/XML/LRIT/positionReport/2008"},
+        {"ns2","http://gisis.imo.org/XML/LRIT/ddpNotification/2008"},
+        {"ns3","http://gisis.imo.org/XML/LRIT/ddpUpdate/2008"},
+        {"ns4","http://gisis.imo.org/XML/LRIT/ddpRequest/2008"},
+        {"ns5","http://gisis.imo.org/XML/LRIT/pricingNotification/2008"},
+        {"ns6","http://gisis.imo.org/XML/LRIT/journalReport/2008"},
+        {"ns7","http://gisis.imo.org/XML/LRIT/types/2008"},
+        {"ns8","http://gisis.imo.org/XML/LRIT/pricingUpdate/2008"},
+        {String.Empty, "http://gisis.imo.org/XML/LRIT/2008"},
+        {"ns10","http://gisis.imo.org/XML/LRIT/systemStatus/2008"},
+        {"ns11","http://gisis.imo.org/XML/LRIT/pricingRequest/2008"},
+        {"ns12","http://gisis.imo.org/XML/LRIT/sarSurpicRequest/2008"},
+        {"ns13","http://gisis.imo.org/XML/LRIT/positionRequest/2008"},
+        {"ns14","http://gisis.imo.org/XML/LRIT/receipt/2008"},
+        {"xsi","http://www.w3.org/2001/XMLSchema-instance"}
+      };
+
+      foreach (var ns in dictns)
+      {
+        nsmanager.AddNamespace(ns.Key, ns.Value);
+      }
+      
+      var ctx = new XmlParserContext(nt, nsmanager, null, XmlSpace.None);
