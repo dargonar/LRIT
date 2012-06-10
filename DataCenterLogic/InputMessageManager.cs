@@ -3,8 +3,8 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Serialization;
 using System.Threading;
-using System.Messaging;
 using System.Transactions;
 using DataCenterDataAccess;
 using DataCenterLogic;
@@ -21,13 +21,6 @@ namespace DataCenterLogic
   public class InputMessageManager
   {
     private static readonly ILog log = LogManager.GetLogger(typeof(InputMessageManager));
-
-    /// <summary>
-    /// Referencia a la cola de entrada
-    /// </summary>
-    private MessageQueue inputQueue = null;
- 
-    private int wrong_count = 0;
 
     /// <summary>
     /// Variable privada del Singleton 
@@ -54,14 +47,91 @@ namespace DataCenterLogic
     /// <summary>
     /// Inicializa el InputMessageManager y comienza a leer de la cola de entrada asincronicamente
     /// </summary>
+    static private Thread mCheckQueueThread = new Thread(CheckQueueStub);
+    static bool mRun = true;
+    
     public void Start()
     {
-      ///Open input and ouput queue
-      inputQueue = QueueManager.Instance().GetInQueue();
-      
-      ///Start async read of message from queue
-      inputQueue.PeekCompleted += new PeekCompletedEventHandler(queue_PeekCompleted);
-      inputQueue.BeginPeek();
+      mCheckQueueThread.Start(this);
+    }
+
+    private void CheckQueue()
+    {
+      while (mRun == true)
+      {
+        try
+        {
+          core_in msg = null;
+          using (DBDataContext ctx = new DBDataContext(mBasicConfiguration.ConnectionString))
+          {
+            msg = ctx.core_ins.OrderBy(c => c.created_at).SingleOrDefault();
+            while (msg != null)
+            {
+              int wrong_count = 0;
+              bool res = ProcessMessage(msg, ctx);
+              while (res == false && ++wrong_count < 3)
+                res = ProcessMessage(msg, ctx);
+
+              if (res == false)
+                DiscardMessage(msg, ctx);
+
+              msg = ctx.core_ins.OrderBy(c => c.created_at).SingleOrDefault();
+            }
+          }
+        }
+        catch (Exception ex)
+        {
+          log.Error("CheckQueue => Loop error", ex);
+        }
+        
+        //Wait 
+        for(int i=0; i<10 && mRun == true; i++)
+          Thread.Sleep(1000);
+      }
+    }
+
+    private void DiscardMessage(core_in msg, DBDataContext ctx)
+    {
+      try
+      {
+        ctx.core_ins.DeleteOnSubmit(msg);
+        ctx.SubmitChanges();
+
+        log.Error("Unable to process msg: " + (msg != null ? msg.message : "null msg"));
+      }
+      catch
+      {
+        log.Error("Unable to dump msg");
+      }
+    }
+
+    private bool ProcessMessage(core_in msg, DBDataContext ctx)
+    {
+      try
+      {
+        // --- Procesamos un mensaje ---
+        using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, TimeSpan.FromMinutes(15)))
+        {
+          queue_PeekCompleted(msg);
+          ctx.core_ins.DeleteOnSubmit(msg);
+          ctx.SubmitChanges();
+          
+          scope.Complete();
+        }
+
+        return true;
+      }
+      catch (Exception ex)
+      {
+        log.Error("ProcessMessage", ex);
+      }
+
+      return false;
+    }
+    
+    static private void CheckQueueStub(object o)
+    {
+      ((InputMessageManager)o).CheckQueue();
     }
 
     /// <summary>
@@ -69,206 +139,153 @@ namespace DataCenterLogic
     /// </summary>
     /// <param name="sender">Object Sender</param>
     /// <param name="e">Async events</param>
-    private void queue_PeekCompleted(object sender, PeekCompletedEventArgs e)
+    private void queue_PeekCompleted(core_in msg)
     {
-      using( TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, TimeSpan.FromMinutes(15) ) )
+      string msgId = "NA";
+      if (msg.msgtype == "receipt")
       {
-        Message msg = null;
-        string msgId = "NA";
-        try
+        log.Debug("Se detecto receipt en queue...");
+        var receipt = new XmlSerializerHelper<DataCenterLogic.DataCenterTypes.ReceiptType>().FromStr(msg.message);
+        msgId = receipt.MessageId;
+        var rman = new ReceiptManager();
+        rman.ProcessReceipt(receipt);
+      }
+      else
+        if (msg.msgtype == "pricingNotification")
         {
-          msg = inputQueue.Receive( MessageQueueTransactionType.Automatic );
-
-          if( msg.Label == "receipt" )
-          {
-            log.Debug("Se detecto receipt en queue...");
-            var receipt = (DataCenterLogic.DataCenterTypes.ReceiptType)(msg.Body);
-            msgId = receipt.MessageId;
-            var rman = new ReceiptManager();
-            rman.ProcessReceipt(receipt);
-          }
-          else 
-          if ( msg.Label == "pricingNotification" )
-          {
-            log.Debug("Se detecto pricingNotification en queue...");
-            var pricingNotification = (PricingNotificationType)(msg.Body);
-            msgId = pricingNotification.MessageId;
-            var pman = new PricingManager();
-            pman.ProcessPricingNotification(pricingNotification);
-          }
-          else
-          if ( msg.Label == "shipPositionReport" )
+          log.Debug("Se detecto pricingNotification en queue...");
+          //var pricingNotification = (PricingNotificationType)(msg.Body);
+          var pricingNotification = new XmlSerializerHelper<PricingNotificationType>().FromStr(msg.message);
+          msgId = pricingNotification.MessageId;
+          var pman = new PricingManager();
+          pman.ProcessPricingNotification(pricingNotification);
+        }
+        else
+          if (msg.msgtype == "shipPositionReport")
           {
             log.Debug("Se detecto shipPositionReport en queue...");
-            var shipPositionReport = (DataCenterLogic.DataCenterTypes.ShipPositionReportType)(msg.Body);
+            //var shipPositionReport = (DataCenterLogic.DataCenterTypes.ShipPositionReportType)(msg.Body);
+            var shipPositionReport = new XmlSerializerHelper<DataCenterLogic.DataCenterTypes.ShipPositionReportType>().FromStr(msg.message);
             msgId = shipPositionReport.MessageId;
             var sprman = new ShipPositionReportManager();
             sprman.ProcessShipPositionReport(shipPositionReport);
           }
           else
-          if ( msg.Label == "pricingUpdate" )
-          {
-            log.Debug("Se detecto pricingUpdate en queue...");
-            var pricingUpdate = (DataCenterLogic.DataCenterTypes.PricingUpdateType)(msg.Body);
-            msgId = pricingUpdate.MessageId;
-            var pman = new PricingManager();
-            pman.ProcessPricingUpdate(pricingUpdate);
-          }
-          else
-          if ( msg.Label == "SARSURPICRequest" )
-          {
-            log.Debug("Se detecto SARSURPICRequest en queue...");
-            var SARSURPICRequest = (DataCenterLogic.DataCenterTypes.SARSURPICType)(msg.Body);
-            msgId = SARSURPICRequest.MessageId;
-            var ssman = new SARSURPICManager();
-            ssman.ProcessSARSURPICRequest(SARSURPICRequest);
-          }
-          else
-          if ( msg.Label == "ddpNotification" )
-          {
-            log.Debug("Se detecto ddpNotification en queue...");
-            var ddpNotification = (DataCenterLogic.DataCenterTypes.DDPNotificationType)(msg.Body);
-            msgId = ddpNotification.MessageId;
-            var DDPman = new DDPManager();
-            DDPman.ProcessDDPNotification(ddpNotification);
-          }
-          else
-          if ( msg.Label == "ddpUpdate" )
-          {
-            log.Debug("Se detecto ddpUpdate en queue...");
-            var DDPman = new DDPManager();
-            var ddpUpdate = (DataCenterTypes.DDPUpdateType)(msg.Body);
-            msgId = ddpUpdate.MessageId;
-            DDPman.ProcessDDPUpdate(ddpUpdate);
-          }
-          else
-          if (msg.Label == "shipPositionRequest")
-          {
-            log.Debug("Se detecto shipPositionRequest en queue...");
-            var shipPositionRequest = (DataCenterTypes.ShipPositionRequestType)(msg.Body);
-            msgId = shipPositionRequest.MessageId;
-            var sprm = new ShipPositionRequestManager();
-            sprm.ProcessShipPositionRequest(shipPositionRequest);
-          }
-          else
-          if (msg.Label == "systemStatus")
-          {
-            log.Debug("Se detecto systemStatus en queue...");
-            var systemStatus = (DataCenterTypes.SystemStatusType)(msg.Body);
-            msgId = systemStatus.MessageId;
-            var ssm = new SystemStatusManager();
-            ssm.ProcessSystemStatus(systemStatus);
-          }
-          else
-          if (msg.Label == "")
-          {
-            log.Debug("Se detecto mensaje del ASP en queue... tipo:");
-            var type = msg.Body.GetType().ToString();
-            
-            switch (type)
+            if (msg.msgtype == "pricingUpdate")
             {
-              case "Common.PositionMessage": 
-                {
-                  log.Debug("Position Message");
-                  var aspPos = (Common.PositionMessage)(msg.Body);
-                  var spm = new ShipPositionManager();
-                  spm.ProcessASPPosition(aspPos);
-                  break; 
-                }
-              case "Common.PollResponse": 
-                {
-                  log.Debug("PollResponse");
-                  var aspPollResponse = (Common.PollResponse)(msg.Body);
-                  var spm = new ShipManager();
-                  spm.ProcessPollResponse(aspPollResponse);
-                  break;
-                }
-              case "Common.HeartBeatMessage":
-                {
-                  log.Debug("HeartBeat");
-                  var aspHb = (Common.HeartBeatMessage)(msg.Body);
-                  var spm = new SystemStatusManager();
-                  spm.ProcessAspHeartBeat(aspHb);
-                  break;
-                }
-              default: 
-                { 
-                  break; 
-                }
+              log.Debug("Se detecto pricingUpdate en queue...");
+              //var pricingUpdate = (DataCenterLogic.DataCenterTypes.PricingUpdateType)(msg.Body);
+              var pricingUpdate = new XmlSerializerHelper<DataCenterLogic.DataCenterTypes.PricingUpdateType>().FromStr(msg.message);
+              msgId = pricingUpdate.MessageId;
+              var pman = new PricingManager();
+              pman.ProcessPricingUpdate(pricingUpdate);
             }
-          }
-          else
-          {
-            log.Error(string.Format("Mensaje no conocido en cola '{0}'", msg.Label));
-          }
+            else
+              if (msg.msgtype == "SARSURPICRequest")
+              {
+                log.Debug("Se detecto SARSURPICRequest en queue...");
+                //var SARSURPICRequest = (DataCenterLogic.DataCenterTypes.SARSURPICType)(msg.Body);
+                var SARSURPICRequest = new XmlSerializerHelper<DataCenterLogic.DataCenterTypes.SARSURPICType>().FromStr(msg.message);
+                msgId = SARSURPICRequest.MessageId;
+                var ssman = new SARSURPICManager();
+                ssman.ProcessSARSURPICRequest(SARSURPICRequest);
+              }
+              else
+                if (msg.msgtype == "ddpNotification")
+                {
+                  log.Debug("Se detecto ddpNotification en queue...");
+                  //var ddpNotification = (DataCenterLogic.DataCenterTypes.DDPNotificationType)(msg.Body);
+                  var ddpNotification = new XmlSerializerHelper<DataCenterLogic.DataCenterTypes.DDPNotificationType>().FromStr(msg.message);
+                  msgId = ddpNotification.MessageId;
+                  var DDPman = new DDPManager();
+                  DDPman.ProcessDDPNotification(ddpNotification);
+                }
+                else
+                  if (msg.msgtype == "ddpUpdate")
+                  {
+                    log.Debug("Se detecto ddpUpdate en queue...");
+                    var DDPman = new DDPManager();
+                    //var ddpUpdate = (DataCenterTypes.DDPUpdateType)(msg.Body);
+                    var ddpUpdate = new XmlSerializerHelper<DataCenterTypes.DDPUpdateType>().FromStr(msg.message);
+                    msgId = ddpUpdate.MessageId;
+                    DDPman.ProcessDDPUpdate(ddpUpdate);
+                  }
+                  else
+                    if (msg.msgtype == "shipPositionRequest")
+                    {
+                      log.Debug("Se detecto shipPositionRequest en queue...");
+                      //var shipPositionRequest = (DataCenterTypes.ShipPositionRequestType)(msg.Body);
+                      var shipPositionRequest = new XmlSerializerHelper<DataCenterTypes.ShipPositionRequestType>().FromStr(msg.message);
+                      msgId = shipPositionRequest.MessageId;
+                      var sprm = new ShipPositionRequestManager();
+                      sprm.ProcessShipPositionRequest(shipPositionRequest);
+                    }
+                    else
+                      if (msg.msgtype == "systemStatus")
+                      {
+                        log.Debug("Se detecto systemStatus en queue...");
+                        //var systemStatus = (DataCenterTypes.SystemStatusType)(msg.Body);
+                        var systemStatus = new XmlSerializerHelper<DataCenterTypes.SystemStatusType>().FromStr(msg.message);
+                        msgId = systemStatus.MessageId;
+                        var ssm = new SystemStatusManager();
+                        ssm.ProcessSystemStatus(systemStatus);
+                      }
+                      else
+                        if (msg.msgtype == "Common.PositionMessage")
+                        {
+                          log.Debug("mensaje del ASP: Position Message");
+                          //var aspPos = (Common.PositionMessage)(msg.Body);
+                          var aspPos = new XmlSerializerHelper<Common.PositionMessage>().FromStr(msg.message);
+                          var spm = new ShipPositionManager();
+                          spm.ProcessASPPosition(aspPos);
+                        }
+                        else
+                          if (msg.msgtype == "Common.PollResponse")
+                          {
+                            log.Debug("mensaje del ASP: PollResponse");
+                            //var aspPollResponse = (Common.PollResponse)(msg.Body);
+                            var aspPollResponse = new XmlSerializerHelper<Common.PollResponse>().FromStr(msg.message);
+                            var spm = new ShipManager();
+                            spm.ProcessPollResponse(aspPollResponse);
+                          }
+                          else
+                            if (msg.msgtype == "Common.HeartBeatMessage")
+                            {
+                              log.Debug("mensaje del ASP: HeartBeat");
+                              //var aspHb = (Common.HeartBeatMessage)(msg.Body);
+                              var aspHb = new XmlSerializerHelper<Common.HeartBeatMessage>().FromStr(msg.message);
+                              var spm = new SystemStatusManager();
+                              spm.ProcessAspHeartBeat(aspHb);
+                            }
+                            else
+                            {
+                              log.Error(string.Format("Mensaje no conocido en cola '{0}'", msg.msgtype));
+                            }
 
-          scope.Complete();
-          wrong_count = 0;
-
-          //Dump message to disk
-          try
-          {
-            if (System.Configuration.ConfigurationManager.AppSettings["save_messages"] == "yes")
-            {
-              string folder = System.Configuration.ConfigurationManager.AppSettings["save_folder"];
-              if (folder == string.Empty)
-                folder = "c:\\msgs";
-              string fullpath = string.Format("{0}\\{1:yyyyMMdd}\\in", folder, DateTime.UtcNow);
-              Directory.CreateDirectory(fullpath);
-
-              string xmlstr = OutputMessageManager.messageToString(msg);
-              string lbl = msg.Label;
-              if (lbl == "")
-                lbl = msg.Body.GetType().ToString();
-              File.WriteAllText(string.Format("{0}\\{1}-{2}.txt", fullpath, lbl, msgId), xmlstr);
-            }
-          }
-          catch (Exception ex)
-          {
-            log.Error("Error intentando guardar mensaje de entrada en disco", ex);
-          }
-
-        }
-        catch(Exception ex)
+      //Dump message to disk
+      try
+      {
+        if (System.Configuration.ConfigurationManager.AppSettings["save_messages"] == "yes")
         {
-          wrong_count++;
-          try
-          {
-            log.Error("Error handling message" + Environment.NewLine + Environment.NewLine + ex + Environment.NewLine + Environment.NewLine);
-          }
-          catch
-          {
+          string folder = System.Configuration.ConfigurationManager.AppSettings["save_folder"];
+          if (folder == string.Empty)
+            folder = "c:\\msgs";
 
-          }
-          
-          //Poison messages
-          if (wrong_count > 3)
-          {
-            wrong_count = 0;
-            try
-            {
-              var serializer = new System.Xml.Serialization.XmlSerializer(msg.Body.GetType());
-              var stringWriter = new System.IO.StringWriter();
-              serializer.Serialize(stringWriter, msg.Body);
+          string fullpath = string.Format("{0}\\{1:yyyyMMdd}\\in", folder, DateTime.UtcNow);
+          Directory.CreateDirectory(fullpath);
 
-              scope.Complete();
-              log.Error("MSGDUMP: " + stringWriter.ToString());
-            }
-            catch(Exception ex2)
-            {
-              log.Error("UNABLE TO DUMP MESSAGE: " + ex.Message, ex2);
-            }
-          }
+          File.WriteAllText(string.Format("{0}\\{1}-{2}.txt", fullpath, msg.message, msgId), msg.message);
         }
       }
-
-      inputQueue.BeginPeek();
+      catch (Exception ex)
+      {
+        log.Error("Error intentando guardar mensaje de entrada en disco", ex);
+      }
     }
- 
 
     public void Stop()
     {
-      
+      mRun = false;
     }
   }
 }

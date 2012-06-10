@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Messaging;
 using System.Transactions;
 using System.Net;
 using System.Net.Security;
@@ -44,11 +43,6 @@ namespace DataCenterLogic
     private static readonly ILog log = LogManager.GetLogger(typeof(OutputMessageManager));
 
     /// <summary>
-    /// Referencia a la cola de salida
-    /// </summary>
-    private MessageQueue outputQueue = null;
-
-    /// <summary>
     /// Variable privada del Singleton 
     /// </summary>
     private static OutputMessageManager outputMessageManager = null;
@@ -73,14 +67,91 @@ namespace DataCenterLogic
     /// <summary>
     /// Inicializa el InputMessageManager y comienza a leer de la cola de entrada asincronicamente
     /// </summary>
+    static private Thread mCheckQueueThread = new Thread(CheckQueueStub);
+    static bool mRun = true;
+
     public void Start()
     {
-      ///Obtiene una referencia a la cola de salida
-      outputQueue = QueueManager.Instance().GetOutQueue();
-      
-      ///Establece el evento de la cola y comienza a leer asincronicamente
-      outputQueue.PeekCompleted += new PeekCompletedEventHandler(queue_PeekCompleted);
-      outputQueue.BeginPeek();
+      mCheckQueueThread.Start(this);
+    }
+
+    private void CheckQueue()
+    {
+      while (mRun == true)
+      {
+        try
+        {
+          core_out msg = null;
+          using (DBDataContext ctx = new DBDataContext(mBasicConfiguration.ConnectionString))
+          {
+            msg = ctx.core_outs.OrderBy(c => c.created_at).SingleOrDefault();
+            while (msg != null)
+            {
+              int wrong_count = 0;
+              bool res = ProcessMessage(msg, ctx);
+              while (res == false && ++wrong_count < 3)
+                res = ProcessMessage(msg, ctx);
+
+              if (res == false)
+                DiscardMessage(msg, ctx);
+
+              msg = ctx.core_outs.OrderBy(c => c.created_at).SingleOrDefault();
+            }
+          }
+        }
+        catch (Exception ex)
+        {
+          log.Error("CheckQueue => Loop error", ex);
+        }
+
+        //Wait 
+        for (int i = 0; i < 10 && mRun == true; i++)
+          Thread.Sleep(1000);
+      }
+    }
+
+    static private void CheckQueueStub(object o)
+    {
+      ((OutputMessageManager)o).CheckQueue();
+    }
+
+    private void DiscardMessage(core_out msg, DBDataContext ctx)
+    {
+      try
+      {
+        ctx.core_outs.DeleteOnSubmit(msg);
+        ctx.SubmitChanges();
+
+        log.Error("Unable to process msg: " + (msg != null ? msg.message : "null msg"));
+      }
+      catch
+      {
+        log.Error("Unable to dump msg");
+      }
+    }
+
+    private bool ProcessMessage(core_out msg, DBDataContext ctx)
+    {
+      try
+      {
+        // --- Procesamos un mensaje ---
+        using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, TimeSpan.FromMinutes(15)))
+        {
+          queue_PeekCompleted(msg);
+          ctx.core_outs.DeleteOnSubmit(msg);
+          ctx.SubmitChanges();
+
+          scope.Complete();
+        }
+
+        return true;
+      }
+      catch (Exception ex)
+      {
+        log.Error("ProcessMessage", ex);
+      }
+
+      return false;
     }
 
     /// <summary>
@@ -88,96 +159,70 @@ namespace DataCenterLogic
     /// </summary>
     /// <param name="sender">Object Sender</param>
     /// <param name="e">Async events</param>
-    private int num_fails = 0;
-    void queue_PeekCompleted(object sender, PeekCompletedEventArgs e)
+    void queue_PeekCompleted(core_out msg)
     {
-      using( TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, TimeSpan.FromMinutes(2) ) )
+      string msgId = "N-A";
+      if( msg.msgtype == "priceRequest" )
       {
-        Message msg = new Message();
-        try
-        {
-          string msgId = "N-A";
-          msg = outputQueue.Receive( MessageQueueTransactionType.Automatic );
-          if( msg.Label == "priceRequest" )
-          {
-            msgId = SendPriceRequest(msg);
-          }
-          else if ( msg.Label == "systemStatus" )
-          {
-            msgId = SendSystemStatus(msg);
-          }
-          else if ( msg.Label == "receipt" )
-          {
-            msgId = SendReceipt(msg);
-          }
-          else if (msg.Label == "pricingUpdate")
-          {
-            msgId = SendPricingUpdate(msg);
-          }
-          else if (msg.Label == "journalReport")
-          {
-            msgId = SendJournalReport(msg);
-          }
-          else if ( msg.Label == "shipPositionReport" )
-          {
-            msgId = SendShipPositionReport(msg);
-          }
-          else if ( msg.Label == "ddpRequest" )
-          {
-            msgId = SendDDPRequest(msg);
-          }
-          else if (msg.Label == "shipPositionRequest")
-          {
-            msgId = SendShipPositionRequest(msg);
-          }
-          else if (msg.Label == "SARSURPICRequest")
-          {
-            msgId = SendSARSurpicRequest(msg);
-          }
-
-
-          if ( System.Configuration.ConfigurationManager.AppSettings["save_messages"] == "yes" )
-          {
-            string folder = System.Configuration.ConfigurationManager.AppSettings["save_folder"];
-            if( folder == string.Empty )
-              folder = "c:\\msgs";
-            string fullpath = string.Format("{0}\\{1:yyyyMMdd}\\out", folder, DateTime.UtcNow);
-            Directory.CreateDirectory(fullpath);
-
-            string xmlstr = messageToString(msg);
-
-            File.WriteAllText(string.Format("{0}\\{1}-{2}.txt", fullpath, msg.Label, msgId), xmlstr);
-          }
-
-          if( OnMessageSentToIDE != null )
-            OnMessageSentToIDE(msg.Label);
-        }
-        catch(Exception ex)
-        {
-          log.Error( string.Format("Error trying to send message to IDE"), ex );
-
-          if (num_fails <= 3)
-          {
-            num_fails++;
-            outputQueue.BeginPeek();
-            return;
-          }
-
-          string xmlstr = messageToString(msg);
-          log.Error(xmlstr);
-
-          num_fails = 0;
-        }
-
-        scope.Complete();
+        msgId = SendPriceRequest(msg);
+      }
+      else if ( msg.msgtype == "systemStatus" )
+      {
+        msgId = SendSystemStatus(msg);
+      }
+      else if ( msg.msgtype == "receipt" )
+      {
+        msgId = SendReceipt(msg);
+      }
+      else if (msg.msgtype == "pricingUpdate")
+      {
+        msgId = SendPricingUpdate(msg);
+      }
+      else if (msg.msgtype == "journalReport")
+      {
+        msgId = SendJournalReport(msg);
+      }
+      else if ( msg.msgtype == "shipPositionReport" )
+      {
+        msgId = SendShipPositionReport(msg);
+      }
+      else if ( msg.msgtype == "ddpRequest" )
+      {
+        msgId = SendDDPRequest(msg);
+      }
+      else if (msg.msgtype == "shipPositionRequest")
+      {
+        msgId = SendShipPositionRequest(msg);
+      }
+      else if (msg.msgtype == "SARSURPICRequest")
+      {
+        msgId = SendSARSurpicRequest(msg);
+      }
+      else
+      {
+        log.Error("Unknow message in out queue " + msg.msgtype);
       }
 
-      outputQueue.BeginPeek();
+      if ( System.Configuration.ConfigurationManager.AppSettings["save_messages"] == "yes" )
+      {
+        string folder = System.Configuration.ConfigurationManager.AppSettings["save_folder"];
+        if( folder == string.Empty )
+          folder = "c:\\msgs";
+
+        string fullpath = string.Format("{0}\\{1:yyyyMMdd}\\out", folder, DateTime.UtcNow);
+        Directory.CreateDirectory(fullpath);
+
+        File.WriteAllText(string.Format("{0}\\{1}-{2}.txt", fullpath, msg.msgtype, msgId), msg.message);
+      }
+
+      if( OnMessageSentToIDE != null )
+        OnMessageSentToIDE(msg.msgtype);
     }
 
-    private string SendPricingRequest(Message msg)
+    private string SendPricingRequest(core_out msg)
     {
-      DataCenterLogic.DataCenterTypesIDE.PricingRequestType pricingRequest = (DataCenterLogic.DataCenterTypesIDE.PricingRequestType)(msg.Body);
+      //DataCenterLogic.DataCenterTypesIDE.PricingRequestType pricingRequest = (DataCenterLogic.DataCenterTypesIDE.PricingRequestType)(msg.Body);
+      var pricingRequest = new XmlSerializerHelper<DataCenterLogic.DataCenterTypesIDE.PricingRequestType>().FromStr(msg.message);
 
       //Send to IDE
       if (System.Configuration.ConfigurationManager.AppSettings["send2servers"] != "False")
@@ -197,9 +242,10 @@ namespace DataCenterLogic
       
     }
 
-    private string SendShipPositionRequest(Message msg)
+    private string SendShipPositionRequest(core_out msg)
     {
-      DataCenterLogic.DataCenterTypesIDE.ShipPositionRequestType shipPositionRequest = (DataCenterLogic.DataCenterTypesIDE.ShipPositionRequestType)(msg.Body);
+      //DataCenterLogic.DataCenterTypesIDE.ShipPositionRequestType shipPositionRequest = (DataCenterLogic.DataCenterTypesIDE.ShipPositionRequestType)(msg.Body);
+      var shipPositionRequest = new XmlSerializerHelper<DataCenterLogic.DataCenterTypesIDE.ShipPositionRequestType>().FromStr(msg.message);
 
       //Send to IDE
       if (System.Configuration.ConfigurationManager.AppSettings["send2servers"] != "False")
@@ -233,9 +279,10 @@ namespace DataCenterLogic
       return shipPositionRequest.MessageId;      
     }
 
-    private string SendSARSurpicRequest(Message msg)
+    private string SendSARSurpicRequest(core_out msg)
     {
-      DataCenterLogic.DataCenterTypesIDE.SARSURPICType SARSurpicReq = (DataCenterLogic.DataCenterTypesIDE.SARSURPICType)(msg.Body);
+      //DataCenterLogic.DataCenterTypesIDE.SARSURPICType SARSurpicReq = (DataCenterLogic.DataCenterTypesIDE.SARSURPICType)(msg.Body);
+      var SARSurpicReq = new XmlSerializerHelper<DataCenterLogic.DataCenterTypesIDE.SARSURPICType>().FromStr(msg.message);
 
       //Send to IDE
       if (System.Configuration.ConfigurationManager.AppSettings["send2servers"] != "False")
@@ -254,23 +301,14 @@ namespace DataCenterLogic
       return SARSurpicReq.MessageId;      
     }
 
-    
-
-    public static string messageToString(Message msg)
-    {
-      var serializer = new System.Xml.Serialization.XmlSerializer(msg.Body.GetType());
-      var stringWriter = new System.IO.StringWriter();
-      serializer.Serialize(stringWriter, msg.Body);
-      return stringWriter.ToString();
-    }
-
     /// <summary>
     /// Envia un DDP Request al DDP
     /// </summary>
     /// <param name="msg"></param>
-    private string SendDDPRequest(Message msg)
+    private string SendDDPRequest(core_out msg)
     {
-      DDPServerTypes.DDPRequestType ddpRequest = (DDPServerTypes.DDPRequestType)(msg.Body);
+      //DDPServerTypes.DDPRequestType ddpRequest = (DDPServerTypes.DDPRequestType)(msg.Body);
+      var ddpRequest = new XmlSerializerHelper<DDPServerTypes.DDPRequestType>().FromStr(msg.message);
 
       //Send to ddp
       if (System.Configuration.ConfigurationManager.AppSettings["send2servers"] != "False")
@@ -293,9 +331,10 @@ namespace DataCenterLogic
     /// Envia un mensaje de tipo ShipPositionReport al IDE
     /// </summary>
     /// <param name="msg">Mensaje ShipPositionReport</param>
-    private string SendShipPositionReport(Message msg)
+    private string SendShipPositionReport(core_out msg)
     {
-      DataCenterLogic.DataCenterTypesIDE.ShipPositionReportType  shipPositionReport = (DataCenterLogic.DataCenterTypesIDE.ShipPositionReportType)(msg.Body);
+      //DataCenterLogic.DataCenterTypesIDE.ShipPositionReportType  shipPositionReport = (DataCenterLogic.DataCenterTypesIDE.ShipPositionReportType)(msg.Body);
+      var shipPositionReport = new XmlSerializerHelper<DataCenterLogic.DataCenterTypesIDE.ShipPositionReportType>().FromStr(msg.message);
 
       //Send to IDE
       if (System.Configuration.ConfigurationManager.AppSettings["send2servers"] != "False")
@@ -327,9 +366,10 @@ namespace DataCenterLogic
     /// Envia un mensaje de tipo JournalReport al IDE
     /// </summary>
     /// <param name="msg">Mensaje JournalReport</param>
-    private string SendJournalReport(Message msg)
+    private string SendJournalReport(core_out msg)
     {
-      DataCenterLogic.DataCenterTypesIDE.JournalReportType journalReport = (DataCenterLogic.DataCenterTypesIDE.JournalReportType)(msg.Body);
+      //DataCenterLogic.DataCenterTypesIDE.JournalReportType journalReport = (DataCenterLogic.DataCenterTypesIDE.JournalReportType)(msg.Body);
+      var journalReport = new XmlSerializerHelper<DataCenterLogic.DataCenterTypesIDE.JournalReportType>().FromStr(msg.message);
 
       //Send to IDE
       if (System.Configuration.ConfigurationManager.AppSettings["send2servers"] != "False")
@@ -352,9 +392,10 @@ namespace DataCenterLogic
     /// Envia un mensaje de tipo PricingUpdate al IDE
     /// </summary>
     /// <param name="msg">Mensaje PricingUpdate</param>
-    private string SendPricingUpdate(Message msg)
+    private string SendPricingUpdate(core_out msg)
     {
-      DataCenterLogic.DataCenterTypesIDE.PricingUpdateType  pricingUpdate = (DataCenterLogic.DataCenterTypesIDE.PricingUpdateType)(msg.Body);
+      //DataCenterLogic.DataCenterTypesIDE.PricingUpdateType  pricingUpdate = (DataCenterLogic.DataCenterTypesIDE.PricingUpdateType)(msg.Body);
+      var pricingUpdate = new XmlSerializerHelper<DataCenterLogic.DataCenterTypesIDE.PricingUpdateType>().FromStr(msg.message);
 
       //Send to IDE
       if (System.Configuration.ConfigurationManager.AppSettings["send2servers"] != "False")
@@ -377,9 +418,10 @@ namespace DataCenterLogic
     /// Envia un mensaje de tipo Receipt al IDE
     /// </summary>
     /// <param name="msg">Mensaje Receipt</param>
-    private string SendReceipt(Message msg)
+    private string SendReceipt(core_out msg)
     {
-      DataCenterLogic.DataCenterTypesIDE.ReceiptType receipt = (DataCenterLogic.DataCenterTypesIDE.ReceiptType)(msg.Body);
+      //DataCenterLogic.DataCenterTypesIDE.ReceiptType receipt = (DataCenterLogic.DataCenterTypesIDE.ReceiptType)(msg.Body);
+      var receipt = new XmlSerializerHelper<DataCenterLogic.DataCenterTypesIDE.ReceiptType>().FromStr(msg.message);
 
       //Send to IDE
       if (System.Configuration.ConfigurationManager.AppSettings["send2servers"] != "False")
@@ -415,9 +457,10 @@ namespace DataCenterLogic
     /// Envia un mensaje de tipo SystemStatus
     /// </summary>
     /// <param name="msg"></param>
-    private string SendSystemStatus(Message msg)
+    private string SendSystemStatus(core_out msg)
     {
-      DataCenterLogic.DataCenterTypesIDE.SystemStatusType systemStatus = (DataCenterLogic.DataCenterTypesIDE.SystemStatusType)(msg.Body);
+      //DataCenterLogic.DataCenterTypesIDE.SystemStatusType systemStatus = (DataCenterLogic.DataCenterTypesIDE.SystemStatusType)(msg.Body);
+      var systemStatus = new XmlSerializerHelper<DataCenterLogic.DataCenterTypesIDE.SystemStatusType>().FromStr(msg.message);
 
       //Send to IDE
       if (System.Configuration.ConfigurationManager.AppSettings["send2servers"] != "False")
@@ -441,9 +484,11 @@ namespace DataCenterLogic
     /// Envia un mensaje de tipo PriceRequest
     /// </summary>
     /// <param name="msg">Mensaje PriceRequest</param>
-    private string SendPriceRequest(Message msg)
+    private string SendPriceRequest(core_out msg)
     {
-      DataCenterLogic.DataCenterTypesIDE.PricingRequestType priceRequest = (DataCenterLogic.DataCenterTypesIDE.PricingRequestType)(msg.Body);
+      //DataCenterLogic.DataCenterTypesIDE.PricingRequestType priceRequest = (DataCenterLogic.DataCenterTypesIDE.PricingRequestType)(msg.Body);
+      var priceRequest = new XmlSerializerHelper<DataCenterLogic.DataCenterTypesIDE.PricingRequestType>().FromStr(msg.message);
+
       //Guarda el mensaje en la base de datos
 
       //Send to IDE
@@ -465,7 +510,7 @@ namespace DataCenterLogic
 
     public void Stop()
     {
-      
+      mRun = false;      
     }
   }
 }

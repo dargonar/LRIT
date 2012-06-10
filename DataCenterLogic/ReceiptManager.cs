@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Messaging;
 using DataCenterLogic.DataCenterTypes;
 using DataCenterDataAccess;
 using log4net;
@@ -41,10 +40,10 @@ namespace DataCenterLogic
       receipt.test = DataCenterLogic.DataCenterTypesIDE.testType.Item1;
       receipt.TimeStamp = DateTime.UtcNow;
 
-      Message msgout = new Message(receipt);
-      msgout.Label = "receipt";
+      //Message msgout = new Message(receipt);
+      //msgout.Label = "receipt";
 
-      QueueManager.Instance().EnqueueOut(msgout);
+      QueueManager.Instance().EnqueueOut("receipt", new XmlSerializerHelper<DataCenterTypesIDE.ReceiptType>().ToStr(receipt));
     }
 
     /// <summary>

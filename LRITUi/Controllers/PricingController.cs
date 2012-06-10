@@ -12,7 +12,6 @@ using GridDemo.Models;
 using System.Threading;
 using System.Globalization;
 using LRITUi.Controllers;
-using System.Messaging;
 
 namespace LRITUi.Controllers
 {
@@ -69,12 +68,12 @@ namespace LRITUi.Controllers
           pud.test = DataCenterLogic.DataCenterTypesIDE.testType.Item0;
           pud.TimeStamp = DateTime.UtcNow;
 
-          Message msgout = new Message(pud);
-          msgout.Label = "pricingUpdate";
+          //Message msgout = new Message(pud);
+          //msgout.Label = "pricingUpdate";
+          //string outQueue = System.Configuration.ConfigurationManager.AppSettings["CoreOutQueue"];
+          //QueueManager.Instance().SetOut(outQueue);
 
-          string outQueue = System.Configuration.ConfigurationManager.AppSettings["CoreOutQueue"];
-          QueueManager.Instance().SetOut(outQueue);
-          QueueManager.Instance().EnqueueOut(msgout);
+          QueueManager.Instance().EnqueueOut("pricingUpdate", new XmlSerializerHelper<DataCenterLogic.DataCenterTypesIDE.PricingUpdateType>().ToStr(pud));
 
           FlashOK("El mensaje fue encolado con exito");
         }

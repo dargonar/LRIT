@@ -16,6 +16,14 @@ namespace PriceUpdaterRunner
     {
       try
       {
+        if (args.Length == 1 && args[0] == "create_db")
+        {
+          var x = new DataCenterDataAccess.DBDataContext();
+          x.Connection.ConnectionString = System.Configuration.ConfigurationManager.AppSettings["ConnectionString"];
+          x.CreateDatabase();
+          return;
+        }
+
         string cnx = System.Configuration.ConfigurationManager.AppSettings["ConnectionString"];
         var p = new PriceUpdater(cnx);
         p.UpdateContracts(DateTime.UtcNow.AddDays(-1), new string[] { });

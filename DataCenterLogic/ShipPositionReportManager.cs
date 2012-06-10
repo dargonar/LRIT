@@ -6,7 +6,6 @@ using DataCenterLogic.DataCenterTypesIDE;
 using DataCenterLogic.DataCenterTypes;
 using DataCenterDataAccess;
 using log4net;
-using System.Messaging;
 using Microsoft.SqlServer.Types;
 
 namespace DataCenterLogic
@@ -60,7 +59,7 @@ namespace DataCenterLogic
         shipPosReport.TimeStamp5 = DateTime.UtcNow;
 
         log.Debug("Enqueing Report for ship: " + shipPosReport.IMONum + " Pos. Long. Lat.:" + shipPosReport.Longitude + " " + shipPosReport.Latitude + " Requestor: " + shipPosReport.DataUserRequestor);
-        QueueManager.Instance().EnqueueOut(shipPosReport, "shipPositionReport");
+        QueueManager.Instance().EnqueueOut("shipPositionReport", new XmlSerializerHelper<DataCenterTypesIDE.ShipPositionReportType>().ToStr(shipPosReport));
       }
     }
 
@@ -142,11 +141,11 @@ namespace DataCenterLogic
         receipt.test = DataCenterLogic.DataCenterTypes.testType.Item1;
         receipt.TimeStamp = DateTime.UtcNow;
 
-        Message msgout = new Message(receipt);
-        msgout.Label = "receipt";
+        //Message msgout = new Message(receipt);
+        //msgout.Label = "receipt";
 
         //Encola mensaje
-        QueueManager.Instance().EnqueueOut(msgout);
+        QueueManager.Instance().EnqueueOut("receipt", new XmlSerializerHelper<DataCenterLogic.DataCenterTypes.ReceiptType>().ToStr(receipt));
 
         log.Error(strError);
         return;
@@ -174,11 +173,11 @@ namespace DataCenterLogic
           receipt.test = DataCenterLogic.DataCenterTypes.testType.Item1;
           receipt.TimeStamp = DateTime.UtcNow;
 
-          Message msgout = new Message(receipt);
-          msgout.Label = "receipt";
+          //Message msgout = new Message(receipt);
+          //msgout.Label = "receipt";
 
           //Envia mensaje
-          QueueManager.Instance().EnqueueOut(msgout);
+          QueueManager.Instance().EnqueueOut("receipt", new XmlSerializerHelper<DataCenterLogic.DataCenterTypes.ReceiptType>().ToStr(receipt));
 
           log.Error(strError);
           return;

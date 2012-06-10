@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using DataCenterDataAccess;
 using log4net;
-using System.Messaging;
 using ICSharpCode.SharpZipLib.Zip;
 using ICSharpCode.SharpZipLib.Zip.Compression;
 using ICSharpCode.SharpZipLib.Checksums;
@@ -95,9 +94,10 @@ namespace DataCenterLogic
       preq.TimeStamp = DateTime.UtcNow;
 
       //Enqueue DDPrequest
-      Message msgout = new Message(preq);
-      msgout.Label = "priceRequest";
-      QueueManager.Instance().EnqueueOut(msgout);
+      //Message msgout = new Message(preq);
+      //msgout.Label = "priceRequest";
+
+      QueueManager.Instance().EnqueueOut("priceRequest", new XmlSerializerHelper<DataCenterTypesIDE.PricingRequestType>().ToStr(preq));
       
       using (PricingNotificationDataAccess dao = new PricingNotificationDataAccess())
       {

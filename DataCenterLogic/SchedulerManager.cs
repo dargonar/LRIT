@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Messaging;
 using System.Transactions;
 using log4net;
 
@@ -220,13 +219,13 @@ namespace DataCenterLogic
         status.test          = DataCenterTypesIDE.testType.Item1;
         status.TimeStamp     = DateTime.UtcNow;
 
-        Message msg = new Message(status);
-        msg.Label = "systemStatus";
+        //Message msg = new Message(status);
+        //msg.Label = "systemStatus";
 
-        using (TransactionScope ts = new TransactionScope())
-        {
-          QueueManager.Instance().EnqueueOut(msg);
-        }
+        //using (TransactionScope ts = new TransactionScope())
+        //{
+        QueueManager.Instance().EnqueueOut("systemStatus", new XmlSerializerHelper<DataCenterTypesIDE.SystemStatusType>().ToStr(status));
+        //}
 
         mLastSystemStatus = DateTime.Now.Ticks;
 

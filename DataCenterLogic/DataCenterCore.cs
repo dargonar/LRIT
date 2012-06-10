@@ -17,8 +17,8 @@ namespace DataCenterLogic
       //Configura la instancia de logging
       XmlConfigurator.Configure();
 
-      QueueManager.Instance().SetIn(config.CoreInQueue);
-      QueueManager.Instance().SetOut(config.CoreOutQueue);
+      //QueueManager.Instance().SetIn(config.CoreInQueue);
+      //QueueManager.Instance().SetOut(config.CoreOutQueue);
       
       inMsgMgr.mBasicConfiguration = config;
       outMsgMgr.mBasicConfiguration = config;

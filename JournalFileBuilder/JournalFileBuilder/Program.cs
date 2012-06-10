@@ -60,8 +60,8 @@ LEFT JOIN Ship S ON sp.ShipId=S.ID
 LEFT join ShipPositionReport spr on s.IMONum=spr.IMONum and sp.TimeStamp=spr.TimeStamp1
   
  where 
-  sp.TimeStamp >= CAST('2012-01-01' AS DATETIME)
-  and sp.TimeStamp <= CAST('2012-30-01' AS DATETIME)
+  sp.TimeStamp >= CAST('2012-01-01 00:00' AS DATETIME)
+  and sp.TimeStamp <= CAST('2012-30-01 23:59' AS DATETIME)
   order by sp.TimeStamp
 
 for xml path('report'),root('reports')";

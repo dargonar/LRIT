@@ -63,7 +63,6 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Messaging" />
     <Reference Include="System.Runtime.Serialization">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -84,6 +83,7 @@
   <ItemGroup>
     <Compile Include="ActiveShipPositionRequestManager.cs" />
     <Compile Include="ASPManager.cs" />
+    <Compile Include="XmlSerializerHelper.cs" />
     <Compile Include="ConfigurationManager.cs" />
     <Compile Include="ContractingGovermentManager.cs" />
     <Compile Include="DataCenterCore.cs" />
@@ -98,8 +98,8 @@
     <Compile Include="PricingImportHelper.cs" />
     <Compile Include="PricingManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueueManager.cs" />
     <Compile Include="BasicConfiguration.cs" />
+    <Compile Include="QueueManager.cs" />
     <Compile Include="ReceiptManager.cs" />
     <Compile Include="SARServiceManager.cs" />
     <Compile Include="SARSURPICManager.cs" />

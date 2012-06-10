@@ -11,7 +11,6 @@ using System.Linq.Dynamic;
 using GridDemo.Models;
 using System.Threading;
 using System.Globalization;
-using System.Messaging;
 using System.Text.RegularExpressions;
 using System.Configuration;
 
@@ -255,12 +254,11 @@ namespace LRITUi.Controllers
         spr.schemaVersion = decimal.Parse(cfgman.Configuration.SchemaVersion);
         spr.test = DataCenterLogic.DataCenterTypesIDE.testType.Item1;
 
-        Message msgout = new Message(spr);
-        msgout.Label = "shipPositionRequest";
+        //Message msgout = new Message(spr);
+        //msgout.Label = "shipPositionRequest";
+        //string outQueue = System.Configuration.ConfigurationManager.AppSettings["CoreOutQueue"];
 
-        string outQueue = System.Configuration.ConfigurationManager.AppSettings["CoreOutQueue"];
-        QueueManager.Instance().SetOut(outQueue);
-        QueueManager.Instance().EnqueueOut(msgout);
+        QueueManager.Instance().EnqueueOut("shipPositionRequest", new XmlSerializerHelper<DataCenterLogic.DataCenterTypesIDE.ShipPositionRequestType>().ToStr(spr) );
 
         return View("Sent");
       }
@@ -364,11 +362,13 @@ namespace LRITUi.Controllers
             break;
         }
 
-        string outQueue = System.Configuration.ConfigurationManager.AppSettings["CoreOutQueue"];
-        QueueManager.Instance().SetOut(outQueue);
+        //string outQueue = System.Configuration.ConfigurationManager.AppSettings["CoreOutQueue"];
+        //QueueManager.Instance().SetOut(outQueue);
 
         var mgr = new DataCenterLogic.DDPManager();
-        QueueManager.Instance().EnqueueOut(mgr.MakeDDPRequest(ddpRequest));
+        mgr.MakeDDPRequest(ddpRequest);
+
+        QueueManager.Instance().EnqueueOut("ddpRequest", new XmlSerializerHelper<DataCenterLogic.DDPServerTypes.DDPRequestType>().ToStr(ddpRequest));
 
         return View("Sent");
       }
@@ -433,13 +433,13 @@ namespace LRITUi.Controllers
 
         
         
-        Message msgout = new Message(SARSURPICMsg);
-        msgout.Label = "SARSURPICRequest";
+        //Message msgout = new Message(SARSURPICMsg);
+        //msgout.Label = "SARSURPICRequest";
 
-        string outQueue = System.Configuration.ConfigurationManager.AppSettings["CoreOutQueue"];
-        QueueManager.Instance().SetOut(outQueue);
+        //string outQueue = System.Configuration.ConfigurationManager.AppSettings["CoreOutQueue"];
+        //QueueManager.Instance().SetOut(outQueue);
 
-        QueueManager.Instance().EnqueueOut(msgout);
+        QueueManager.Instance().EnqueueOut("SARSURPICRequest", new XmlSerializerHelper<DataCenterLogic.DataCenterTypesIDE.SARSURPICType>().ToStr(SARSURPICMsg));
 
         //sprda.Create( TypeHelper.Map2DB(SARSURPICMsg), 1);
 

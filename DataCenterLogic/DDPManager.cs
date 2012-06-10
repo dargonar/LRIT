@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using DataCenterDataAccess;
 using log4net;
-using System.Messaging;
 using ICSharpCode.SharpZipLib.Zip;
 using ICSharpCode.SharpZipLib.Zip.Compression;
 using System.IO;
@@ -143,9 +142,10 @@ namespace DataCenterLogic
         ddpRequest.UpdateType = DataCenterLogic.DDPServerTypes.DDPRequestTypeUpdateType.Item1;
 
       //Enqueue DDPrequest
-      Message msgout = new Message(ddpRequest);
-      msgout.Label = "ddpRequest";
-      QueueManager.Instance().EnqueueOut(msgout);
+      //Message msgout = new Message(ddpRequest);
+      //msgout.Label = "ddpRequest";
+
+      QueueManager.Instance().EnqueueOut("ddpRequest", new XmlSerializerHelper<DataCenterLogic.DDPServerTypes.DDPRequestType>().ToStr(ddpRequest));
 
       using (DDPNotificationDataAccess dao = new DDPNotificationDataAccess())
       {
@@ -175,7 +175,7 @@ namespace DataCenterLogic
     }
 
     
-    public Message MakeDDPRequest(DDPServerTypes.DDPRequestType ddpRequest)
+    public void MakeDDPRequest(DDPServerTypes.DDPRequestType ddpRequest)
     {
       ConfigurationManager configMgr = new ConfigurationManager();
 
@@ -192,10 +192,9 @@ namespace DataCenterLogic
       ddpRequest.TimeStamp = DateTime.UtcNow;
 
       //Enqueue DDPrequest
-      Message msgout = new Message(ddpRequest);
-      msgout.Label = "ddpRequest";
-
-      return msgout;
+      //Message msgout = new Message(ddpRequest);
+      //msgout.Label = "ddpRequest";
+      //return ddpRequest;
     }
 
   }

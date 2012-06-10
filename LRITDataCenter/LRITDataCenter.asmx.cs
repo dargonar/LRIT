@@ -34,7 +34,7 @@ namespace LRITDataCenter
     {
       XmlConfigurator.Configure();
       DataCenterDataAccess.Config.ConnectionString = mBasicConfiguration.ConnectionString;
-      QueueManager.Instance().SetIn(mBasicConfiguration.CoreInQueue);
+      //QueueManager.Instance().SetIn(mBasicConfiguration.CoreInQueue);
     }
 
     #region IDcServiceBinding Members
@@ -46,10 +46,10 @@ namespace LRITDataCenter
       validateSchemaVersion(shipPositionReport.schemaVersion);
 
       //Create message and enqueue it
-      Message msg = new Message(shipPositionReport);
-      msg.Label = "shipPositionReport";
+      //Message msg = new Message(shipPositionReport);
+      //msg.Label = "shipPositionReport";
 
-      EnqueueMessageInQueue(msg);
+      EnqueueMessageInQueue("shipPositionReport", new XmlSerializerHelper<ShipPositionReportType>().ToStr(shipPositionReport));
       
       //Build response
       Response response = new Response();
@@ -65,10 +65,10 @@ namespace LRITDataCenter
       validateSchemaVersion(shipPositionRequest.schemaVersion);
 
       //Create message and enqueue it
-      Message msg = new Message(shipPositionRequest);
-      msg.Label = "shipPositionRequest";
+      //Message msg = new Message(shipPositionRequest);
+      //msg.Label = "shipPositionRequest";
 
-      EnqueueMessageInQueue(msg);
+      EnqueueMessageInQueue("shipPositionRequest", new XmlSerializerHelper<ShipPositionRequestType>().ToStr(shipPositionRequest));
 
       //Build response
       Response response = new Response();
@@ -84,10 +84,10 @@ namespace LRITDataCenter
       validateSchemaVersion(SARSURPICRequest.schemaVersion);
 
       //Create message and enqueue it
-      Message msg = new Message(SARSURPICRequest);
-      msg.Label = "SARSURPICRequest";
+      //Message msg = new Message(SARSURPICRequest);
+      //msg.Label = "SARSURPICRequest";
 
-      EnqueueMessageInQueue(msg);
+      EnqueueMessageInQueue("SARSURPICRequest", new XmlSerializerHelper<SARSURPICType>().ToStr(SARSURPICRequest));
       
       //Build response
       Response response = new Response();
@@ -103,10 +103,10 @@ namespace LRITDataCenter
       validateSchemaVersion(receipt.schemaVersion);
 
       //Create message and enqueue it
-      Message msg = new Message(receipt);
-      msg.Label = "receipt";
+      //Message msg = new Message(receipt);
+      //msg.Label = "receipt";
 
-      EnqueueMessageInQueue(msg);
+      EnqueueMessageInQueue("receipt", new XmlSerializerHelper<ReceiptType>().ToStr(receipt));
       
       //Build response
       Response response = new Response();
@@ -125,7 +125,7 @@ namespace LRITDataCenter
       Message msg = new Message(ddpNotification);
       msg.Label = "ddpNotification";
 
-      EnqueueMessageInQueue(msg);
+      EnqueueMessageInQueue("ddpNotification", new XmlSerializerHelper<DDPNotificationType>().ToStr(ddpNotification));
       
       //Build response
       Response response = new Response();
@@ -141,10 +141,10 @@ namespace LRITDataCenter
       validateSchemaVersion(ddpUpdate.schemaVersion);
 
       //Create message and enqueue it
-      Message msg = new Message(ddpUpdate);
-      msg.Label = "ddpUpdate";
+      //Message msg = new Message(ddpUpdate);
+      //msg.Label = "ddpUpdate";
 
-      EnqueueMessageInQueue(msg);
+      EnqueueMessageInQueue("ddpUpdate", new XmlSerializerHelper<DDPUpdateType>().ToStr(ddpUpdate));
       
       //Build response
       Response response = new Response();
@@ -160,10 +160,10 @@ namespace LRITDataCenter
       validateSchemaVersion(SystemStatus1.schemaVersion);
       
       //Create message and enqueue it
-      Message msg = new Message(SystemStatus1);
-      msg.Label = "systemStatus";
+      //Message msg = new Message(SystemStatus1);
+      //msg.Label = "systemStatus";
 
-      EnqueueMessageInQueue(msg);
+      EnqueueMessageInQueue("systemStatus", new XmlSerializerHelper<SystemStatusType>().ToStr(SystemStatus1));
 
       //Build response
       Response response = new Response();
@@ -179,10 +179,10 @@ namespace LRITDataCenter
       validateSchemaVersion(pricingNotification.schemaVersion);
   
       //Create message and enqueue it
-      Message msg = new Message(pricingNotification);
-      msg.Label = "pricingNotification";
+      //Message msg = new Message(pricingNotification);
+      //msg.Label = "pricingNotification";
 
-      EnqueueMessageInQueue(msg);
+      EnqueueMessageInQueue("pricingNotification", new XmlSerializerHelper<PricingNotificationType>().ToStr(pricingNotification));
       
       //Build response
       Response response = new Response();
@@ -198,10 +198,10 @@ namespace LRITDataCenter
       validateSchemaVersion(pricingUpdate.schemaVersion);
 
       //Create message and enqueue it
-      Message msg = new Message(pricingUpdate);
-      msg.Label = "pricingUpdate";
+      //Message msg = new Message(pricingUpdate);
+      //msg.Label = "pricingUpdate";
 
-      EnqueueMessageInQueue(msg);
+      EnqueueMessageInQueue("pricingUpdate", new XmlSerializerHelper<PricingUpdateType>().ToStr(pricingUpdate));
       
       //Build response
       Response response = new Response();
@@ -214,13 +214,13 @@ namespace LRITDataCenter
 
     #region Enqueue Function
 
-    private void EnqueueMessageInQueue(Message msg)
+    private void EnqueueMessageInQueue(string label, string xmlmessage)
     {
       using (TransactionScope ts = new TransactionScope())
       {
         try
         {
-          QueueManager.Instance().EnqueueIn(msg);
+          QueueManager.Instance().EnqueueIn(label, xmlmessage);
         }
         catch(Exception ex)
         {

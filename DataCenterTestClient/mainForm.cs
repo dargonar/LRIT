@@ -31,8 +31,8 @@ namespace DataCenterTestClient
     {
       DataCenterDataAccess.Config.ConnectionString = mBasicConfiguration.ConnectionString;
       
-      QueueManager.Instance().SetOut( mBasicConfiguration.CoreOutQueue );
-      QueueManager.Instance().SetIn(mBasicConfiguration.CoreInQueue );
+      //QueueManager.Instance().SetOut( mBasicConfiguration.CoreOutQueue );
+      //QueueManager.Instance().SetIn(mBasicConfiguration.CoreInQueue );
       
       //Configure logger
       XmlConfigurator.Configure(); //new System.IO.FileInfo( mBasicConfiguration.Log4NetConfigFile ) );
@@ -84,10 +84,10 @@ namespace DataCenterTestClient
           priceQuest.TimeStamp = DateTime.UtcNow;
           priceQuest.ReferenceId = dc8ReferenceId.Text;
           
-          System.Messaging.Message msg = new System.Messaging.Message(priceQuest);
-          msg.Label = "priceRequest";
+          //System.Messaging.Message msg = new System.Messaging.Message(priceQuest);
+          //msg.Label = "priceRequest";
 
-          QueueManager.Instance().EnqueueOut(msg);
+          QueueManager.Instance().EnqueueOut("priceRequest", new XmlSerializerHelper<DataCenterTypesIDE.PricingRequestType>().ToStr(priceQuest));
           applog("Price request successfully enqueued\n\t" + priceQuest.ToString() );
       }
       catch(Exception ex)
@@ -437,10 +437,11 @@ namespace DataCenterTestClient
           pricingUpdate.ReferenceId = dc10ReferenceId.Text;
 
           
-          System.Messaging.Message msg = new System.Messaging.Message(pricingUpdate);
-          msg.Label = "pricingUpdate";
+          //System.Messaging.Message msg = new System.Messaging.Message(pricingUpdate);
+          //msg.Label = "pricingUpdate";
 
-          QueueManager.Instance().EnqueueOut(msg);
+          QueueManager.Instance().EnqueueOut("pricingUpdate", new XmlSerializerHelper<DataCenterTypesIDE.PricingUpdateType>().ToStr(pricingUpdate));
+          
           ts.Complete();
           applog("Pricing Update successfully enqueued\n\t" + pricingUpdate.ToString() );
         }
@@ -490,10 +491,11 @@ namespace DataCenterTestClient
           journalReport.TimeStamp     = DateTime.Parse(dc14TimeStamp.Text);
           
 
-          System.Messaging.Message msg = new System.Messaging.Message(journalReport);
-          msg.Label = "journalReport";
+          //System.Messaging.Message msg = new System.Messaging.Message(journalReport);
+          //msg.Label = "journalReport";
 
-          QueueManager.Instance().EnqueueOut(msg);
+          QueueManager.Instance().EnqueueOut("journalReport", new XmlSerializerHelper<DataCenterTypesIDE.JournalReportType>().ToStr(journalReport));
+
           ts.Complete();
           applog("Journal Report successfully enqueued\n\t" + journalReport.ToString() );
         }
@@ -664,15 +666,17 @@ namespace DataCenterTestClient
               return;
           }
 
-          System.Messaging.Message msg = new System.Messaging.Message(ddpRequest);
-          msg.Label = "ddpRequest";
+          //System.Messaging.Message msg = new System.Messaging.Message(ddpRequest);
+          //msg.Label = "ddpRequest";
 
-          var serializer = new System.Xml.Serialization.XmlSerializer(msg.Body.GetType());
-          var stringWriter = new System.IO.StringWriter();
-          serializer.Serialize(stringWriter, msg.Body);
-          applog( stringWriter.ToString() + "\n\n\n");
+          //var serializer = new System.Xml.Serialization.XmlSerializer(msg.Body.GetType());
+          //var stringWriter = new System.IO.StringWriter();
+          //serializer.Serialize(stringWriter, msg.Body);
 
-          QueueManager.Instance().EnqueueOut(msg);
+          var xmlmsg = new XmlSerializerHelper<DDPServerTypes.DDPRequestType>().ToStr(ddpRequest);
+          applog( xmlmsg + "\n\n\n");
+          QueueManager.Instance().EnqueueOut("ddpRequest", xmlmsg);
+          
           ts.Complete();
           applog("DDP Request successfully enqueued\n\t" + ddpRequest.ToString() );
         }
@@ -1281,11 +1285,11 @@ namespace DataCenterTestClient
     private void btn_testQueue_Click(object sender, EventArgs e)
     {
       
-      System.Messaging.Message msg = new System.Messaging.Message("MENSAJE DE PRUEBA");
-      msg.Label = "test message";
+      //System.Messaging.Message msg = new System.Messaging.Message("MENSAJE DE PRUEBA");
+      //msg.Label = "test message";
       try
       {
-        QueueManager.Instance().EnqueueOut(msg);
+        QueueManager.Instance().EnqueueOut("test message", "-no-content-");
         txtLog.Clear();
         txtLog.Text = "Enviado OK";
       }
