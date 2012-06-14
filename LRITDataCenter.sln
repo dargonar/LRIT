@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PriceUpdaterLib", "PriceUpd
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JournalFileBuilder", "JournalFileBuilder\JournalFileBuilder\JournalFileBuilder.csproj", "{AFC0C19F-E590-482D-B8FE-1037F6551237}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPDC2", "ASPDC2\ASPDC2.csproj", "{9BF13BF4-B9C9-41AE-9C2D-E10D66EC4A01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -179,6 +181,16 @@ Global
 		{AFC0C19F-E590-482D-B8FE-1037F6551237}.Release|Mixed Platforms.Build.0 = Release|x86
 		{AFC0C19F-E590-482D-B8FE-1037F6551237}.Release|x86.ActiveCfg = Release|x86
 		{AFC0C19F-E590-482D-B8FE-1037F6551237}.Release|x86.Build.0 = Release|x86
+		{9BF13BF4-B9C9-41AE-9C2D-E10D66EC4A01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BF13BF4-B9C9-41AE-9C2D-E10D66EC4A01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BF13BF4-B9C9-41AE-9C2D-E10D66EC4A01}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9BF13BF4-B9C9-41AE-9C2D-E10D66EC4A01}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9BF13BF4-B9C9-41AE-9C2D-E10D66EC4A01}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9BF13BF4-B9C9-41AE-9C2D-E10D66EC4A01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BF13BF4-B9C9-41AE-9C2D-E10D66EC4A01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BF13BF4-B9C9-41AE-9C2D-E10D66EC4A01}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9BF13BF4-B9C9-41AE-9C2D-E10D66EC4A01}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9BF13BF4-B9C9-41AE-9C2D-E10D66EC4A01}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

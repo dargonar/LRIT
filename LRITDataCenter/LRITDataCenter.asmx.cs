@@ -29,7 +29,9 @@ namespace LRITDataCenter
   {
     private static readonly ILog log = LogManager.GetLogger(typeof(LRITDataCenterWebService));
     private BasicConfiguration mBasicConfiguration = BasicConfiguration.FromNameValueCollection( System.Configuration.ConfigurationManager.AppSettings );
-    
+
+    private static string VERSION = "1.3.1";
+
     public LRITDataCenterWebService()
     {
       XmlConfigurator.Configure();

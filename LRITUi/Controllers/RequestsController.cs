@@ -430,8 +430,6 @@ namespace LRITUi.Controllers
         SARSURPICMsg.schemaVersion = decimal.Parse(cfgman.Configuration.SchemaVersion);
         SARSURPICMsg.test = DataCenterLogic.DataCenterTypesIDE.testType.Item1;
         SARSURPICMsg.TimeStamp = DateTime.UtcNow;
-
-        
         
         //Message msgout = new Message(SARSURPICMsg);
         //msgout.Label = "SARSURPICRequest";

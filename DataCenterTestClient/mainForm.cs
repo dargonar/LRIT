@@ -22,6 +22,8 @@ namespace DataCenterTestClient
 {
   public partial class mainForm : Form
   {
+    public static string VERSION = "1.1";
+
     DataCenterTypes.dcPortTypeClient client = new DataCenterTypes.dcPortTypeClient();
     
     private static readonly ILog log = LogManager.GetLogger(typeof(mainForm));
@@ -80,7 +82,7 @@ namespace DataCenterTestClient
           priceQuest.MessageType   = DataCenterTypesIDE.messageTypeType6.Item14;
           priceQuest.Originator    = dc8Originator.Text;
           priceQuest.schemaVersion = decimal.Parse(dc8schemaVersion.Text);
-          priceQuest.test          = DataCenterTestClient.DataCenterTypesIDE.testType.Item1;
+          priceQuest.test          = DataCenterTestClient.DataCenterTypesIDE.testType.Item0;
           priceQuest.TimeStamp = DateTime.UtcNow;
           priceQuest.ReferenceId = dc8ReferenceId.Text;
           

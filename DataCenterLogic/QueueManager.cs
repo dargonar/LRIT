@@ -28,6 +28,7 @@ namespace DataCenterLogic
         var msg = new core_out();
         msg.message = xmlmsg;
         msg.msgtype = label;
+        msg.created_at = DateTime.UtcNow;
         context.core_outs.InsertOnSubmit(msg);
         context.SubmitChanges();
       }
@@ -40,6 +41,7 @@ namespace DataCenterLogic
         var msg = new core_in();
         msg.message = xmlmsg;
         msg.msgtype = label;
+        msg.created_at = DateTime.UtcNow;
         context.core_ins.InsertOnSubmit(msg);
         context.SubmitChanges();
       }

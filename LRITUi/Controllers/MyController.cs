@@ -13,6 +13,8 @@ namespace LRITUi.Controllers
     private DBDataContext _context = null;
     protected static readonly ILog log = LogManager.GetLogger(typeof(MyController));
 
+    private static string VERSION = "2.5.1";
+
     public DBDataContext context
     {
       get

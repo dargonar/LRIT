@@ -8,6 +8,8 @@ namespace DataCenterCore
 {
   static class Program
   {
+    static public string VERSION = "1.7.8";
+
     /// <summary>
     /// The main entry point for the application.
     /// </summary>

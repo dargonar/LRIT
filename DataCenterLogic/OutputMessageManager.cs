@@ -77,27 +77,16 @@ namespace DataCenterLogic
 
     private void CheckQueue()
     {
+      log.Info("Starting OutputMessageManager Manager");
       while (mRun == true)
       {
         try
         {
-          core_out msg = null;
-          using (DBDataContext ctx = new DBDataContext(mBasicConfiguration.ConnectionString))
+          while (try_to_load_message() == true)
           {
-            msg = ctx.core_outs.OrderBy(c => c.created_at).SingleOrDefault();
-            while (msg != null)
-            {
-              int wrong_count = 0;
-              bool res = ProcessMessage(msg, ctx);
-              while (res == false && ++wrong_count < 3)
-                res = ProcessMessage(msg, ctx);
-
-              if (res == false)
-                DiscardMessage(msg, ctx);
-
-              msg = ctx.core_outs.OrderBy(c => c.created_at).SingleOrDefault();
-            }
+            Thread.Sleep(100);
           }
+
         }
         catch (Exception ex)
         {
@@ -108,6 +97,31 @@ namespace DataCenterLogic
         for (int i = 0; i < 10 && mRun == true; i++)
           Thread.Sleep(1000);
       }
+
+      log.Info("Finishing OutputMessageManager Manager");
+    }
+
+    private bool try_to_load_message()
+    {
+      bool retval = false;
+
+      using (DBDataContext ctx = new DBDataContext(mBasicConfiguration.ConnectionString))
+      {
+        var msg = ctx.core_outs.OrderBy(c => c.created_at).FirstOrDefault();
+        if (msg != null)
+        {
+          retval = true;
+          int wrong_count = 0;
+          bool res = ProcessMessage(msg, ctx);
+          while (res == false && ++wrong_count < 3)
+            res = ProcessMessage(msg, ctx);
+
+          if (res == false)
+            DiscardMessage(msg, ctx);
+        }
+      }
+
+      return retval;
     }
 
     static private void CheckQueueStub(object o)
@@ -135,7 +149,7 @@ namespace DataCenterLogic
       try
       {
         // --- Procesamos un mensaje ---
-        using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, TimeSpan.FromMinutes(15)))
+        using (TransactionScope scope = new TransactionScope())
         {
           queue_PeekCompleted(msg);
           ctx.core_outs.DeleteOnSubmit(msg);

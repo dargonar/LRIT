@@ -3,7 +3,7 @@ REM ************************************************************************
 REM LRIT - DataCenter
 REM ************************************************************************
 
-set version=2.0.0
+set version=2.4.0
 
 call:packme LRITCore DataCenterCore
 call:packme TestClient DataCenterTestClient

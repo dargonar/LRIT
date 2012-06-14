@@ -1,0 +1,1 @@
+﻿<%@ WebService Language="C#" CodeBehind="LRITASPDCService.asmx.cs" Class="ASPDC2.LRITASPDCService" %>
